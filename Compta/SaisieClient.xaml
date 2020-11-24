@@ -1,13 +1,12 @@
-﻿<Window x:Class="PPE_1.MainWindow"
+﻿<Window x:Class="PPE_1.SaisieClient"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPE_1"
         mc:Ignorable="d"
-        Topmost = "true"
         WindowStartupLocation ="CenterScreen"
-        Title="Selection" Height="450" Width="800">
+        Title="Saisie Client" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -27,7 +26,7 @@
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        <Style x:Key="BoutonSelectUser" TargetType="{x:Type Button}">
+        <Style x:Key="RetourBouton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -39,8 +38,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="-15,0,-19,0">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="20" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="199,311,-200,-311">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Stretch" Margin="9,5,9,-15" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="38"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
@@ -64,7 +63,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="BoutonCreateUser" TargetType="{x:Type Button}">
+        <Style x:Key="RechercherBoutton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -76,7 +75,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="20" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Margin="505,307,-505,-307">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -84,12 +83,13 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#EAB01E"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#EAB01E"/>
+                                <Setter Property="Background" TargetName="border" Value="#67D35D"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#67D35D"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="#F1CA68"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#F1CA68"/>
+                                <Setter Property="Background" TargetName="border" Value="#92D38C"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#92D38C"/>
+
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
@@ -102,16 +102,41 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#EDEFFF">
-        <Button Content="Selectionner un client" Margin="150,201,491,0" VerticalAlignment="Top" Height="50"
+
+    <Grid>
+        <Canvas>
+            <TextBlock x:Name="Label_Prenom" Text="Prénom" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="top" Height="24" Width="84" FontFamily="Arial" FontSize="20"
+                   FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="153" Canvas.Left="294"/>
+            <TextBlock x:Name="Label_Nom" Text="Nom" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="84" FontFamily="Arial" FontSize="20"
+                   FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="187" Canvas.Left="294"/>
+            <TextBlock x:Name="Label_Email" Text="Email" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="84" FontFamily="Arial" FontSize="20"
+                   FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="220" Canvas.Left="294"/>
+            <TextBox x:Name="TextBox_Prenom" Height="31" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="145" Width="180" TextAlignment="Center" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="TextBox_Nom" Height="31" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="179" Width="180" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14"/>
+            <TextBox x:Name="TextBox_Email" Height="31" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="215" Width="180" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBlock x:Name="Label_Infos" Text="Pour trouver un client, merci de rentré le nom, le prénom ainsi que l'email du client." HorizontalAlignment="Left" TextWrapping="Wrap"
+                   VerticalAlignment="Top" Height="48" Width="792"
+                   FontFamily="Arial"
+                   FontSize="15"
+                   FontWeight="Bold"
+                   Foreground="#FF534C4C" TextAlignment="Center" Canvas.Top="78"/>
+            <TextBlock x:Name="Label_Instruction" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="Saisie Client" VerticalAlignment="Top" Height="48" Width="792"
+                   FontFamily="Arial"
+                   FontSize="40"
+                   FontWeight="Bold"
+                   Foreground="#FF534C4C" TextAlignment="Center"/>
+            <Button x:Name="Return" Content="← Retour" VerticalAlignment="Top" Width="89" Height="30"
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource BoutonSelectUser}" Click="Button_Click"/>
-        <Button Content="Creer un utilisateur" Margin="491,197,150,0" VerticalAlignment="Top" Height="50"
-                Background="#FF64CCF1"
+                FontSize="15" Click="ReturnButton" Style="{DynamicResource RetourBouton}"/>
+            <Button x:Name="Rechercher" Content="Rechercher" VerticalAlignment="Top" Width="89" Height="30"
+                Background="#10D500"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource BoutonCreateUser}" Click="Button_Click_1"/>
+                FontSize="15" Click="Button_Click" Style="{DynamicResource RechercherBoutton}"/>
+
+
+        </Canvas>
     </Grid>
 </Window>

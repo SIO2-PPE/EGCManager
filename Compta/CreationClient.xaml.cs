@@ -15,31 +15,21 @@ using System.Windows.Shapes;
 namespace PPE_1
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour CreationClient.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreationClient : Window
     {
-        public MainWindow()
+        public CreationClient()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            {
-                SaisieClient subWindow = new SaisieClient();
-                subWindow.Show();
-                this.Close();
-            }
+            MainWindow subWindow = new MainWindow();
+            subWindow.Show();
+            this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            {
-                CreationClient subWindow = new CreationClient();
-                subWindow.Show();
-                this.Close();
-            }
-        }
     }
 }

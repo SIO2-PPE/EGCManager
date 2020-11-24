@@ -17,9 +17,9 @@ namespace PPE_1
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SaisieClient: Window
     {
-        public MainWindow()
+        public SaisieClient()
         {
             InitializeComponent();
         }
@@ -27,16 +27,16 @@ namespace PPE_1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             {
-                SaisieClient subWindow = new SaisieClient();
+                InfosClient subWindow = new InfosClient();
                 subWindow.Show();
                 this.Close();
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ReturnButton(object sender, RoutedEventArgs e)
         {
             {
-                CreationClient subWindow = new CreationClient();
+                MainWindow subWindow = new MainWindow();
                 subWindow.Show();
                 this.Close();
             }

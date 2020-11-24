@@ -15,28 +15,37 @@ using System.Windows.Shapes;
 namespace PPE_1
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour FenetreClient.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InfosClient : Window
     {
-        public MainWindow()
+        public InfosClient()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Click_Edit(object sender, RoutedEventArgs e)
         {
             {
-                SaisieClient subWindow = new SaisieClient();
+                MainWindow subWindow = new MainWindow();
                 subWindow.Show();
                 this.Close();
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Factu_Click(object sender, RoutedEventArgs e)
         {
             {
-                CreationClient subWindow = new CreationClient();
+                Facturation subWindow = new Facturation();
+                subWindow.Show();
+                this.Close();
+            }
+        }
+
+        private void Return1_Click_1(object sender, RoutedEventArgs e)
+        {
+            {
+                SaisieClient subWindow = new SaisieClient();
                 subWindow.Show();
                 this.Close();
             }

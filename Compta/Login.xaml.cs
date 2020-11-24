@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace PPE_1
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Window1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Window
     {
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
         }
@@ -27,19 +27,12 @@ namespace PPE_1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             {
-                SaisieClient subWindow = new SaisieClient();
+                MainWindow subWindow = new MainWindow();
                 subWindow.Show();
                 this.Close();
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            {
-                CreationClient subWindow = new CreationClient();
-                subWindow.Show();
-                this.Close();
-            }
-        }
     }
 }
+
