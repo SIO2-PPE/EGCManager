@@ -8,26 +8,26 @@ namespace Model.Data
 {
     class DaoJoueur
     {
-        private Dbal dbal;
+        private Dbal _dbal;
 
         public DaoJoueur(Dbal dbal)
         {
-            this.dbal = dbal;
+            this._dbal = dbal;
         }
         public void AddJoueurToPartie(Joueur j, Partie p)
         {
             Dictionary<string, string> val = new Dictionary<string, string>();
             val.Add("joueur", j.Id.ToString());
             val.Add("partie", p.Id.ToString());
-            this.dbal.Insert("joueur_partie", val);
+            this._dbal.Insert("joueur_partie", val);
         }
         public List<Joueur> GetJoueurToPartie(Partie p)
         {
             List<Joueur> lst = new List<Joueur>();
-            DataTable tab = this.dbal.SelectByField("joueur_partie", "partie = " + p.Id);
-            foreach (DataRow rowJP in tab.Rows)
+            DataTable tab = this._dbal.SelectByField("joueur_partie", "partie = " + p.Id);
+            foreach (DataRow rowJp in tab.Rows)
             {
-                DataRow row = this.dbal.SelectById("joueur", (int)rowJP["joueur"]);
+                DataRow row = this._dbal.SelectById("joueur", (int)rowJp["joueur"]);
                 lst.Add(new Joueur(
                     (string)row["pseudo"],
                     (string)row["email"],
@@ -39,7 +39,7 @@ namespace Model.Data
         public List<Joueur> GetAllJoueur()
         {
             List<Joueur> lst = new List<Joueur>();
-            DataTable tab = this.dbal.SelectAll("joueur");
+            DataTable tab = this._dbal.SelectAll("joueur");
             foreach (DataRow row in tab.Rows)
             {
                 lst.Add(new Joueur(

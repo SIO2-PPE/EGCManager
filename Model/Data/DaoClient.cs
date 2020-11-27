@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Model.Data
 {
-    class DaoFacture
+    class DaoClient
     {
-        private Dbal dbal;
+        private Dbal _dbal;
 
-        public DaoFacture(Dbal dbal)
+        public DaoClient(Dbal dbal)
         {
-            this.dbal = dbal;
+            this._dbal = dbal;
         }
     }
 }

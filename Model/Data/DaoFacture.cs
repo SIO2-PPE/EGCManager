@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Model.Data
 {
-    class DaoReservation
+    class DaoFacture
     {
-        private Dbal dbal;
+        private Dbal _dbal;
 
-        public DaoReservation(Dbal dbal)
+        public DaoFacture(Dbal dbal)
         {
-            this.dbal = dbal;
+            this._dbal = dbal;
         }
     }
 }

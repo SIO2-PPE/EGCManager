@@ -8,20 +8,20 @@ namespace Model.Data
 {
     class DaoTheme
     {
-        private Dbal dbal;
+        private Dbal _dbal;
 
         public DaoTheme(Dbal dbal)
         {
-            this.dbal = dbal;
+            this._dbal = dbal;
         }
         public Theme GetThemeActuel(Salle s)
         {
-            DataRow rowTS = this.dbal.SelectByField("theme_salle",
+            DataRow rowTs = this._dbal.SelectByField("theme_salle",
                 "salle = " + s.Id + " AND " +
                 "dateDebut < " + DateTime.Now.ToString("'yyyy-MM-dd'") + " AND " +
                 "dateFin > " + DateTime.Now.ToString("'yyyy-MM-dd'")
             ).Rows[0];
-            DataRow row = this.dbal.SelectById("theme", (int)rowTS["theme"]);
+            DataRow row = this._dbal.SelectById("theme", (int)rowTs["theme"]);
             return new Theme(
                 (int)row["id"],
                 (string)row["nom"]

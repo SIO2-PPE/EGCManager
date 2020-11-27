@@ -7,11 +7,11 @@ namespace Model.Data
 {
     class DaoObstacle
     {
-        private Dbal dbal;
+        private Dbal _dbal;
 
         public DaoObstacle(Dbal dbal)
         {
-            this.dbal = dbal;
+            this._dbal = dbal;
         }
         public void AddObstacleToPartie(Obstacle o, Partie p, int position)
         {
@@ -19,7 +19,7 @@ namespace Model.Data
             val.Add("obstacle", o.Id.ToString());
             val.Add("partie", p.Id.ToString());
             val.Add("position", position.ToString());
-            this.dbal.Insert("obstacle_partie", val);
+            this._dbal.Insert("obstacle_partie", val);
         }
     }
 }

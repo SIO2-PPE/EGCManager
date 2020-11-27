@@ -10,7 +10,7 @@ namespace Model.Data
 {
     public class Dbal
     {
-        private MySqlConnection connection;
+        private MySqlConnection _connection;
 
         //Constructor
         public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
@@ -30,7 +30,7 @@ namespace Model.Data
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-            connection = new MySqlConnection(connectionString);
+            _connection = new MySqlConnection(connectionString);
         }
 
         //open connection to database
@@ -38,7 +38,7 @@ namespace Model.Data
         {
             try
             {
-                connection.Open();
+                _connection.Open();
                 return true;
             }
             catch (MySqlException ex)
@@ -67,7 +67,7 @@ namespace Model.Data
         {
             try
             {
-                connection.Close();
+                _connection.Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -110,7 +110,7 @@ namespace Model.Data
             if (this.OpenConnection())
             {
                 //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, _connection);
 
                 try
                 {
@@ -155,7 +155,7 @@ namespace Model.Data
                 //Assign the query using CommandText
                 cmd.CommandText = query;
                 //Assign the connection using Connection
-                cmd.Connection = connection;
+                cmd.Connection = _connection;
 
                 //Execute query
                 cmd.ExecuteNonQuery();
@@ -172,7 +172,7 @@ namespace Model.Data
 
             if (this.OpenConnection())
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, _connection);
                 cmd.ExecuteNonQuery();
                 this.CloseConnection();
             }
@@ -184,7 +184,7 @@ namespace Model.Data
             DataSet dataset = new DataSet();
             if (this.OpenConnection())
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, _connection);
                 adapter.Fill(dataset);
                 this.CloseConnection();
             }
@@ -222,7 +222,7 @@ namespace Model.Data
             if (this.OpenConnection())
             {
                 //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, _connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
@@ -252,25 +252,25 @@ namespace Model.Data
         public int Count()
         {
             string query = "SELECT Count(*) FROM tableinfo";
-            int Count = -1;
+            int count = -1;
 
             //Open Connection
             if (this.OpenConnection() == true)
             {
                 //Create Mysql Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, _connection);
 
                 //ExecuteScalar will return one value
-                Count = int.Parse(cmd.ExecuteScalar() + "");
+                count = int.Parse(cmd.ExecuteScalar() + "");
 
                 //close Connection
                 this.CloseConnection();
 
-                return Count;
+                return count;
             }
             else
             {
-                return Count;
+                return count;
             }
         }
     }

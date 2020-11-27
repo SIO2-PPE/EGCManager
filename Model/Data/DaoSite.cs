@@ -8,15 +8,15 @@ namespace Model.Data
 {
     class DaoSite
     {
-        private Dbal dbal;
+        private Dbal _dbal;
 
         public DaoSite(Dbal dbal)
         {
-            this.dbal = dbal;
+            this._dbal = dbal;
         }
         public Site GetSite(int id)
         {
-            DataRow row = this.dbal.SelectById("site", id);
+            DataRow row = this._dbal.SelectById("site", id);
             return new Site(
                 (string)row["ville"],
                 (string)row["adresse"],
