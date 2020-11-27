@@ -20,6 +20,14 @@ namespace Model.Business
             this.lstAvis = new List<Avis>();
         }
 
+        public Joueur()
+        {
+            this.id = 0;
+            this.pseudo = "";
+            this.email = "";
+            this.lstAvis = new List<Avis>();
+        }
+
         public int Id { get => id; set => id = value; }
         public string Pseudo { get => pseudo; set => pseudo = value; }
         public string Email { get => email; set => email = value; }
