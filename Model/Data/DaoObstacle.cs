@@ -5,7 +5,7 @@ using Model.Business;
 
 namespace Model.Data
 {
-    class DaoObstacle
+    public class DaoObstacle
     {
         private Dbal _dbal;
 

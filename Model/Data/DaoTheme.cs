@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Model.Data
 {
-    class DaoTheme
+    public class DaoTheme
     {
         private Dbal _dbal;
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Model.Data
 {
-    class DaoPartie
+    public class DaoPartie
     {
         private Dbal _dbal;
         private DaoSalle _daoSalle;

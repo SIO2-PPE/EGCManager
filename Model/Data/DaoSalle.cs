@@ -6,7 +6,7 @@ using Model.Business;
 
 namespace Model.Data
 {
-    class DaoSalle
+    public class DaoSalle
     {
         private Dbal _dbal;
         private DaoSite _daoSite;
