@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Model.Business
@@ -11,49 +12,51 @@ namespace Model.Business
         private string _adresse;
         private List<Salle> _lstSalle;
 
-        public Site(string ville, string adresse, int id = 0)
+        public Site(DataRow row, List<Salle> lstSalle)
         {
-            _id = id;
-            _ville = ville;
-            _adresse = adresse;
-            _lstSalle = new List<Salle>();
-
-        }
-        public Site()
-        {
-            _id = 0;
-            _ville = "";
-            _adresse = "";
-            _lstSalle = new List<Salle>();
+            Hydrate(row);
+            _lstSalle = lstSalle;
         }
 
-        public int Id { get => _id; set => _id = value; }
-        public string Ville { get => _ville; set => _ville = value; }
-        public string Adresse { get => _adresse; set => _adresse = value; }
-        public List<Salle> LstSalle { get => _lstSalle; set => _lstSalle = value; }
+        #region Getter and Setter
 
-        public Salle NouvelleSalle(Theme th)
+        public int Id
         {
-            Salle s = new Salle(0, this, th);
-            _lstSalle.Add(s);
-            return s; 
+            get => _id;
+            set => _id = value;
         }
 
-        public void Hydrate(Dictionary<string, dynamic> val)
+        public string Ville
         {
-            _id = val["id"];
-            _ville = val["ville"];
-            _adresse = val["adresse"];
-            _lstSalle = val["lstSalle"];
+            get => _ville;
+            set => _ville = value;
         }
 
+        public string Adresse
+        {
+            get => _adresse;
+            set => _adresse = value;
+        }
+
+        public List<Salle> LstSalle
+        {
+            get => _lstSalle;
+            set => _lstSalle = value;
+        }
+
+        #endregion
+
+        public void Hydrate(DataRow row)
+        {
+            _id = (int)row["id"];
+            _ville = (string)row["ville"];
+            _adresse = (string)row["adresse"];
+        }
         public Dictionary<string, dynamic> ToArray()
         {
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
-            val.Add("id", _id);
             val.Add("ville", _ville);
             val.Add("adresse", _adresse);
-            val.Add("lstSalle", _lstSalle);
             return val;
         }
     }

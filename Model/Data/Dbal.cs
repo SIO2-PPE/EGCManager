@@ -11,6 +11,7 @@ namespace Model.Data
     public class Dbal
     {
         private MySqlConnection _connection;
+        private bool _auto_increment = true;
 
         //Constructor
         public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
@@ -190,88 +191,19 @@ namespace Model.Data
             }
             return dataset;
         }
-        public DataTable SelectAll(string table)
+        public DataTable Select(string table, string where = null)
         {
-            return this.RQuery("select * from " + table).Tables[0];
+            string query = "select * from " + table;
+            if (where != null) query += " where " + where;
+            return RQuery(query).Tables[0];
         }
-        public DataTable SelectByField(string table, string fieldTestCondition)
+        public DataTable SelectOrderBy(string table, string order)
         {
-            string query = "SELECT * FROM " + table + " where " + fieldTestCondition;
-            DataSet dataset = RQuery(query);
-            return dataset.Tables[0];
-            // return this.RQuery("select * from " + table + " where " + fieldTestCondition).Tables[0];
+            return RQuery("select * from " + table + " oder by " + order).Tables[0];
         }
         public DataRow SelectById(string table, int id)
         {
             return this.RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
-        }
-
-        //Select statement
-        public List<string>[] Select(string where)
-        {
-            string query = "SELECT * FROM tableinfo WHERE " + where;
-
-            //Create a list to store the result
-            List<string>[] list = new List<string>[2];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-
-            System.Console.WriteLine(query);
-
-            //Open connection
-            if (this.OpenConnection())
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, _connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["nom"] + "");
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
-                //return list to be displayed
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-        }
-
-        //Count statement
-        public int Count()
-        {
-            string query = "SELECT Count(*) FROM tableinfo";
-            int count = -1;
-
-            //Open Connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Mysql Command
-                MySqlCommand cmd = new MySqlCommand(query, _connection);
-
-                //ExecuteScalar will return one value
-                count = int.Parse(cmd.ExecuteScalar() + "");
-
-                //close Connection
-                this.CloseConnection();
-
-                return count;
-            }
-            else
-            {
-                return count;
-            }
         }
     }
 }
