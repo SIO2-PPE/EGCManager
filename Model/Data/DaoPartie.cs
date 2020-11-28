@@ -15,14 +15,14 @@ namespace Model.Data
 
         public DaoPartie(Dbal dbal)
         {
-            this._dbal = dbal;
-            this._daoSalle = new DaoSalle(dbal);
-            this._daoObstacle = new DaoObstacle(dbal);
-            this._daoJoueur = new DaoJoueur(dbal);
+            _dbal = dbal;
+            _daoSalle = new DaoSalle(dbal);
+            _daoObstacle = new DaoObstacle(dbal);
+            _daoJoueur = new DaoJoueur(dbal);
         }
         public List<Partie> ListReserv(Salle salle, DateTime date)
         {
-            DataTable tab = this._dbal.SelectByField("Partie",
+            DataTable tab = _dbal.SelectByField("Partie",
                 "date > " + date.ToString("'yyyy-MM-dd H:m:s'") + " AND " +
                 "date < " + date.AddDays(1).ToString("'yyyy-MM-dd'") + " AND " +
                 "salle = " + salle.Id
@@ -42,19 +42,19 @@ namespace Model.Data
         /// </summary>
         public void Create(Partie p)
         {
-            Dictionary<string, string> val = new Dictionary<string, string>();
-            val.Add("date", p.Date.ToString("'yyyy-MM-dd'"));
-            val.Add("salle", p.Salle.Id.ToString());
-            this._dbal.Insert("partie", val);
-            DataRow dbP = this._dbal.SelectByField("partie","date = " + p.Date.ToString("'yyyy-MM-dd'")).Rows[0];
+            Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
+            val.Add("date", p.Date);
+            val.Add("salle", p.Salle.Id);
+            _dbal.Insert("partie", val);
+            DataRow dbP = _dbal.SelectByField("partie","date = '" + p.Date.ToString("yyyy-MM-dd") +"'").Rows[0];
             p.Id = (int)dbP["id"];
             foreach (Joueur j in p.LstJoueur)
             {
-                this._daoJoueur.AddJoueurToPartie(j, p);
+                _daoJoueur.AddJoueurToPartie(j, p);
             }
             for (int i = 0; i < p.LstObstacle.Count; i++)
             {
-                this._daoObstacle.AddObstacleToPartie(p.LstObstacle[i], p, i);
+                _daoObstacle.AddObstacleToPartie(p.LstObstacle[i], p, i);
             }
         }
         public void Edit(Partie p)
@@ -63,15 +63,15 @@ namespace Model.Data
         }
         public Partie GetPartie(int id)
         {
-            DataRow rowP = this._dbal.SelectById("partie", id);
+            DataRow rowP = _dbal.SelectById("partie", id);
             Partie partie = new Partie(
                 (int)rowP["id"],
                 (DateTime)rowP["date"],
                 (DateTime)rowP["temps"],
                 (bool)rowP["win"]
             );
-            partie.Salle = this._daoSalle.GetSalle((int)rowP["salle"]);
-            partie.LstJoueur = this._daoJoueur.GetJoueurToPartie(partie);
+            partie.Salle = _daoSalle.GetSalle((int)rowP["salle"]);
+            partie.LstJoueur = _daoJoueur.GetJoueurToPartie(partie);
             return partie;
         }
     }

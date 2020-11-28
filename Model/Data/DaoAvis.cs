@@ -12,47 +12,50 @@ namespace Model.Data
         private DaoJoueur _daoJoueur;
         public DaoAvis(Dbal dbal)
         {
-            this._dbal = dbal;
-            this._daoJoueur = new DaoJoueur(dbal);
+            _dbal = dbal;
+            _daoJoueur = new DaoJoueur(dbal);
         }
         public void Insert(Avis avis)
         {
             Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
             values.Add("commentaire", avis.Commentaire);
             values.Add("creation", avis.Creation);
-            this._dbal.Insert("avis", values);
+            _dbal.Insert("avis", values);
         }
         public void Update(Avis avis)
         {
             Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
             values.Add("commentaire", avis.Commentaire);
             values.Add("creation", avis.Creation);
-            this._dbal.Update("avis", values, "id = " + avis.Id);
+            _dbal.Update("avis", values, "id = " + avis.Id);
         }
         public void Delete(Avis avis)
         {
-            this._dbal.Delete("Avis", "id = " + avis.Id);
+            _dbal.Delete("Avis", "id = " + avis.Id);
         }
         public List<Avis> SelectAll()
         {
-            DataTable tab = this._dbal.SelectAll("avis");
+            DataTable tab = _dbal.SelectAll("avis");
             List<Avis> lst = new List<Avis>();
             foreach (DataRow row in tab.Rows)
             {
                 lst.Add(new Avis(
-                    this._daoJoueur.GetJoueurById((int)row[""])
+                    _daoJoueur.GetJoueurById((int)row["createur"]),
+                    (string)row["commantair"],
+                    (DateTime)row["date"],
+                    (int)row["id"]
                     ));
             }
             return lst;
         }
         public Avis SelectById(int id)
         {
-            DataRow row = this._dbal.SelectById("avis", id);
+            DataRow row = _dbal.SelectById("avis", id);
             return new Avis();
         }
         public Avis SelectByName(string nom)
         {
-            DataRow row = this._dbal.SelectByField("Avis", "nom = '" + nom + "'").Rows[0];
+            DataRow row = _dbal.SelectByField("Avis", "nom = '" + nom + "'").Rows[0];
             return new Avis();
         }
     }

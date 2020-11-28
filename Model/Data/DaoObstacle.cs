@@ -11,15 +11,15 @@ namespace Model.Data
 
         public DaoObstacle(Dbal dbal)
         {
-            this._dbal = dbal;
+            _dbal = dbal;
         }
         public void AddObstacleToPartie(Obstacle o, Partie p, int position)
         {
-            Dictionary<string, string> val = new Dictionary<string, string>();
-            val.Add("obstacle", o.Id.ToString());
-            val.Add("partie", p.Id.ToString());
-            val.Add("position", position.ToString());
-            this._dbal.Insert("obstacle_partie", val);
+            Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
+            val.Add("obstacle", o.Id);
+            val.Add("partie", p.Id);
+            val.Add("position", position);
+            _dbal.Insert("obstacle_partie", val);
         }
     }
 }
