@@ -33,6 +33,14 @@ namespace Model.Data
             }
             return lst;
         }
+        
+
+        public Joueur GetJoueurById(int id)
+        {
+            DataRow row = _dbal.SelectById("joueur", id);
+            return new Joueur(row, _daoAvis.GetByJoueurId((int)row["id"]));
+        }*/
+        
         public List<Joueur> GetAllJoueur()
         {
             List<Joueur> lst = new List<Joueur>();
@@ -43,11 +51,5 @@ namespace Model.Data
             }
             return lst;
         }
-
-        public Joueur GetJoueurById(int id)
-        {
-            DataRow row = _dbal.SelectById("joueur", id);
-            return new Joueur(row, _daoAvis.GetByJoueurId((int)row["id"]));
-        }*/
     }
 }

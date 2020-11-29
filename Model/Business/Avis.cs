@@ -12,10 +12,9 @@ namespace Model.Business
         private DateTime _date;
         private Joueur _joueur;
 
-        public Avis(DataRow row, Joueur joueur)
+        public Avis(DataRow row)
         {
             Hydrate(row);
-            _joueur = joueur;
         }
 
         #region Getter and Setter
