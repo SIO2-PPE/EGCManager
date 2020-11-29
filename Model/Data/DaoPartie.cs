@@ -22,7 +22,7 @@ namespace Model.Data
         }
         public List<Partie> ListReserv(Salle salle, DateTime date)
         {
-            DataTable tab = _dbal.SelectByField("Partie",
+            DataTable tab = _dbal.Select("Partie",
                 "date > " + date.ToString("'yyyy-MM-dd H:m:s'") + " AND " +
                 "date < " + date.AddDays(1).ToString("'yyyy-MM-dd'") + " AND " +
                 "salle = " + salle.Id
@@ -30,10 +30,7 @@ namespace Model.Data
             List<Partie> lstP = new List<Partie>();
             foreach (DataRow row in tab.Rows)
             {
-                lstP.Add(new Partie(
-                    (int)row["id"],
-                    (DateTime)row["date"]
-                ));
+                lstP.Add(new Partie(row, _daoSalle.GetSalle((int)row["salle"])));
             }
             return lstP;
         }
@@ -42,11 +39,8 @@ namespace Model.Data
         /// </summary>
         public void Create(Partie p)
         {
-            Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
-            val.Add("date", p.Date);
-            val.Add("salle", p.Salle.Id);
-            _dbal.Insert("partie", val);
-            DataRow dbP = _dbal.SelectByField("partie","date = '" + p.Date.ToString("yyyy-MM-dd") +"'").Rows[0];
+            _dbal.Insert("partie", p.ToArray());
+            DataRow dbP = _dbal.Select("partie","date = '" + p.Date.ToString("yyyy-MM-dd") + "'").Rows[0];
             p.Id = (int)dbP["id"];
             foreach (Joueur j in p.LstJoueur)
             {
@@ -64,13 +58,7 @@ namespace Model.Data
         public Partie GetPartie(int id)
         {
             DataRow rowP = _dbal.SelectById("partie", id);
-            Partie partie = new Partie(
-                (int)rowP["id"],
-                (DateTime)rowP["date"],
-                (DateTime)rowP["temps"],
-                (bool)rowP["win"]
-            );
-            partie.Salle = _daoSalle.GetSalle((int)rowP["salle"]);
+            Partie partie = new Partie(rowP, _daoSalle.GetSalle((int)rowP["salle"]));
             partie.LstJoueur = _daoJoueur.GetJoueurToPartie(partie);
             return partie;
         }

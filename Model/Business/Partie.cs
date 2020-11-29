@@ -16,12 +16,10 @@ namespace Model.Business
         private List<Joueur> _lstJoueur;
         private List<Obstacle> _lstObstacle; // L'indice correspond à la position (0 à 11)
 
-        public Partie(DataRow row, Salle s, List<Joueur> lstJ, List<Obstacle> lstO)
+        public Partie(DataRow row, Salle salle)
         {
             Hydrate(row);
-            _salle = s;
-            _lstJoueur = lstJ;
-            _lstObstacle = lstO;
+            _salle = salle;
         }
         
         #region Getter and Setter

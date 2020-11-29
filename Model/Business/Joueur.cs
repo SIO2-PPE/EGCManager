@@ -16,6 +16,7 @@ namespace Model.Business
         public Joueur(DataRow row, List<Avis> lstAvis)
         {
             Hydrate(row);
+            foreach (Avis avis in lstAvis) avis.Joueur = this;
             _lstAvis = lstAvis;
         }
 
@@ -42,7 +43,11 @@ namespace Model.Business
         public List<Avis> LstAvis
         {
             get => _lstAvis;
-            set => _lstAvis = value;
+            set
+            {
+                foreach (Avis avis in value) avis.Joueur = this;
+                _lstAvis = value;
+            }
         }
 
         #endregion

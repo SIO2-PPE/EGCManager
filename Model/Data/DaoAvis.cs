@@ -37,6 +37,15 @@ namespace Model.Data
             }
             return lst;
         }
-        
+        public List<Avis> GetForJoueur(Joueur joueur)
+        {
+            DataTable tab = _dbal.Select("avis","joueur = " + joueur.Id);
+            List<Avis> lst = new List<Avis>();
+            foreach (DataRow row in tab.Rows)
+            {
+                lst.Add(new Avis(row, joueur));
+            }
+            return lst;
+        }
     }
 }

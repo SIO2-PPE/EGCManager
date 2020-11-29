@@ -19,11 +19,13 @@ namespace Model.Business
         private List<Facture> _lstFacture;
         private List<Reservation> _lstReservation;
 
-        public Client(DataRow row)
+        public Client(DataRow row, List<Facture> lstFacture, List<Reservation> lstReservation)
         {
             Hydrate(row);
-            // _lstFacture = lstFacture;
-            // _lstReservation = lstReservation;
+            foreach (Facture facture in lstFacture) facture.Client = this;
+            _lstFacture = lstFacture;
+            foreach (Reservation reservation in lstReservation) reservation.Client = this;
+            _lstReservation = lstReservation;
         }
 
         #region Getter and Setter

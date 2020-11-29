@@ -14,10 +14,10 @@ namespace Model.Business
         
         private Client _client;
         
-        public Facture(DataRow row, Client c)
+        public Facture(DataRow row, Client client)
         {
             Hydrate(row);
-            _client = c;
+            _client = client;
         }
 
         public Facture(DateTime date, double montant, int nbCredit, Client client)
@@ -67,7 +67,6 @@ namespace Model.Business
             _date = (DateTime)row["date"];
             _montant = (double)row["montant"];
             _nbCredit = (int)row["nbCredit"];
-            // _client = (int)row["client"];
         }
         public Dictionary<string, dynamic> ToArray()
         {
