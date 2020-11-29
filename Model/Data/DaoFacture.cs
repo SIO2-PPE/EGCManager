@@ -16,7 +16,7 @@ namespace Model.Data
             _dbal = dbal;
         }
         
-        public List<Facture> GetForClient(Client client)
+        /*public List<Facture> GetForClient(Client client)
         {
             DataTable tab = _dbal.Select("facture", "client = " + client.Id);
             List<Facture> lst = new List<Facture>();
@@ -25,6 +25,6 @@ namespace Model.Data
                 lst.Add(new Facture(row, client));
             }
             return lst;
-        }
+        }*/
     }
 }

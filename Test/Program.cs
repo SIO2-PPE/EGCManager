@@ -10,11 +10,12 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Dbal dbal = new Dbal("egc_db");
-            DaoClient daoClient = new DaoClient(dbal);
-            DaoFacture daoFacture = new DaoFacture(dbal);
+            // Dbal dbal = new Dbal("egc_db");
+            // DaoClient daoClient = new DaoClient(dbal);
+            // DaoFacture daoFacture = new DaoFacture(dbal);
 
-            daoClient.GetAllClient();
+            Dictionary<DateTime, string> t = new Dictionary<DateTime, string>();
+            
         }
     }
 }

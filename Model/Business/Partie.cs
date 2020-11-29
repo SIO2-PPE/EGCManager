@@ -11,15 +11,21 @@ namespace Model.Business
         private DateTime _date;
         private DateTime _temps;
         private bool _win;
-        
+
+        private Horaire _horaire;
         private Salle _salle;
         private List<Joueur> _lstJoueur;
         private List<Obstacle> _lstObstacle; // L'indice correspond à la position (0 à 11)
 
-        public Partie(DataRow row, Salle salle)
+        public Partie(DataRow row, Horaire horaire, Salle salle)
         {
             Hydrate(row);
             _salle = salle;
+            _horaire = horaire;
+        }
+        public Partie(DataRow row)
+        {
+            Hydrate(row);
         }
         
         #region Getter and Setter

@@ -20,11 +20,12 @@ namespace Model.Data
             _daoObstacle = new DaoObstacle(dbal);
             _daoJoueur = new DaoJoueur(dbal);
         }
-        public List<Partie> ListReserv(Salle salle, DateTime date)
+        
+        /*public List<Partie> GetPartiesDuJour(Salle salle, DateTime date)
         {
             DataTable tab = _dbal.Select("Partie",
-                "date > " + date.ToString("'yyyy-MM-dd H:m:s'") + " AND " +
-                "date < " + date.AddDays(1).ToString("'yyyy-MM-dd'") + " AND " +
+                "date > '" + date.ToString("yyyy-MM-dd H:m:s") + "' AND " +
+                "date < '" + date.AddDays(1).ToString("yyyy-MM-dd") + "' AND " +
                 "salle = " + salle.Id
             );
             List<Partie> lstP = new List<Partie>();
@@ -33,11 +34,11 @@ namespace Model.Data
                 lstP.Add(new Partie(row, _daoSalle.GetSalle((int)row["salle"])));
             }
             return lstP;
-        }
+        }*/
         /// <summary>
         /// Attention, la date doit déja être attribué
         /// </summary>
-        public void Create(Partie p)
+        /*public void Create(Partie p)
         {
             _dbal.Insert("partie", p.ToArray());
             DataRow dbP = _dbal.Select("partie","date = '" + p.Date.ToString("yyyy-MM-dd") + "'").Rows[0];
@@ -54,13 +55,22 @@ namespace Model.Data
         public void Edit(Partie p)
         {
 
-        }
-        public Partie GetPartie(int id)
+        }*/
+        // public Partie GetPartie(int id)
+        // {
+        //     DataRow rowP = _dbal.SelectById("partie", id);
+        //     Partie partie = new Partie(rowP, _daoSalle.GetSalle((int)rowP["salle"]));
+        //     partie.LstJoueur = _daoJoueur.GetJoueurToPartie(partie);
+        //     return partie;
+        // }
+
+        public Partie GetPartieForHoraire(int horaireId,DateTime jour, Salle salle)
         {
-            DataRow rowP = _dbal.SelectById("partie", id);
-            Partie partie = new Partie(rowP, _daoSalle.GetSalle((int)rowP["salle"]));
-            partie.LstJoueur = _daoJoueur.GetJoueurToPartie(partie);
-            return partie;
+            return new Partie(_dbal.Select("partie",
+                "salle = " + salle.Id +
+                "date = '" + jour.ToString("yyyy-M-d") + "' and " +
+                "horaire = " + horaireId
+                ).Rows[0]);
         }
     }
 }

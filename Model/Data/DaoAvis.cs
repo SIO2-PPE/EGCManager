@@ -15,7 +15,7 @@ namespace Model.Data
             _dbal = dbal;
             _daoJoueur = new DaoJoueur(dbal);
         }
-        public void Insert(Avis avis)
+        /*public void Insert(Avis avis)
         {
             _dbal.Insert("avis", avis.ToArray());
         }
@@ -46,6 +46,6 @@ namespace Model.Data
                 lst.Add(new Avis(row, joueur));
             }
             return lst;
-        }
+        }*/
     }
 }

@@ -27,6 +27,10 @@ namespace Model.Business
             foreach (Reservation reservation in lstReservation) reservation.Client = this;
             _lstReservation = lstReservation;
         }
+        public Client(DataRow row)
+        {
+            Hydrate(row);
+        }
 
         #region Getter and Setter
 

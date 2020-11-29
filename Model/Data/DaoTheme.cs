@@ -14,7 +14,7 @@ namespace Model.Data
         {
             this._dbal = dbal;
         }
-        public Theme GetThemeActuel(Salle s)
+        /*public Theme GetThemeActuel(Salle s)
         {
             DataRow rowTs = this._dbal.SelectByField("theme_salle",
                 "salle = " + s.Id + " AND " +
@@ -26,6 +26,6 @@ namespace Model.Data
                 (int)row["id"],
                 (string)row["nom"]
             );
-        }
+        }*/
     }
 }

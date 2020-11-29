@@ -16,7 +16,7 @@ namespace Model.Data
             _daoFacture = new DaoFacture(dbal);
         }
 
-        public void NouveauClient(Client c)
+        /*public void NouveauClient(Client c)
         {
             _dbal.Insert("client", c.ToArray());
         }
@@ -32,6 +32,6 @@ namespace Model.Data
                 lst.Add(client);
             }
             return lst;
-        }
+        }*/
     }
 }

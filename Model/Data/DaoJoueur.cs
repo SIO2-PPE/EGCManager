@@ -16,7 +16,7 @@ namespace Model.Data
             _dbal = dbal;
             _daoAvis = new DaoAvis(dbal);
         }
-        public void AddJoueurToPartie(Joueur j, Partie p)
+        /*public void AddJoueurToPartie(Joueur j, Partie p)
         {
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
             val.Add("joueur", j.Id);
@@ -48,6 +48,6 @@ namespace Model.Data
         {
             DataRow row = _dbal.SelectById("joueur", id);
             return new Joueur(row, _daoAvis.GetByJoueurId((int)row["id"]));
-        }
+        }*/
     }
 }
