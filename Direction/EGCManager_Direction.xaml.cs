@@ -13,20 +13,13 @@ using System.Windows.Shapes;
 namespace Direction
 {
     /// <summary>
-    /// Logique d'interaction pour Login.xaml
+    /// Logique d'interaction pour EGCManager_Direction.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class EGCManager_Direction : Window
     {
-        public Login()
+        public EGCManager_Direction()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            EGCManager_Direction wnd = new EGCManager_Direction();
-            wnd.Show();
-            this.Close();
         }
     }
 }
