@@ -8,6 +8,27 @@
         WindowState = "Maximized"
         Title="EGCManager - Direction" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Tableau de bord">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Gestion des salles">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Gestion des horaires">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Avis clients">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
