@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Data;
+
+//using Model.Data;
 
 namespace Test
 {
@@ -7,20 +10,11 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
-            values.Add("date", DateTime.Now);
-            if (values["date"] is string)
-            {
-                Console.WriteLine("c'est un string");
-            }
-            else if (values["date"] is DateTime)
-            {
-                Console.WriteLine(values["date"].ToString("yyyy-M-d"));
-            }
-            else
-            {
-                Console.WriteLine("ba non");
-            }
+            // Dbal dbal = new Dbal("egc_db");
+            // DaoClient daoClient = new DaoClient(dbal);
+            // DaoFacture daoFacture = new DaoFacture(dbal);
+
+            Dictionary<DateTime, string> t = new Dictionary<DateTime, string>();
             
         }
     }

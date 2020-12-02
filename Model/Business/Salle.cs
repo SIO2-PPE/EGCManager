@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Model.Business
@@ -16,29 +17,37 @@ namespace Model.Business
             _site = site;
             _theme = theme;
         }
-        public Salle(int id = 0)
+
+        #region Getter and Setter
+
+        public int Id
         {
-            _id = id;
-            _site = new Site();
-            _theme = new Theme();
+            get => _id;
+            set => _id = value;
         }
 
-        public int Id { get => _id; set => _id = value; }
-        public Site Site { get => _site; set { _site = value; _site.LstSalle.Add(this); } }
-        public Theme Theme { get => _theme; set => _theme = value; }
-        public void Hydrate(Dictionary<string, dynamic> val)
+        public Site Site
         {
-            _id = val["id"];
-            _site = val["site"];
-            _theme = val["theme"];
+            get => _site;
+            set => _site = value;
         }
 
+        public Theme Theme
+        {
+            get => _theme;
+            set => _theme = value;
+        }
+
+        #endregion
+        
+        public void Hydrate(DataRow row)
+        {
+            _id = (int)row["id"];
+        }
         public Dictionary<string, dynamic> ToArray()
         {
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
-            val.Add("id", _id);
-            val.Add("site", _site);
-            val.Add("theme", _theme);
+            val.Add("site", _site.Id);
             return val;
         }
     }

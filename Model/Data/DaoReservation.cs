@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model.Data
 {
-    class DaoReservation
+    public class DaoReservation
     {
         private Dbal _dbal;
 

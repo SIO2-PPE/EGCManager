@@ -6,7 +6,7 @@ using Model.Business;
 
 namespace Model.Data
 {
-    class DaoSite
+    public class DaoSite
     {
         private Dbal _dbal;
 
@@ -14,7 +14,7 @@ namespace Model.Data
         {
             this._dbal = dbal;
         }
-        public Site GetSite(int id)
+        /*public Site GetSite(int id)
         {
             DataRow row = this._dbal.SelectById("site", id);
             return new Site(
@@ -22,6 +22,6 @@ namespace Model.Data
                 (string)row["adresse"],
                 (int)row["id"]
             );
-        }
+        }*/
     }
 }

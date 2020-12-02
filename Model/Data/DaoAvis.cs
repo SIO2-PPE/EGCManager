@@ -6,7 +6,7 @@ using Model.Business;
 
 namespace Model.Data
 {
-    class DaoAvis
+    public class DaoAvis
     {
         private Dbal _dbal;
         private DaoJoueur _daoJoueur;
@@ -15,43 +15,47 @@ namespace Model.Data
             _dbal = dbal;
             _daoJoueur = new DaoJoueur(dbal);
         }
-        public void Insert(Avis avis)
+        /*public void Insert(Avis avis)
         {
-            avis.ToArray();
-            _dbal.Insert("avis", values);
+            _dbal.Insert("avis", avis.ToArray());
         }
         public void Update(Avis avis)
         {
-            Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
-            values.Add("commentaire", avis.Commentaire);
-            values.Add("creation", avis.Creation);
-            _dbal.Update("avis", values, "id = " + avis.Id);
+            _dbal.Update("avis", avis.ToArray(), "id = " + avis.Id);
         }
         public void Delete(Avis avis)
         {
             _dbal.Delete("Avis", "id = " + avis.Id);
         }
-        public List<Avis> SelectAll()
+        public List<Avis> GetAll()
         {
-            DataTable tab = _dbal.SelectAll("avis");
+            DataTable tab = _dbal.Select("avis");
             List<Avis> lst = new List<Avis>();
             foreach (DataRow row in tab.Rows)
             {
-                lst.Add(new Avis(
-                    _daoJoueur.GetJoueurById((int)row[""])
-                    ));
+                lst.Add(new Avis(row, _daoJoueur.GetJoueurById((int)row["joueur"])));
             }
             return lst;
         }
-        public Avis SelectById(int id)
+        public List<Avis> GetForJoueur(Joueur joueur)
         {
-            DataRow row = _dbal.SelectById("avis", id);
-            return new Avis();
-        }
-        public Avis SelectByName(string nom)
+            DataTable tab = _dbal.Select("avis","joueur = " + joueur.Id);
+            List<Avis> lst = new List<Avis>();
+            foreach (DataRow row in tab.Rows)
+            {
+                lst.Add(new Avis(row, joueur));
+            }
+            return lst;
+        }*/
+        public List<Avis> GetByJoueurId(int id)
         {
-            DataRow row = _dbal.SelectByField("Avis", "nom = '" + nom + "'").Rows[0];
-            return new Avis();
+            DataTable tab = _dbal.Select("avis","joueur = " + id);
+            List<Avis> lst = new List<Avis>();
+            foreach (DataRow row in tab.Rows)
+            {
+                lst.Add(new Avis(row));
+            }
+            return lst;
         }
     }
 }

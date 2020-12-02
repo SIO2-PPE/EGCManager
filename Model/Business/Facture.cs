@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Model.Business
@@ -10,24 +11,25 @@ namespace Model.Business
         private DateTime _date;
         private double _montant;
         private int _nbCredit;
+        
         private Client _client;
-
-        public Facture(double montant, int nbCredit, Client client, DateTime date, int id = 0)
+        
+        public Facture(DataRow row, Client client)
         {
-            _id = id;
-            _date = date;
-            _montant = montant;
+            Hydrate(row);
             _client = client;
         }
-        public Facture()
+
+        public Facture(DateTime date, double montant, int nbCredit, Client client)
         {
             _id = 0;
-            _date = new DateTime();
-            _montant = 0;
-            _nbCredit = 0;
-            _client = new Client();
+            _date = date;
+            _montant = montant;
+            _nbCredit = nbCredit;
+            _client = client;
         }
 
+        #region Getter and Setter
         public int Id
         {
             get => _id;
@@ -57,24 +59,22 @@ namespace Model.Business
             get => _client;
             set => _client = value;
         }
+        #endregion
 
-        public void Hydrate(Dictionary<string, dynamic> val)
+        public void Hydrate(DataRow row)
         {
-            _id = val["id"];
-            _date = val["date"];
-            _montant = val["montant"];
-            _nbCredit = val["nbCredit"];
-            _client = val["client"];
+            _id = (int)row["id"];
+            _date = (DateTime)row["date"];
+            _montant = (double)row["montant"];
+            _nbCredit = (int)row["nbCredit"];
         }
-
         public Dictionary<string, dynamic> ToArray()
         {
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
-            val.Add("id", _id);
             val.Add("date", _date);
             val.Add("montant", _montant);
             val.Add("nbCredit", _nbCredit);
-            val.Add("client", _client);
+            val.Add("client", _client.Id);
             return val;
         }
     }
