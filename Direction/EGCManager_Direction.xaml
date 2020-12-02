@@ -22,9 +22,9 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Label Margin="10,0,0,12" HorizontalAlignment="Left" Width="32" Content="Site" Height="26" VerticalAlignment="Bottom"/>
-                        <ComboBox HorizontalAlignment="Left" Height="20" Margin="42,0,0,0" Width="95" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="SelectSite" HorizontalAlignment="Left" Height="20" Margin="42,0,0,0" Width="95" VerticalAlignment="Center"/>
                         <Label Margin="152,0,0,0" HorizontalAlignment="Left" Width="34" Content="Salle" VerticalAlignment="Center"/>
-                        <ComboBox HorizontalAlignment="Left" Height="20" Margin="186,0,0,0" Width="95" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="SelectSalle" HorizontalAlignment="Left" Height="20" Margin="186,0,0,0" Width="95" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
                                 <RowDefinition Height="64"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="Sélectionner une salle ..." VerticalAlignment="Center" Margin="16" FontSize="18"/>
+                            <TextBlock x:Name="SalleName" Grid.Row="0" Text="Sélectionner une salle ..." VerticalAlignment="Center" Margin="16" FontSize="18"/>
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="64"/>
@@ -50,8 +50,8 @@
                                         <ColumnDefinition Width="100"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Content="Thème de la salle" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                                    <ComboBox Grid.Column="1" VerticalAlignment="Center"/>
-                                    <Button Content="Nouveau thème" Grid.Column="2" VerticalAlignment="Center" Height="22" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="SelectTheme" Grid.Column="1" VerticalAlignment="Center"/>
+                                    <Button x:Name="NewTheme" Content="Nouveau thème" Grid.Column="2" VerticalAlignment="Center" Height="22" Margin="5,0,0,0"/>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -62,8 +62,8 @@
                                 <RowDefinition Height="64"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Obstacle pour cette salle" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                            <ListBox Grid.Row="1" Margin="16" />
-                            <Button Grid.Row="2" Margin="16,0,16,16" Content="Retirer de la salle"/>
+                            <ListBox x:Name="ObstacleSalle" Grid.Row="1" Margin="16" />
+                            <Button x:Name="RemoveObstacle" Grid.Row="2" Margin="16,0,16,16" Content="Retirer de la salle"/>
                         </Grid>
                         <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
@@ -73,9 +73,9 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="Obstacle libre" />
-                            <ListBox Grid.Row="1" Margin="16" />
-                            <Button  Grid.Row="2" Margin="16,0,16,16" Content="Créer un obstacle" />
-                            <Button  Grid.Row="3" Margin="16,0,16,16" Content="Ajouter à cette salle" />
+                            <ListBox x:Name="ObstacleFree" Grid.Row="1" Margin="16" />
+                            <Button x:Name="NewObstacle"  Grid.Row="2" Margin="16,0,16,16" Content="Créer un obstacle" />
+                            <Button x:Name="AddObstacle"  Grid.Row="3" Margin="16,0,16,16" Content="Ajouter à cette salle" />
                         </Grid>
                     </Grid>
                 </Grid>
