@@ -64,7 +64,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#EDEFFF">
+    <Grid x:Name="Login" Background="#EDEFFF">
         <TextBlock HorizontalAlignment="Left" Margin="10,51,0,0" TextWrapping="Wrap" Text="Authentification" VerticalAlignment="Top" Height="48" Width="422"
                    FontFamily="Arial"
                    FontSize="40"

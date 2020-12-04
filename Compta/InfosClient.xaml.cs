@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PPE_1
+namespace Compta
 {
     /// <summary>
     /// Logique d'interaction pour FenetreClient.xaml
@@ -27,7 +27,7 @@ namespace PPE_1
         private void Click_Edit(object sender, RoutedEventArgs e)
         {
             {
-                MainWindow subWindow = new MainWindow();
+                SelectWindow subWindow = new SelectWindow();
                 subWindow.Show();
                 this.Close();
             }

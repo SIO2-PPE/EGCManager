@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PPE_1
+namespace Compta
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml

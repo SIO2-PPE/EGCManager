@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PPE_1
+namespace Compta
 {
     /// <summary>
     /// Logique d'interaction pour Window1.xaml
@@ -33,6 +33,15 @@ namespace PPE_1
                 this.Close();
             }
 
+        }
+
+        private void Create_facture_Click(object sender, RoutedEventArgs e)
+        {
+            {
+                SelectWindow subWindow = new SelectWindow();
+                subWindow.Show();
+                this.Close();
+            }
         }
     }
 }
