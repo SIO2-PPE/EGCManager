@@ -9,11 +9,6 @@
         Title="EGCManager - Direction" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="Tableau de bord">
-                <Grid>
-
-                </Grid>
-            </TabItem>
             <TabItem Header="Gestion des salles">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -21,10 +16,6 @@
                         <RowDefinition Height="8*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <Label Margin="10,0,0,12" HorizontalAlignment="Left" Width="32" Content="Site" Height="26" VerticalAlignment="Bottom"/>
-                        <ComboBox ItemsSource="{Binding ListSite, Mode=OneTime}" SelectedItem="{Binding Site}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSite" HorizontalAlignment="Left" Height="20" Margin="42,0,0,0" Width="95" VerticalAlignment="Center"/>
-                        <Label Margin="152,0,0,0" HorizontalAlignment="Left" Width="34" Content="Salle" VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding ListSalle, Mode=OneTime}" SelectedItem="{Binding Salle}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSalle" HorizontalAlignment="Left" Height="20" Margin="186,0,0,0" Width="95" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -80,9 +71,94 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Gestion des horaires">
+            <TabItem Header="Gestion">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="64"/>
+                        <RowDefinition Height="31"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Label Margin="10,0,0,0" HorizontalAlignment="Left" Width="32" Content="Site" Height="26" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding ListSite, Mode=OneTime}" SelectedItem="{Binding Site}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSite" HorizontalAlignment="Left" Height="20" Margin="42,0,0,0" Width="95" VerticalAlignment="Center"/>
+                        <Label Margin="152,0,0,0" HorizontalAlignment="Left" Width="34" Content="Salle" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding ListSalle, Mode=OneTime}" SelectedItem="{Binding Salle}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSalle" HorizontalAlignment="Left" Height="20" Margin="186,0,0,0" Width="95" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Modifier les horaires du site" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="Modifier le hème de la salle" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="16,16,8,16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Horaire prédéfini" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="Liste des horaire du site" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Margin="0,0,4,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <ListBox Grid.Row="0"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="54"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <DatePicker Grid.Column="0" Margin="0,4,4,4"/>
+                                        <Button Grid.Column="1" Content="Ajouter" Margin="0,4,4,4"/>
+                                        <Button Grid.Column="2" Content="+" Margin="4,4,0,4"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <ListBox Grid.Row="0"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Content="-" Margin="0,4,4,4"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="8,16,16,16">
 
+                        </Grid>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Avis clients">
