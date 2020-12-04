@@ -11,11 +11,13 @@ namespace Model.Business
         private string _ville;
         private string _adresse;
         private List<Salle> _lstSalle;
+        private List<Horaire> _lstHoraire;
 
-        public Site(DataRow row, List<Salle> lstSalle)
+        public Site(DataRow row, List<Salle> lstSalle, List<Horaire> lstHoraire)
         {
             Hydrate(row);
             _lstSalle = lstSalle;
+            _lstHoraire = lstHoraire;
         }
 
         #region Getter and Setter
