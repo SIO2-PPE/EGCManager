@@ -12,6 +12,7 @@ namespace Model.Business
         private string _prenom;
         private string _photo;
         private string _email;
+        private string _tel;
         private DateTime _naissance;
         private int _credit;
         private string _adresse;
@@ -64,6 +65,12 @@ namespace Model.Business
             set => _email = value;
         }
 
+        public string Tel
+        {
+            get => _tel;
+            set => _tel = value;
+        }
+
         public DateTime Naissance
         {
             get => _naissance;
@@ -103,6 +110,7 @@ namespace Model.Business
             _prenom = (string)row["prenom"];
             _photo = (string)row["photo"];
             _email = (string)row["email"];
+            _tel = (string)row["tel"];
             _naissance = (DateTime)row["naissance"];
             _credit = (int)row["credit"];
             _adresse = (string)row["adresse"];
@@ -114,6 +122,7 @@ namespace Model.Business
             val.Add("prenom", _prenom);
             val.Add("photo", _photo);
             val.Add("email", _email);
+            val.Add("tel", _tel);
             val.Add("naissance", _naissance);
             val.Add("credit", _credit);
             val.Add("adresse", _adresse);
