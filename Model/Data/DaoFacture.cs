@@ -16,6 +16,10 @@ namespace Model.Data
             _dbal = dbal;
         }
         
+        public void NouvelleFacture(Facture f)
+        {
+            _dbal.Insert("facture", f.ToArray());
+        }
         /*public List<Facture> GetForClient(Client client)
         {
             DataTable tab = _dbal.Select("facture", "client = " + client.Id);
