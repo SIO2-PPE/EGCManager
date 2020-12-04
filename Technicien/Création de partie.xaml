@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Technicien"
         mc:Ignorable="d"
-        WindowState = "Maximized" 
+        
         Title="Création_de_partie" Height="900" Width="1600">
 
     <Grid RenderTransformOrigin="0.668,0.614">
