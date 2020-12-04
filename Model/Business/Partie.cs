@@ -85,6 +85,7 @@ namespace Model.Business
         {
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
             val.Add("date", _date);
+            val.Add("horaire", _horaire.Id);
             val.Add("temps", _temps);
             val.Add("win", _win);
             val.Add("salle", _salle.Id);
