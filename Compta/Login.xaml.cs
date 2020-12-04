@@ -25,12 +25,13 @@ namespace Compta
     /// </summary>
     public partial class Login : Window
     {
+        
 
 
         public Login(DaoClient thedaoclient, DaoFacture thedaofacture)
         {
             InitializeComponent();
-            Login.DataContext = new viewModel.viewModelClient(thedaoclient, thedaofacture);
+            maGrid.DataContext = new viewModel.viewModelClient(thedaofacture, thedaoclient);
 
         }
 

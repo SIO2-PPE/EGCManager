@@ -22,8 +22,6 @@ namespace Compta.viewModel
         private Facture selectedFacture = new Facture();
         private Facture activeFacture = new Facture();
         private ICommand updateCommand;
-        private ICommand deleteCommand;
-        private ICommand imageFileDialogCommand;
         private ICommand createCommand;
 
 
@@ -32,21 +30,6 @@ namespace Compta.viewModel
         {
             vmDaoFacture = thedaofacture;
             vmDaoClient = thedaoclient;
-
-
-            //listFacture = new ObservableCollection<Facture>(thedaofacture.SelectAll());
-            //listClient = new ObservableCollection<Client>(thedaoclient.SelectAll());
-
-            //foreach (Fromage f in listFromages)
-            //{
-            //    foreach (Pays p in listPays)
-            //    {
-            //        if (f.PaysOrigine.Nom == p.Nom)
-            //        {
-            //            f.PaysOrigine = p;
-            //        }
-            //    }
-            //}
         }
         #endregion
 
