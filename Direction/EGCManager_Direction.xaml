@@ -95,7 +95,20 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Column="1" Margin="8,16,16,16">
-
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1" Content="Thème" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
