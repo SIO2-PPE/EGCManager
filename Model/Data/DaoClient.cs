@@ -16,12 +16,19 @@ namespace Model.Data
             _daoFacture = new DaoFacture(dbal);
         }
 
-        /*public void NouveauClient(Client c)
+        public void NouveauClient(Client c)
         {
             _dbal.Insert("client", c.ToArray());
         }
-
-        public List<Client> GetAllClient()
+        public Client SearchClient(string prenom, string nom, string email)
+        {
+            return new Client(_dbal.Select("client",
+                "prenom = '" + prenom + "' AND " +
+                "nom = '" + nom + "' AND " +
+                "email = '" + email + "'"
+                ).Rows[0]);
+        }
+       /* public List<Client> GetAllClient()
         {
             DataTable tab = _dbal.Select("client");
             List<Client> lst = new List<Client>();
