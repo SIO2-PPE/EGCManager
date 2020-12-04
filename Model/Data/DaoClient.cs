@@ -32,17 +32,5 @@ namespace Model.Data
         {
             _dbal.Update("client", c.ToArray(), "id = " + c.Id);
         }
-        /* public List<Client> GetAllClient()
-         {
-             DataTable tab = _dbal.Select("client");
-             List<Client> lst = new List<Client>();
-             foreach (DataRow row in tab.Rows)
-             {
-                 Client client = new Client(row);
-                 client.LstFacture = _daoFacture.GetForClient(client);
-                 lst.Add(client);
-             }
-             return lst;
-         }*/
     }
 }
