@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using Model.Data;
+
+//using Model.Data;
 
 namespace Test
 {
@@ -6,7 +10,12 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Dbal dbal = new Dbal("egc_db");
+            // DaoClient daoClient = new DaoClient(dbal);
+            // DaoFacture daoFacture = new DaoFacture(dbal);
+
+            Dictionary<DateTime, string> t = new Dictionary<DateTime, string>();
+            
         }
     }
 }
