@@ -59,49 +59,102 @@ namespace Direction.viewModel
         }
         #endregion
         
-        #region Liaison Binding
-        // LISTES
+        #region BINDING LISTES
+
         public ObservableCollection<Site> ListSites { get => _listSites; set => _listSites = value; }
         public ObservableCollection<Salle> ListSalles { get => _listSalles; set => _listSalles = value; }
         public ObservableCollection<Horaire> ListHoraires { get => _listHoraires; set => _listHoraires = value; }
         public ObservableCollection<Horaire> ListHorairesSite { get => _listHorairesSite; set => _listHorairesSite = value; }
         public ObservableCollection<Theme> ListThemes { get => _listThemes; set => _listThemes = value; }
-        // SELECTIONS
+
+        #endregion
+        #region BINDING SELECTIONS
+
         public Site SelectedSite
         {
             get => _selectedSite;
-            set => _selectedSite = value;
+            set
+            {
+                if (value != null &&
+                    value != _selectedSite)
+                {
+                    _selectedSite = value;
+                }
+            }
         }
         public Salle SelectedSalle
         {
             get => _selectedSalle;
-            set => _selectedSalle = value;
+            set
+            {
+                if (value != null &&
+                    value != _selectedSalle)
+                {
+                    _selectedSalle = value;
+                }
+            }
         }
         public Horaire SelectedHoraire
         {
             get => _selectedHoraire;
-            set => _selectedHoraire = value;
+            set
+            {
+                if (value != null &&
+                    value != _selectedHoraire)
+                {
+                    _selectedHoraire = value;
+                }
+            }
         }
         public Horaire SelectedHoraireSite
         {
             get => _selectedHoraireSite;
-            set => _selectedHoraireSite = value;
+            set
+            {
+                if (value != null &&
+                    value != _selectedHoraireSite)
+                {
+                    _selectedHoraireSite = value;
+                }
+            }
         }
         public DateTime DateNewDate
         {
             get => _dateNewDate;
-            set => _dateNewDate = value;
+            set
+            {
+                if (value != null &&
+                    value != _dateNewDate)
+                {
+                    _dateNewDate = value;
+                }
+            }
         }
         public Theme SelectedTheme
         {
             get => _selectedTheme;
-            set => _selectedTheme = value;
+            set
+            {
+                if (value != null &&
+                    value != _selectedTheme)
+                {
+                    _selectedTheme = value;
+                }
+            }
         }
         public string NameNewTheme
         {
             get => _nameNewTheme;
-            set => _nameNewTheme = value;
+            set
+            {
+                if (value != null &&
+                    value != _nameNewTheme)
+                {
+                    _nameNewTheme = value;
+                }
+            }
         }
+        
         #endregion
         
         #region Commande (boutons)
