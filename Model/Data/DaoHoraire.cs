@@ -27,7 +27,8 @@ namespace Model.Data
             DataTable tab = _dbal.SelectOrderBy("horaire", "heure");
             foreach (DataRow row in tab.Rows)
             {
-                dic.Add(new Horaire(row), _daoPartie.GetPartieForHoraire((int)row["id"],jour,salle));
+                Horaire horaire = new Horaire(row);
+                dic.Add(horaire, _daoPartie.GetPartieForHoraire(horaire,jour,salle));
             }
             return dic;
         }

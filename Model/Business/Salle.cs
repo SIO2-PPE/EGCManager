@@ -11,11 +11,9 @@ namespace Model.Business
         private Site _site;
         private Theme _theme;
 
-        public Salle(int id, Site site, Theme theme)
+        public Salle(DataRow row)
         {
-            _id = id;
-            _site = site;
-            _theme = theme;
+            Hydrate(row);
         }
 
         public Salle()

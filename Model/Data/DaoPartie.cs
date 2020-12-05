@@ -64,13 +64,14 @@ namespace Model.Data
         //     return partie;
         // }
 
-        public Partie GetPartieForHoraire(int horaireId,DateTime jour, Salle salle)
+        public Partie GetPartieForHoraire(Horaire horaire,DateTime jour, Salle salle)
         {
             return new Partie(_dbal.Select("partie",
                 "salle = " + salle.Id +
                 "date = '" + jour.ToString("yyyy-M-d") + "' and " +
-                "horaire = " + horaireId
-                ).Rows[0]);
+                "horaire = " + horaire.Id
+                ).Rows[0],
+                horaire);
         }
 
         public void NouvellePartie(Partie partie)
