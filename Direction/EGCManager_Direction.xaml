@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Direction"
         mc:Ignorable="d"
         WindowState = "Maximized"
-        Title="EGCManager - Direction" Height="450" Width="800">
+        FontSize="16"
+        Title="EGCManager - Direction" Height="800" Width="1400">
     <Grid>
         <TabControl>
             <TabItem Header="Gestion">
@@ -17,18 +18,27 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <Label Margin="10,0,0,0" HorizontalAlignment="Left" Width="32" Content="Site" Height="26" VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding ListSite, Mode=OneTime}" SelectedItem="{Binding Site}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSite" HorizontalAlignment="Left" Height="20" Margin="42,0,0,0" Width="95" VerticalAlignment="Center"/>
-                        <Label Margin="152,0,0,0" HorizontalAlignment="Left" Width="34" Content="Salle" VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding ListSalle, Mode=OneTime}" SelectedItem="{Binding Salle}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSalle" HorizontalAlignment="Left" Height="20" Margin="186,0,0,0" Width="95" VerticalAlignment="Center"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="1" Content="Site" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="2" ItemsSource="{Binding ListSites, Mode=OneTime}" SelectedItem="{Binding SelectedSite}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSite" VerticalAlignment="Center"/>
+                        <Label Grid.Column="4" Content="Salle" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="5" ItemsSource="{Binding ListSalles, Mode=OneTime}" SelectedItem="{Binding SelectedSalle}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSalle" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Modifier les horaires du site" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Column="1" Text="Modifier le thème de la salle" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Text="Modifier les horaires du site" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="Modifier le thème de la salle" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -56,40 +66,32 @@
                                 <Grid Grid.Column="0" Margin="0,0,4,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
-                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="36"/>
                                     </Grid.RowDefinitions>
                                     <ListBox Grid.Row="0"/>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" Margin="0,4,0,0">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="164"/>
+                                            <ColumnDefinition Width="64"/>
                                             <ColumnDefinition/>
-                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="32"/>
                                         </Grid.ColumnDefinitions>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="90"/>
-                                            <ColumnDefinition Width="54"/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="30"/>
-                                        </Grid.ColumnDefinitions>
-                                        <DatePicker Grid.Column="0" Margin="0,4,4,4"/>
-                                        <Button Grid.Column="1" Content="Ajouter" Margin="0,4,4,4"/>
-                                        <Button Grid.Column="3" Content="+" Margin="4,4,0,4"/>
+                                        <DatePicker Grid.Column="0" Margin="0,0,2,0"/>
+                                        <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"/>
+                                        <Button Grid.Column="3" Content="+"/>
                                     </Grid>
                                 </Grid>
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
-                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="36"/>
                                     </Grid.RowDefinitions>
                                     <ListBox Grid.Row="0"/>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" Margin="0,4,0,0">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="30"/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="32"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Grid.Column="0" Content="-" Margin="0,4,4,4"/>
+                                        <Button Grid.Column="0" Content="-"/>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -100,14 +102,38 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
+                                <TextBlock Grid.Column="1" Text="Liste des thème" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                            <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="1" Content="Thème" VerticalAlignment="Center"/>
-                                <ComboBox Grid.Column="2" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <ListBox Grid.Row="0"/>
+                                    <Grid Grid.Row="1" Margin="0,4,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Margin="0,0,2,0" Content="Appliquer à la salle"/>
+                                        <Button Grid.Column="1" Margin="2,0,0,0" Content="Supprimer"/>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="0,4,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Margin="0,0,2,0" TextAlignment="Left" FontSize="16"/>
+                                        <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"/>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>

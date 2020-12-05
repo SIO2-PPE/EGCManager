@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using Model.Business;
+using Model.Data;
 
 namespace Direction.viewModel
 {
@@ -9,16 +11,15 @@ namespace Direction.viewModel
     {
         #region Attributs
         // DAO
-        private daoPays daoPays;
-        private daoPoste daoPoste;
-        private daoJoueur daoJoueur;
-        private daoEquipe daoEquipe;
+        private DaoSite _daoSite;
+        private DaoSalle _daoSalle;
         // LISTES
-        private ObservableCollection<Equipe> listEquipes;
-        private ObservableCollection<Joueur> listJoueurs;
+        private ObservableCollection<Site> _listSites;
+        private ObservableCollection<Salle> _listSalles;
+        private ObservableCollection<Theme> _listThemes;
         // SELECTION
-        private Equipe selectedEquipe;
-        private Joueur selectedJoueur;
+        private Site _selectedSite;
+        private Salle _selectedSalle;
         // COMMANDES
         private ICommand updateCommand;
         private ICommand addCommand;
@@ -26,35 +27,22 @@ namespace Direction.viewModel
         #endregion
 
         #region Constructeur
-        public ViewModelEquipe(daoPays daoPays, daoPoste daoPoste, daoJoueur daoJoueur, daoEquipe daoEquipe)
+        public ViewModelSite(DaoSite daoSite, DaoSalle daoSalle)
         {
-            this.daoPays = daoPays;
-            this.daoPoste = daoPoste;
-            this.daoJoueur = daoJoueur;
-            this.daoEquipe = daoEquipe;
+            _daoSite = daoSite;
+            _daoSalle = daoSalle;
+            
+            _listSites = new ObservableCollection<Site>();
+            _listSalles = new ObservableCollection<Salle>();
+            _listThemes = new ObservableCollection<Theme>();
 
-            listEquipes = new ObservableCollection<Equipe>(daoEquipe.SelectAll());
-            listJoueurs = new ObservableCollection<Joueur>();
-
-            selectedEquipe = new Equipe();
-            selectedJoueur = new Joueur();
-
-
-            // Faire la liaison entre les joueur dans listJoueur et les joueur dans la lstJoueur des Equipes
-
-            /*foreach (Fromage f in listFromages)
-            {
-                foreach (Pays p in listPays)
-                {
-                    if (f.PaysOrigine.Nom == p.Nom)
-                    {
-                        f.PaysOrigine = p;
-                    }
-                }
-            }*/
+            // _selectedSite = new Site();
+            // _selectedSalle = new Salle();
+            
         }
         #endregion
 
+        /*
         #region Liaison Binding
         public ObservableCollection<Equipe> ListEquipes { get => listEquipes; set => listEquipes = value; }
         public ObservableCollection<Joueur> ListJoueurs { get => listJoueurs; set => listJoueurs = value; }
@@ -114,7 +102,7 @@ namespace Direction.viewModel
                     OnPropertyChanged("ImageSource");
                 }
             }
-        }*/
+        }#1#
         public string Nom
         {
             get => selectedJoueur.Nom;
@@ -248,6 +236,6 @@ namespace Direction.viewModel
                 return false;
             }
         }
-        #endregion
+        #endregion*/
     }
 }
