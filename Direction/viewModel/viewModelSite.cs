@@ -79,6 +79,8 @@ namespace Direction.viewModel
                     value != _selectedSite)
                 {
                     _selectedSite = value;
+                    ListSalles = new ObservableCollection<Salle>(_daoSalle.GetBySite(_selectedSite));
+                    OnPropertyChanged("SelectedSite");
                 }
             }
         }
@@ -91,6 +93,8 @@ namespace Direction.viewModel
                     value != _selectedSalle)
                 {
                     _selectedSalle = value;
+                    
+                    OnPropertyChanged("SelectedSalle");
                 }
             }
         }
@@ -103,6 +107,8 @@ namespace Direction.viewModel
                     value != _selectedHoraire)
                 {
                     _selectedHoraire = value;
+                    
+                    OnPropertyChanged("SelectedHoraire");
                 }
             }
         }
@@ -115,6 +121,8 @@ namespace Direction.viewModel
                     value != _selectedHoraireSite)
                 {
                     _selectedHoraireSite = value;
+                    
+                    OnPropertyChanged("SelectedHoraireSite");
                 }
             }
         }
@@ -127,6 +135,8 @@ namespace Direction.viewModel
                     value != _dateNewDate)
                 {
                     _dateNewDate = value;
+                    
+                    OnPropertyChanged("DateNewDate");
                 }
             }
         }
@@ -139,6 +149,8 @@ namespace Direction.viewModel
                     value != _selectedTheme)
                 {
                     _selectedTheme = value;
+                    
+                    OnPropertyChanged("SelectedTheme");
                 }
             }
         }
@@ -151,6 +163,8 @@ namespace Direction.viewModel
                     value != _nameNewTheme)
                 {
                     _nameNewTheme = value;
+                    
+                    OnPropertyChanged("NameNewTheme");
                 }
             }
         }
