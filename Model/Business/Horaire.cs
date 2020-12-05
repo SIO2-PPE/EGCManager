@@ -14,6 +14,12 @@ namespace Model.Business
             Hydrate(row);
         }
 
+        public Horaire()
+        {
+            _id = 0;
+            _heure = new DateTime();
+        }
+
         #region Getter and Setter
 
         public int Id

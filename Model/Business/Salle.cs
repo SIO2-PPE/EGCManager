@@ -18,6 +18,13 @@ namespace Model.Business
             _theme = theme;
         }
 
+        public Salle()
+        {
+            _id = 0;
+            _site = new Site();
+            _theme = new Theme();
+        }
+
         #region Getter and Setter
 
         public int Id

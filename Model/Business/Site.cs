@@ -20,6 +20,15 @@ namespace Model.Business
             _lstHoraire = lstHoraire;
         }
 
+        public Site()
+        {
+            _id = 0;
+            _ville = "";
+            _adresse = "";
+            _lstSalle = new List<Salle>();
+            _lstHoraire = new List<Horaire>();
+        }
+
         #region Getter and Setter
 
         public int Id
