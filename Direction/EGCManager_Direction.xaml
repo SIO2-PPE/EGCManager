@@ -8,7 +8,7 @@
         WindowState = "Maximized"
         FontSize="16"
         Title="EGCManager - Direction" Height="800" Width="1400">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <TabControl>
             <TabItem Header="Gestion">
                 <Grid>

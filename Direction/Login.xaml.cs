@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Data;
 
 namespace Direction
 {
@@ -17,14 +18,18 @@ namespace Direction
     /// </summary>
     public partial class Login : Window
     {
-        public Login()
+        private DaoSite _daoSite;
+        private DaoSalle _daoSalle;
+        public Login(DaoSite daoSite, DaoSalle daoSalle)
         {
+            _daoSite = daoSite;
+            _daoSalle = daoSalle;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EGCManager_Direction wnd = new EGCManager_Direction();
+            EGCManager_Direction wnd = new EGCManager_Direction(_daoSite, _daoSalle);
             wnd.Show();
             this.Close();
         }

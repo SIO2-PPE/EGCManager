@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Model.Data;
 
 namespace Direction
 {
@@ -15,7 +16,11 @@ namespace Direction
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Login wnd = new Login();
+            Dbal dbal = new Dbal("ppe3_mmd");
+            DaoSite daoSite = new DaoSite(dbal);
+            DaoSalle daoSalle = new DaoSalle(dbal);
+            
+            Login wnd = new Login(daoSite, daoSalle);
             wnd.Show();
         }
     }

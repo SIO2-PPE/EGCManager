@@ -11,7 +11,6 @@ namespace Model.Data
     public class Dbal
     {
         private MySqlConnection _connection;
-        private bool _auto_increment = true;
 
         //Constructor
         public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
