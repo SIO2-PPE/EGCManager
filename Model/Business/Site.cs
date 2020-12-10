@@ -70,5 +70,9 @@ namespace Model.Business
             val.Add("adresse", _adresse);
             return val;
         }
+        public override string ToString()
+        {
+            return _ville;
+        }
     }
 }

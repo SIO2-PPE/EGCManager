@@ -48,5 +48,10 @@ namespace Model.Business
             val.Add("nom", _nom);
             return val;
         }
+
+        public override string ToString()
+        {
+            return _nom;
+        }
     }
 }
