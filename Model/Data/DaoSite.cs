@@ -9,19 +9,24 @@ namespace Model.Data
     public class DaoSite
     {
         private Dbal _dbal;
+        private DaoSalle _daoSalle;
 
         public DaoSite(Dbal dbal)
         {
-            this._dbal = dbal;
+            _dbal = dbal;
+            _daoSalle = new DaoSalle(dbal);
         }
-        /*public Site GetSite(int id)
+        public List<Site> GetAllSite()
         {
-            DataRow row = this._dbal.SelectById("site", id);
-            return new Site(
-                (string)row["ville"],
-                (string)row["adresse"],
-                (int)row["id"]
-            );
-        }*/
+            DataTable tab = this._dbal.Select("site");
+            List<Site> lstS = new List<Site>();
+            foreach (DataRow row in tab.Rows)
+            {
+                Site s = new Site(row);
+                s.LstSalle = (_daoSalle.GetBySite(s));
+                lstS.Add(s);
+            }
+            return lstS;
+        }
     }
 }

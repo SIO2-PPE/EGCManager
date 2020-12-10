@@ -43,7 +43,7 @@ namespace Direction.viewModel
             _daoSite = daoSite;
             _daoSalle = daoSalle;
             // LISTES
-            _listSites = new ObservableCollection<Site>();
+            _listSites = new ObservableCollection<Site>(_daoSite.GetAll);
             _listSalles = new ObservableCollection<Salle>();
             _listHoraires = new ObservableCollection<Horaire>();
             _listHorairesSite = new ObservableCollection<Horaire>();

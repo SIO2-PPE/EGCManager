@@ -13,11 +13,11 @@ namespace Model.Business
         private List<Salle> _lstSalle;
         private List<Horaire> _lstHoraire;
 
-        public Site(DataRow row, List<Salle> lstSalle, List<Horaire> lstHoraire)
+        public Site(DataRow row)
         {
             Hydrate(row);
-            _lstSalle = lstSalle;
-            _lstHoraire = lstHoraire;
+            _lstSalle = new List<Salle>();
+            _lstHoraire = new List<Horaire>();
         }
 
         public Site()
