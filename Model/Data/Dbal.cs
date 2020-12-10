@@ -107,7 +107,7 @@ namespace Model.Data
             query += ")";
 
             //open connection
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
@@ -118,7 +118,7 @@ namespace Model.Data
                     cmd.ExecuteNonQuery();
 
                     //close connection
-                    this.CloseConnection();
+                    CloseConnection();
                 }
                 catch (Exception e)
                 {
@@ -148,7 +148,7 @@ namespace Model.Data
             query += " WHERE " + where;
 
             //Open connection
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 //create mysql command
                 MySqlCommand cmd = new MySqlCommand();
@@ -161,7 +161,7 @@ namespace Model.Data
                 cmd.ExecuteNonQuery();
 
                 //close connection
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -170,11 +170,11 @@ namespace Model.Data
         {
             string query = "DELETE FROM " + table + " WHERE " + where;
 
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
                 cmd.ExecuteNonQuery();
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -182,11 +182,11 @@ namespace Model.Data
         {
             System.Console.WriteLine(query);
             DataSet dataset = new DataSet();
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, _connection);
                 adapter.Fill(dataset);
-                this.CloseConnection();
+                CloseConnection();
             }
             return dataset;
         }
@@ -202,7 +202,8 @@ namespace Model.Data
         }
         public DataRow SelectById(string table, int id)
         {
-            return this.RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
+            return RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
         }
+
     }
 }
