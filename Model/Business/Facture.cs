@@ -20,6 +20,8 @@ namespace Model.Business
             _client = client;
         }
 
+        public Facture(){}
+
         public Facture(DateTime date, double montant, int nbCredit, Client client)
         {
             _id = 0;
