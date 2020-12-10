@@ -19,6 +19,12 @@ namespace Model.Data
             _daoSite = new DaoSite(dbal);
             _daoTheme = new DaoTheme(dbal);
         }
+        public DaoSalle(Dbal dbal, DaoSite daoSite)
+        {
+            _dbal = dbal;
+            _daoSite = daoSite;
+            _daoTheme = new DaoTheme(dbal);
+        }
         public List<Salle> GetBySite(Site site)
         {
             DataTable tab = _dbal.Select("salle", "site = " + site.Id);

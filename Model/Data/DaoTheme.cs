@@ -18,8 +18,8 @@ namespace Model.Data
         {
             DataRow rowTs = this._dbal.Select("theme_salle",
                 "salle = " + s.Id + " AND " +
-                "dateDebut < " + DateTime.Now.ToString("'yyyy-MM-dd'") + " AND " +
-                "dateFin > " + DateTime.Now.ToString("'yyyy-MM-dd'")
+                "dateDebut < '" + DateTime.Now.ToString("yyyy-MM-dd") + "' AND " +
+                "dateFin > '" + DateTime.Now.ToString("yyyy-MM-dd") + "'"
             ).Rows[0];
             DataRow row = this._dbal.SelectById("theme", (int)rowTs["theme"]);
             return new Theme(row);

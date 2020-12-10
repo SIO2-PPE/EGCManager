@@ -15,12 +15,10 @@ namespace Test
             DaoSite daoSite = new DaoSite(dbal);
             //DaoSalle daoSalle = new DaoSalle(dbal);
 
-            //dbal.Select("Site");
-
-            /*foreach (Site site in daoSite.GetAllSite())
+            foreach (Site site in daoSite.GetAllSite())
             {
                 Console.WriteLine(site.Ville);
-            }*/
+            }
             
         }
     }
