@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Business;
 using Model.Data;
 
 //using Model.Data;
@@ -10,11 +11,16 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            // Dbal dbal = new Dbal("egc_db");
-            // DaoClient daoClient = new DaoClient(dbal);
-            // DaoFacture daoFacture = new DaoFacture(dbal);
+            Dbal dbal = new Dbal("ppe3_mmd");
+            DaoSite daoSite = new DaoSite(dbal);
+            //DaoSalle daoSalle = new DaoSalle(dbal);
 
-            Dictionary<DateTime, string> t = new Dictionary<DateTime, string>();
+            //dbal.Select("Site");
+
+            /*foreach (Site site in daoSite.GetAllSite())
+            {
+                Console.WriteLine(site.Ville);
+            }*/
             
         }
     }
