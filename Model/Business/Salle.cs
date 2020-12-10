@@ -55,5 +55,9 @@ namespace Model.Business
             val.Add("site", _site.Id);
             return val;
         }
+        public override string ToString()
+        {
+            return _theme.Nom;
+        }
     }
 }
