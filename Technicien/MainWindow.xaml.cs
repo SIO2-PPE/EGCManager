@@ -16,13 +16,22 @@ using System.Windows.Shapes;
 namespace Technicien
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            {
+                Planning subWindow = new Planning();
+                subWindow.Show();
+                this.Close();
+            }
         }
     }
 }
