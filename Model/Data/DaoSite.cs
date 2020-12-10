@@ -14,7 +14,7 @@ namespace Model.Data
         public DaoSite(Dbal dbal)
         {
             _dbal = dbal;
-            _daoSalle = new DaoSalle(dbal);
+            _daoSalle = new DaoSalle(dbal, this);
         }
         public List<Site> GetAllSite()
         {
