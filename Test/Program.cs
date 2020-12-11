@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
 using Model.Business;
 using Model.Data;
 
@@ -12,14 +15,8 @@ namespace Test
         static void Main(string[] args)
         {
             Dbal dbal = new Dbal("ppe3_mmd");
-            DaoSite daoSite = new DaoSite(dbal);
-            //DaoSalle daoSalle = new DaoSalle(dbal);
-
-            foreach (Site site in daoSite.GetAllSite())
-            {
-                Console.WriteLine(site.Ville);
-            }
-            
+            dbal.DBinit();
+            dbal.DBhydrate();
         }
     }
 }
