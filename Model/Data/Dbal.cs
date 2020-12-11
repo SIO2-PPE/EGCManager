@@ -14,7 +14,7 @@ namespace Model.Data
         private MySqlConnection _connection;
 
         //Constructor
-        public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
+        public Dbal(string database, string server = "localhost", string uid = "root", string password = "5MichelAnnecy")
         {
             Initialize(
                 server,
@@ -203,7 +203,7 @@ namespace Model.Data
         }
         public DataTable Select(string table, string where = null)
         {
-            string query = "select * from " + table;
+            string query = "select * from " + table ;
             if (where != null) query += " where " + where;
             return RQuery(query).Tables[0];
         }

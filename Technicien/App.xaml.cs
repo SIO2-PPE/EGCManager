@@ -19,6 +19,8 @@ namespace Technicien
         {
             Dbal dbal = new Dbal("ppe3_mmd");
             DaoSite daoSite = new DaoSite(dbal);
+            DaoSalle daoSalle = new DaoSalle(dbal);
+
 
             MainWindow Wnd = new MainWindow(daoSite);
             Wnd.Show();
