@@ -19,6 +19,7 @@ namespace Direction
             Dbal dbal = new Dbal("ppe3_mmd");
             DaoSite daoSite = new DaoSite(dbal);
             DaoSalle daoSalle = new DaoSalle(dbal);
+            DaoHoraire daoHoraire = new DaoHoraire(dbal);
             
             Login wnd = new Login(daoSite, daoSalle);
             wnd.Show();

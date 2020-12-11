@@ -14,7 +14,7 @@ namespace Model.Data
         public DaoJoueur(Dbal dbal)
         {
             _dbal = dbal;
-            _daoAvis = new DaoAvis(dbal);
+            _daoAvis = new DaoAvis(dbal, this);
         }
         /*public void AddJoueurToPartie(Joueur j, Partie p)
         {

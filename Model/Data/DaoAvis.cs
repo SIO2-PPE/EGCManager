@@ -15,6 +15,11 @@ namespace Model.Data
             _dbal = dbal;
             _daoJoueur = new DaoJoueur(dbal);
         }
+        public DaoAvis(Dbal dbal, DaoJoueur daoJoueur)
+        {
+            _dbal = dbal;
+            _daoJoueur = daoJoueur;
+        }
         /*public void Insert(Avis avis)
         {
             _dbal.Insert("avis", avis.ToArray());
