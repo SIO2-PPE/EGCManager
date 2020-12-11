@@ -22,20 +22,23 @@ namespace Technicien
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dbal thedbal;
+        
         private DaoSite thedaoSite;
-        public MainWindow()
+        public MainWindow(DaoSite daosite)
         {
+            thedaoSite = daosite;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            {
+            
                 Planning subWindow = new Planning(thedaoSite);
                 subWindow.Show();
-                this.Close();
-            }
+                Close();
+            
+            
+            
         }
     }
 }
