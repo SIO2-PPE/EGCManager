@@ -268,11 +268,19 @@ namespace Direction.viewModel
         }
         private void AssigneHoraire()
         {
-            
+            if (IsNotNull(SelectedHoraire,"Il faut selectionner un horaire"))
+            {
+                _daoHoraire.AssigneToSite(SelectedHoraire, SelectedSite);
+                ListHorairesSite.Add(SelectedHoraire);
+            }
         }
         private void DissosHoraire()
         {
-            
+            if (IsNotNull(SelectedHoraireSite, "Il faut selectionner un horaire"))
+            {
+                _daoHoraire.DissosToSite(SelectedHoraireSite, SelectedSite);
+                ListHorairesSite.Remove(SelectedHoraireSite);
+            }
         }
         private void AssigneToSalle()
         {
@@ -289,13 +297,12 @@ namespace Direction.viewModel
         #endregion
 
         #region Autre methode
-        private void RefreshListSalle()
+        private bool IsNotNull(dynamic val, string msg, bool isnot = true)
         {
-            foreach (Salle salle in _listSalles)
-            {
-                _listSalles.Remove(salle);
-            }
-            OnPropertyChanged("ListSalles");
+            bool r = val != null;
+            r = r == isnot;
+            if (!r) MessageBox.Show(msg);
+            return r;
         }
         #endregion
     }

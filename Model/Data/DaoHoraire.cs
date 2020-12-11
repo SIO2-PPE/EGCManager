@@ -60,5 +60,21 @@ namespace Model.Data
             _dbal.Insert("horaire",horaire.ToArray());
             horaire.Id = (int)_dbal.Select("horaire", "heure = '" + horaire.Heure + "'").Rows[0]["id"];
         }
+
+        public void AssigneToSite(Horaire horaire, Site site)
+        {
+            Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
+            dic.Add("site", site.Id);
+            dic.Add("horaire", horaire.Id);
+            _dbal.Insert("site_horaire", dic);
+        }
+
+        public void DissosToSite(Horaire horaire, Site site)
+        {
+            _dbal.Delete("site_horaire",
+                "site = " + site.Id + " AND " +
+                "horaire = " + horaire.Id
+                );
+        }
     }
 }
