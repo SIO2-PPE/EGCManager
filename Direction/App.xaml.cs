@@ -21,7 +21,7 @@ namespace Direction
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoHoraire daoHoraire = new DaoHoraire(dbal);
             
-            Login wnd = new Login(daoSite, daoSalle);
+            Login wnd = new Login(daoSite, daoSalle, daoHoraire);
             wnd.Show();
         }
     }

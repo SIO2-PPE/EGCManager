@@ -20,18 +20,20 @@ namespace Direction
     {
         private DaoSite _daoSite;
         private DaoSalle _daoSalle;
-        public Login(DaoSite daoSite, DaoSalle daoSalle)
+        private DaoHoraire _daoHoraire;
+        public Login(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire)
         {
             _daoSite = daoSite;
             _daoSalle = daoSalle;
+            _daoHoraire = daoHoraire;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EGCManager_Direction wnd = new EGCManager_Direction(_daoSite, _daoSalle);
+            EGCManager_Direction wnd = new EGCManager_Direction(_daoSite, _daoSalle, _daoHoraire);
             wnd.Show();
-            this.Close();
+            Close();
         }
     }
 }

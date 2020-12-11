@@ -12,12 +12,11 @@ namespace Test
         static void Main(string[] args)
         {
             Dbal dbal = new Dbal("ppe3_mmd");
-            DaoSite daoSite = new DaoSite(dbal);
-            //DaoSalle daoSalle = new DaoSalle(dbal);
+            DaoHoraire daoH = new DaoHoraire(dbal);
 
-            foreach (Site site in daoSite.GetAllSite())
+            foreach (Horaire horaire in daoH.GetAllHoraires())
             {
-                Console.WriteLine(site.Ville);
+                Console.WriteLine(horaire.Heure);
             }
             
         }

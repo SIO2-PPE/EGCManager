@@ -32,5 +32,16 @@ namespace Model.Data
             }
             return dic;
         }
+
+        public List<Horaire> GetAllHoraires()
+        {
+            DataTable tab = _dbal.Select("horaire");
+            List<Horaire> lstH = new List<Horaire>();
+            foreach (DataRow row in tab.Rows)
+            {
+                lstH.Add(new Horaire(row));
+            }
+            return lstH;
+        }
     }
 }

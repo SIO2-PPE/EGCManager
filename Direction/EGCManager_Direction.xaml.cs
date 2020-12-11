@@ -18,10 +18,10 @@ namespace Direction
     /// </summary>
     public partial class EGCManager_Direction : Window
     {
-        public EGCManager_Direction(DaoSite daoSite, DaoSalle daoSalle)
+        public EGCManager_Direction(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire)
         {
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.ViewModelSite(daoSite, daoSalle);
+            MainGrid.DataContext = new viewModel.ViewModelSite(daoSite, daoSalle, daoHoraire);
         }
     }
 }
