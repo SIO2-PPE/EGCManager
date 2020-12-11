@@ -49,5 +49,10 @@ namespace Model.Business
             tab.Add("heure", _heure);
             return tab;
         }
+
+        public override string ToString()
+        {
+            return _heure.ToString("g");
+        }
     }
 }

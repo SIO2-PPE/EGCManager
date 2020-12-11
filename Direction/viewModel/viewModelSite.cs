@@ -48,7 +48,7 @@ namespace Direction.viewModel
             // LISTES
             _listSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
             _listSalles = new ObservableCollection<Salle>(_listSites.First().LstSalle);
-            _listHoraires = new ObservableCollection<Horaire>(_daoHoraire.);
+            _listHoraires = new ObservableCollection<Horaire>(_daoHoraire.GetAllHoraires());
             _listHorairesSite = new ObservableCollection<Horaire>();
             _listThemes = new ObservableCollection<Theme>();
             // SELECTIONS
