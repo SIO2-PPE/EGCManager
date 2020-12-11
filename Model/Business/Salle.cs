@@ -57,7 +57,7 @@ namespace Model.Business
         }
         public override string ToString()
         {
-            return _theme.Nom;
+            return "[" + _id + "] " + _theme.Nom;
         }
     }
 }

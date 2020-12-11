@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Model.Business;
@@ -44,13 +45,13 @@ namespace Direction.viewModel
             _daoSalle = daoSalle;
             // LISTES
             _listSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
-            _listSalles = new ObservableCollection<Salle>();
+            _listSalles = new ObservableCollection<Salle>(_listSites.First().LstSalle);
             _listHoraires = new ObservableCollection<Horaire>();
             _listHorairesSite = new ObservableCollection<Horaire>();
             _listThemes = new ObservableCollection<Theme>();
             // SELECTIONS
-            _selectedSite = new Site();
-            _selectedSalle = new Salle();
+            _selectedSite = _listSites.First();
+            _selectedSalle = _listSalles.First();
             _selectedHoraire = new Horaire();
             _selectedHoraireSite = new Horaire();
             _dateNewDate = new DateTime();
@@ -61,8 +62,12 @@ namespace Direction.viewModel
         
         #region BINDING LISTES
 
-        public ObservableCollection<Site> ListSites { get => _listSites; set => _listSites = value; }
-        public ObservableCollection<Salle> ListSalles { get => _listSalles; set => _listSalles = value; }
+        public ObservableCollection<Site> ListSites { get => _listSites; set { _listSites = value;
+            SelectedSite = _listSites.First();
+        } }
+        public ObservableCollection<Salle> ListSalles { get => _listSalles; set { _listSalles = value;
+            SelectedSalle = _listSalles.First();
+        } }
         public ObservableCollection<Horaire> ListHoraires { get => _listHoraires; set => _listHoraires = value; }
         public ObservableCollection<Horaire> ListHorairesSite { get => _listHorairesSite; set => _listHorairesSite = value; }
         public ObservableCollection<Theme> ListThemes { get => _listThemes; set => _listThemes = value; }
@@ -79,8 +84,9 @@ namespace Direction.viewModel
                     value != _selectedSite)
                 {
                     _selectedSite = value;
-                    ListSalles = new ObservableCollection<Salle>(_daoSalle.GetBySite(_selectedSite));
+                    ListSalles = new ObservableCollection<Salle>(); //_daoSalle.GetBySite(_selectedSite)
                     OnPropertyChanged("SelectedSite");
+                    OnPropertyChanged("ListSalles");
                 }
             }
         }
@@ -93,7 +99,6 @@ namespace Direction.viewModel
                     value != _selectedSalle)
                 {
                     _selectedSalle = value;
-                    
                     OnPropertyChanged("SelectedSalle");
                 }
             }
