@@ -136,11 +136,11 @@
                    FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="220" Canvas.Left="294" Margin="0,214,392,0"/>
         <TextBlock x:Name="TextBlock_nbCredit" Text="Nombre de crédit" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="top" Height="24" Width="159" FontFamily="Arial" FontSize="18"
                    FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="153" Canvas.Left="294" Margin="0,248,392,0"/>
-        <TextBox x:Name="Box_Nom" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="179" TextAlignment="Center" Margin="427,108,152,280" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="Box_Prenom" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="145" TextAlignment="Center" Margin="427,143,152,245" VerticalContentAlignment="Center"/>
-        <DatePicker x:Name="Selection_Date" HorizontalAlignment="Left" Height="31" Margin="427,173,0,0" Text="" VerticalAlignment="Top" Width="204" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="Box_Email" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="215" TextAlignment="Center" Margin="427,210,152,178" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="Box_Numero" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="215" TextAlignment="Center" Margin="427,244,152,144" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Box_Nom" Text="{Binding LeNomDuClient}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="179" TextAlignment="Center" Margin="427,108,152,280" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Box_Prenom" Text="{Binding LePrenomDuClient}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="145" TextAlignment="Center" Margin="427,143,152,245" VerticalContentAlignment="Center"/>
+        <DatePicker x:Name="Selection_Date" Text="{Binding DateDuJour}" HorizontalAlignment="Left" Height="31" Margin="427,173,0,0" VerticalAlignment="Top" Width="204" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Box_Montant" Text="{Binding Montant}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,210,152,178" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Box_Credits" Text="{Binding CreditsClient}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,244,152,144" VerticalContentAlignment="Center"/>
         <TextBlock x:Name="Label_Instruction" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="Facturation" VerticalAlignment="Top" Height="48" Width="792"
                    FontFamily="Arial"
                    FontSize="40"
@@ -155,6 +155,7 @@
                 Background="#10D500"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Margin="503,310,190,0" Click="Create_facture_Click"/>
+                FontSize="15" Margin="503,310,190,0" Click="Create_facture_Click"
+                Command="{Binding CreerUneFacture}"/>
     </Grid>
 </Window>

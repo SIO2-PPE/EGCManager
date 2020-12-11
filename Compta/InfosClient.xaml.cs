@@ -23,7 +23,6 @@ namespace Compta
         {
             InitializeComponent();
         }
-
         private void Click_Edit(object sender, RoutedEventArgs e)
         {
             {

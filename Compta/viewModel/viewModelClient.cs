@@ -268,7 +268,7 @@ namespace Compta.viewModel
         private void UpdateClient()
         {
             this.vmDaoClient.EditClient(this.activeClient);
-            MessageBox.Show("Le fromage à bien été mis à jour");
+            MessageBox.Show("Le client à bien été mis à jour");
         }
     }
 }
