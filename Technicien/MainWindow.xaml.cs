@@ -24,16 +24,18 @@ namespace Technicien
     {
         
         private DaoSite thedaoSite;
-        public MainWindow(DaoSite daosite)
+        private DaoSalle thedaoSalle;
+        public MainWindow(DaoSite daosite,DaoSalle daosalle)
         {
             thedaoSite = daosite;
+            thedaoSalle = daosalle;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-                Planning subWindow = new Planning(thedaoSite);
+                Planning subWindow = new Planning(thedaoSite,thedaoSalle);
                 subWindow.Show();
                 Close();
             

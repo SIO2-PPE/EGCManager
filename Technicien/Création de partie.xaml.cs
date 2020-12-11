@@ -24,6 +24,7 @@ namespace Technicien
        /// </summary>
        private Dbal thedbal;
         private DaoSite thedaoSite;
+        private DaoSalle thedaoSalle;
 
         public Création_de_partie()
         {
@@ -56,7 +57,7 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
-            Planning subWindow = new Planning(thedaoSite);
+            Planning subWindow = new Planning(thedaoSite,thedaoSalle);
             subWindow.Show();
             this.Close();
         }

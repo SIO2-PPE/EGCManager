@@ -22,7 +22,7 @@ namespace Technicien
             DaoSalle daoSalle = new DaoSalle(dbal);
 
 
-            MainWindow Wnd = new MainWindow(daoSite);
+            MainWindow Wnd = new MainWindow(daoSite,daoSalle);
             Wnd.Show();
         }
     }
