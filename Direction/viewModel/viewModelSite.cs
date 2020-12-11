@@ -46,8 +46,8 @@ namespace Direction.viewModel
             _daoSalle = daoSalle;
             _daoHoraire = daoHoraire;
             // LISTES
+            _listSalles = new ObservableCollection<Salle>();
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
-            // ListSalles = new ObservableCollection<Salle>(_listSites.First().LstSalle);
             _listHoraires = new ObservableCollection<Horaire>(_daoHoraire.GetAllHoraires());
             //_listHorairesSite = new ObservableCollection<Horaire>();
             _listThemes = new ObservableCollection<Theme>();
@@ -86,7 +86,12 @@ namespace Direction.viewModel
                     value != _selectedSite)
                 {
                     _selectedSite = value;
-                    ListSalles = new ObservableCollection<Salle>(_daoSalle.GetBySite(_selectedSite));
+                    _listSalles.Clear();
+                    foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
+                    {
+                        ListSalles.Add(salle);
+                    }
+                    SelectedSalle = ListSalles.First();
                     ListHorairesSite = new ObservableCollection<Horaire>(_daoHoraire.GetHorairesForSite(_selectedSite));
                     OnPropertyChanged("SelectedSite");
                     OnPropertyChanged("ListSalles");
@@ -280,6 +285,17 @@ namespace Direction.viewModel
         private void AddTheme()
         {
             
+        }
+        #endregion
+
+        #region Autre methode
+        private void RefreshListSalle()
+        {
+            foreach (Salle salle in _listSalles)
+            {
+                _listSalles.Remove(salle);
+            }
+            OnPropertyChanged("ListSalles");
         }
         #endregion
     }

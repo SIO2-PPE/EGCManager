@@ -58,7 +58,7 @@ namespace Model.Data
         public void New(ref Horaire horaire)
         {
             _dbal.Insert("horaire",horaire.ToArray());
-            horaire.Id = (int)_dbal.Select("horaire", "heure = " + horaire.Heure).Rows[0]["id"];
+            horaire.Id = (int)_dbal.Select("horaire", "heure = '" + horaire.Heure + "'").Rows[0]["id"];
         }
     }
 }
