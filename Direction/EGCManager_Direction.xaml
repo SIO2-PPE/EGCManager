@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Direction"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowState = "Maximized"
         FontSize="16"
@@ -76,7 +77,8 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition Width="32"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding MyTime,StringFormat=hh\\:mm}"/>
+                                        <!-- <DatePicker Grid.Column="0" Margin="0,0,2,0" SelectedDate="{Binding DateNewDate}" SelectedDateFormat="Short" FirstDayOfWeek="Monday"/> -->
+                                        <xctk:TimePicker Grid.Column="0" Margin="0,0,2,0" Value="{Binding DateNewDate}"/>
                                         <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0" Command="{Binding AddHoraireCommand}"/>
                                         <Button Grid.Column="3" Content="+" Command="{Binding AssigneHoraireCommand}"/>
                                     </Grid>

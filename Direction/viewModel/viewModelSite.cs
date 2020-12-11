@@ -65,10 +65,10 @@ namespace Direction.viewModel
         #region BINDING LISTES
 
         public ObservableCollection<Site> ListSites { get => _listSites; set { _listSites = value;
-            SelectedSite = _listSites.First();
+            if ( _listSites.First() != null) SelectedSite = _listSites.First();
         } }
         public ObservableCollection<Salle> ListSalles { get => _listSalles; set { _listSalles = value;
-            SelectedSalle = _listSalles.First();
+            if (_listSalles.First() != null) SelectedSalle = _listSalles.First();
         } }
         public ObservableCollection<Horaire> ListHoraires { get => _listHoraires; set => _listHoraires = value; }
         public ObservableCollection<Horaire> ListHorairesSite { get => _listHorairesSite; set => _listHorairesSite = value; }
@@ -252,7 +252,10 @@ namespace Direction.viewModel
         #region Action
         private void AddHoraire()
         {
-            
+            Horaire horaire = new Horaire(DateNewDate.TimeOfDay);
+            _daoHoraire.New(ref horaire);
+            MessageBox.Show(horaire.Id.ToString());
+            ListHoraires.Add(horaire);
         }
         private void AssigneHoraire()
         {

@@ -19,6 +19,11 @@ namespace Model.Business
             _id = 0;
             _heure = new TimeSpan();
         }
+        public Horaire(TimeSpan heure)
+        {
+            _id = 0;
+            _heure = heure;
+        }
 
         #region Getter and Setter
 
@@ -46,7 +51,7 @@ namespace Model.Business
         {
             Dictionary<string, dynamic> tab = new Dictionary<string, dynamic>();
             tab.Add("id", _id);
-            tab.Add("heure", _heure);
+            tab.Add("heure", _heure.ToString());
             return tab;
         }
 
