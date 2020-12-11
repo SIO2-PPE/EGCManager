@@ -28,6 +28,7 @@ namespace Direction.viewModel
         private Horaire _selectedHoraire;
         private Horaire _selectedHoraireSite;
         private DateTime _dateNewDate;
+        private Theme _themeActif;
         private Theme _selectedTheme;
         private string _nameNewTheme;
         // COMMANDES
@@ -49,17 +50,18 @@ namespace Direction.viewModel
             _daoTheme = daoTheme;
             // LISTES
             _listSalles = new ObservableCollection<Salle>();
+            _listThemes = new ObservableCollection<Theme>(_daoTheme.GetAllTheme());
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
             _listHoraires = new ObservableCollection<Horaire>(_daoHoraire.GetAllHoraires());
             //_listHorairesSite = new ObservableCollection<Horaire>();
-            _listThemes = new ObservableCollection<Theme>();
             // SELECTIONS
             _selectedSite = _listSites.First();
             _selectedSalle = _listSalles.First();
             _selectedHoraire = new Horaire();
             _selectedHoraireSite = new Horaire();
             _dateNewDate = new DateTime();
-            _selectedTheme = new Theme();
+            //_themeActif = new Theme();
+            //_selectedTheme = new Theme();
             _nameNewTheme = "";
         }
         #endregion
@@ -91,6 +93,10 @@ namespace Direction.viewModel
                     _listSalles.Clear();
                     foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
                     {
+                        foreach (Theme theme in ListThemes)
+                        {
+                            if (salle.Theme.Id == theme.Id) salle.Theme = theme;
+                        }
                         ListSalles.Add(salle);
                     }
                     SelectedSalle = ListSalles.First();
@@ -110,7 +116,7 @@ namespace Direction.viewModel
                     value != _selectedSalle)
                 {
                     _selectedSalle = value;
-                    
+                    ThemeActif = _selectedSalle.Theme;
                     OnPropertyChanged("SelectedSalle");
                 }
             }
@@ -154,6 +160,20 @@ namespace Direction.viewModel
                     _dateNewDate = value;
                     
                     OnPropertyChanged("DateNewDate");
+                }
+            }
+        }
+        public Theme ThemeActif
+        {
+            get => _themeActif;
+            set
+            {
+                if (value != null &&
+                    value != _themeActif)
+                {
+                    _themeActif = value;
+                    
+                    OnPropertyChanged("ThemeActif");
                 }
             }
         }

@@ -24,5 +24,16 @@ namespace Model.Data
             DataRow row = this._dbal.SelectById("theme", (int)rowTs["theme"]);
             return new Theme(row);
         }
+
+        public List<Theme> GetAllTheme()
+        {
+            DataTable tab = _dbal.Select("theme");
+            List<Theme> lstT = new List<Theme>();
+            foreach (DataRow row in tab.Rows)
+            {
+                lstT.Add(new Theme(row));
+            }
+            return lstT;
+        }
     }
 }
