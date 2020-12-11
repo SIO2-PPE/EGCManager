@@ -24,7 +24,7 @@ namespace Model.Data
         public Dictionary<Horaire, Partie> GetPlanning(DateTime jour, Salle salle)
         {
             Dictionary<Horaire, Partie> dic = new Dictionary<Horaire, Partie>();
-            DataTable tab = _dbal.SelectOrderBy("horaire", "heure");
+            DataTable tab = _dbal.SelectOrderBy("horaire", "heure"); // Il faut sélectionnée par site (de la salle)
             foreach (DataRow row in tab.Rows)
             {
                 Horaire horaire = new Horaire(row);

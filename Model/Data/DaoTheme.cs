@@ -35,5 +35,21 @@ namespace Model.Data
             }
             return lstT;
         }
+
+        public void AssgneToSalle(Theme theme,ref Salle salle)
+        {
+            Theme themeActu = GetThemeActuel(salle);
+            Dictionary<string, dynamic> dicA = new Dictionary<string, dynamic>();
+            dicA.Add("dateFin",DateTime.Now);
+            _dbal.Update("theme_salle",dicA,"salle = " + salle.Id + " AND theme = " + themeActu.Id);
+            
+            Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
+            dic.Add("salle", salle.Id);
+            dic.Add("theme", theme.Id);
+            dic.Add("dateDebut", DateTime.Now);
+            _dbal.Insert("theme_salle",dic);
+
+            salle.Theme = GetThemeActuel(salle);
+        }
     }
 }

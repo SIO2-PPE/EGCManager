@@ -307,7 +307,11 @@ namespace Direction.viewModel
         }
         private void AssigneToSalle()
         {
-            
+            if (IsNotNull(SelectedTheme,"Il faut selectionner un thème"))
+            {
+                _daoTheme.AssgneToSalle(SelectedTheme,ref SelectedSalle);
+                ThemeActif = 
+            }
         }
         private void DeleteTheme()
         {
