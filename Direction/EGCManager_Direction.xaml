@@ -101,12 +101,21 @@
                         <Grid Grid.Column="1" Margin="8,16,16,16">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
-                                <TextBlock Grid.Column="1" Text="Liste des thème" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Thème actif : " VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Text="{Binding ThemeActif}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                             </Grid>
                             <Grid Grid.Row="1">
+                                <TextBlock Text="Liste des thème" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="2*"/>
