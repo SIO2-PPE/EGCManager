@@ -143,7 +143,93 @@
             </TabItem>
             <TabItem Header="Avis clients">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="64"/>
+                        <RowDefinition Height="31"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="5" Content="Theme" VerticalAlignment="Center" Margin="77,0,0,0" Height="44" HorizontalAlignment="Left" Width="88" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <ComboBox Grid.Column="5" IsSynchronizedWithCurrentItem="True" x:Name="ThemeComboBox" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="165,0,510,0" Height="44"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Liste des avis" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="214,0,0,0"/>
+                        <TextBlock Grid.Column="1" Text="Avis complet" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="697*"/>
+                            <ColumnDefinition Width="382*"/>
+                            <ColumnDefinition Width="315*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="16,16,30,16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="283*"/>
+                                    <ColumnDefinition Width="390*"/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox ItemsSource="{Binding FaireBindingAvis}" SelectedItem="{Binding FaireBindingAvis}" Height="592" VerticalAlignment="Center" Margin="0,0,152,0" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="8,16,16,16" Grid.ColumnSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="168*"/>
+                                    <ColumnDefinition Width="206*"/>
+                                    <ColumnDefinition Width="131*"/>
+                                    <ColumnDefinition Width="168*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.ColumnSpan="4" Margin="168,0,168,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="168*"/>
+                                        <ColumnDefinition Width="0*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <ListBox Grid.Row="0" ItemsSource="{Binding ListThemes}" SelectedItem="{Binding SelectedTheme}" Margin="-73,0,-115,32" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                                    <Grid Grid.Row="1" Margin="0,4,0,32" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Pseudo du joueur" Grid.ColumnSpan="2" Margin="-72,0,0,0"/>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="0,4,0,0" Grid.ColumnSpan="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" TextAlignment="Left" FontSize="16" Text="{Binding NomDuClient}" Grid.ColumnSpan="2" Margin="-71,0,0,0"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
