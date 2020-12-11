@@ -50,7 +50,6 @@ namespace Model.Business
         public Dictionary<string, dynamic> ToArray()
         {
             Dictionary<string, dynamic> tab = new Dictionary<string, dynamic>();
-            tab.Add("id", _id);
             tab.Add("heure", _heure.ToString());
             return tab;
         }

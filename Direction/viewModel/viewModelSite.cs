@@ -252,10 +252,14 @@ namespace Direction.viewModel
         #region Action
         private void AddHoraire()
         {
-            Horaire horaire = new Horaire(DateNewDate.TimeOfDay);
-            _daoHoraire.New(ref horaire);
-            MessageBox.Show(horaire.Id.ToString());
-            ListHoraires.Add(horaire);
+            MessageBox.Show(DateNewDate.ToString());
+            if (_dateNewDate != null)
+            {
+                Horaire horaire = new Horaire(DateNewDate.TimeOfDay);
+                _daoHoraire.New(ref horaire);
+                MessageBox.Show(horaire.Id.ToString());
+                ListHoraires.Add(horaire);
+            }
         }
         private void AssigneHoraire()
         {
