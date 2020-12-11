@@ -21,17 +21,19 @@ namespace Direction
         private DaoSite _daoSite;
         private DaoSalle _daoSalle;
         private DaoHoraire _daoHoraire;
-        public Login(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire)
+        private DaoTheme _daoTheme;
+        public Login(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire, DaoTheme daoTheme)
         {
             _daoSite = daoSite;
             _daoSalle = daoSalle;
             _daoHoraire = daoHoraire;
+            _daoTheme = daoTheme;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EGCManager_Direction wnd = new EGCManager_Direction(_daoSite, _daoSalle, _daoHoraire);
+            EGCManager_Direction wnd = new EGCManager_Direction(_daoSite, _daoSalle, _daoHoraire, _daoTheme);
             wnd.Show();
             Close();
         }

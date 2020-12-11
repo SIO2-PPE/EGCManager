@@ -15,6 +15,7 @@ namespace Direction.viewModel
         private DaoSite _daoSite;
         private DaoSalle _daoSalle;
         private DaoHoraire _daoHoraire;
+        private DaoTheme _daoTheme;
         // LISTES
         private ObservableCollection<Site> _listSites;
         private ObservableCollection<Salle> _listSalles;
@@ -39,12 +40,13 @@ namespace Direction.viewModel
         #endregion
         
         #region Constructeur
-        public ViewModelSite(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire)
+        public ViewModelSite(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire, DaoTheme daoTheme)
         {
             // DAO
             _daoSite = daoSite;
             _daoSalle = daoSalle;
             _daoHoraire = daoHoraire;
+            _daoTheme = daoTheme;
             // LISTES
             _listSalles = new ObservableCollection<Salle>();
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
@@ -108,6 +110,7 @@ namespace Direction.viewModel
                     value != _selectedSalle)
                 {
                     _selectedSalle = value;
+                    
                     OnPropertyChanged("SelectedSalle");
                 }
             }

@@ -20,8 +20,9 @@ namespace Direction
             DaoSite daoSite = new DaoSite(dbal);
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoHoraire daoHoraire = new DaoHoraire(dbal);
-            
-            Login wnd = new Login(daoSite, daoSalle, daoHoraire);
+            DaoTheme daoTheme = new DaoTheme(dbal);
+
+            Login wnd = new Login(daoSite, daoSalle, daoHoraire, daoTheme);
             wnd.Show();
         }
     }
