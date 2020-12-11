@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Data;
+using Model.Business;
 
 namespace Technicien
 {
@@ -17,9 +19,13 @@ namespace Technicien
     /// </summary>
     public partial class Planning : Window
     {
-        public Planning()
+
+        
+        public Planning(DaoSite thedaoSite)
         {
             InitializeComponent();
+            MainGrid.DataContext = new viewModel.viewModelApp(thedaoSite);
+
         }
 
         private void btn_new_partie_Click(object sender, RoutedEventArgs e)

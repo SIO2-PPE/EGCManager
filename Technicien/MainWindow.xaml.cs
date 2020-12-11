@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model.Business;
+using Model.Data;
 
 namespace Technicien
 {
@@ -20,6 +22,8 @@ namespace Technicien
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Dbal thedbal;
+        private DaoSite thedaoSite;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +32,7 @@ namespace Technicien
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             {
-                Planning subWindow = new Planning();
+                Planning subWindow = new Planning(thedaoSite);
                 subWindow.Show();
                 this.Close();
             }

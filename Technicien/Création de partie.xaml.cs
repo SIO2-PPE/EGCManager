@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Data;
+using Model.Business;
 
 
 namespace Technicien
@@ -20,6 +22,8 @@ namespace Technicien
     {  /// <summary>
        /// Logique d'interaction pour Création_de_partie.xaml
        /// </summary>
+       private Dbal thedbal;
+        private DaoSite thedaoSite;
 
         public Création_de_partie()
         {
@@ -52,7 +56,7 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
-            Planning subWindow = new Planning();
+            Planning subWindow = new Planning(thedaoSite);
             subWindow.Show();
             this.Close();
         }
@@ -78,6 +82,11 @@ namespace Technicien
         }
 
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
 
         }
