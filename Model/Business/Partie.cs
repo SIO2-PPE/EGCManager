@@ -23,9 +23,10 @@ namespace Model.Business
             _salle = salle;
             _horaire = horaire;
         }
-        public Partie(DataRow row)
+        public Partie(DataRow row, Horaire horaire)
         {
             Hydrate(row);
+            _horaire = horaire;
         }
         
         #region Getter and Setter
