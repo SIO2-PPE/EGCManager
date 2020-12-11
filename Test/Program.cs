@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
 using Model.Business;
 using Model.Data;
 
@@ -12,13 +15,8 @@ namespace Test
         static void Main(string[] args)
         {
             Dbal dbal = new Dbal("ppe3_mmd");
-            DaoHoraire daoH = new DaoHoraire(dbal);
-
-            foreach (Horaire horaire in daoH.GetAllHoraires())
-            {
-                Console.WriteLine(horaire.Heure);
-            }
-            
+            dbal.DBinit();
+            dbal.DBhydrate();
         }
     }
 }

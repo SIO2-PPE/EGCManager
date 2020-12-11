@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Data;
 using System.Linq;
+using System.Net;
 
 namespace Model.Data
 {
@@ -26,11 +27,21 @@ namespace Model.Data
         //Initialize values
         private void Initialize(string server, string database, string uid, string password)
         {
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            string connectionString = "";
+            connectionString += "SERVER=" + server + ";";
+            connectionString += "UID=" + uid + ";"; 
+            connectionString += "PASSWORD=" + password + ";";
+            connectionString += "DATABASE=" + database + ";";
 
-            _connection = new MySqlConnection(connectionString);
+            try
+            {
+                _connection = new MySqlConnection(connectionString);
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         //open connection to database
@@ -205,5 +216,26 @@ namespace Model.Data
             return RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
         }
 
+        public void DBinit()
+        {
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/scripte.sql");
+            StreamReader reader = new StreamReader(stream);
+            String sqlFile = reader.ReadToEnd();
+            
+            MySqlScript script = new MySqlScript(_connection, sqlFile);
+            script.Execute();
+        }
+
+        public void DBhydrate()
+        {
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/hydratation.sql");
+            StreamReader reader = new StreamReader(stream);
+            String sqlFile = reader.ReadToEnd();
+            
+            MySqlScript script = new MySqlScript(_connection, sqlFile);
+            script.Execute();
+        }
     }
 }
