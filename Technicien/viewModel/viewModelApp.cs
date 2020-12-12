@@ -18,16 +18,21 @@ namespace Technicien.viewModel
         private DaoObstacle vmdaoObstacle;
         private DaoPartie vmdaoPartie;
         private DaoSalle vmdaoSalle;
+
         private DaoSite vmdaoSite;
+
         //LISTE
         private ObservableCollection<Site> listSite;
         private ObservableCollection<Salle> listSalle;
 
         //SELECTION
-        public Site selectedsite;
-        public Salle selectedsalle;
+        public Site selectedSite;
+        public Salle selectedSalle;
+
+
+
         //COMMANDE
-        public viewModelApp(/*DaoHoraire thedaohoraire,*/DaoSite thedaosite, DaoSalle thedaosalle)
+        public viewModelApp( /*DaoHoraire thedaohoraire,*/ DaoSite thedaosite, DaoSalle thedaosalle)
         {
             //DAO
             //   vmdaoHoraire = thedaohoraire;
@@ -36,12 +41,12 @@ namespace Technicien.viewModel
             //LISTE
             listSalle = new ObservableCollection<Salle>();
             listSite = new ObservableCollection<Site>(thedaosite.GetAllSite());
-            selectedsite = listSite.First();
+            selectedSite = listSite.First();
             //listSalle = new ObservableCollection<Salle>(thedaosalle.GetBySite(selectedsite));
 
             //selection
 
-            selectedsalle = listSalle.First();
+            selectedSalle = listSalle.First();
 
             // listPlannning = new ObservableCollection<Partie>(thedaohoraire.GetPlanning());   afficher les horaire
 
@@ -51,64 +56,67 @@ namespace Technicien.viewModel
         // public ObservableCollection<Partie> ListPlannnings { get => listPlannning; set => listPlannning = value; }
         public ObservableCollection<Site> ListSites
         {
-            get => listSite; set
+            get => listSite;
+            set
             {
-                listSite = value; if (listSite.First() != null) { SelectedSite = listSite.First(); }
+                listSite = value;
+                if (listSite.First() != null)
+                {
+                    SelectedSite = listSite.First();
+                }
             }
         }
+
         public ObservableCollection<Salle> ListSalles
         {
-            get => listSalle; set
+            get => listSalle;
+            set
             {
-                listSalle = value; if (listSalle.First() != null) { SelectedSalle = listSalle.First(); }
+                listSalle = value;
+                if (listSalle.First() != null)
+                {
+                    SelectedSalle = listSalle.First();
+                }
             }
         }
 
 
         public Site SelectedSite
         {
-            get => selectedsite;
+            get => selectedSite;
             set
             {
 
-                if (value != null && value != selectedsite)
+                if (value != null && value != selectedSite)
                 {
-                    selectedsite = value;
+                    selectedSite = value;
                     ListSalles.Clear();
-                    foreach (Salle salle in vmdaoSalle.GetBySite(selectedsite))
+                    foreach (Salle salle in vmdaoSalle.GetBySite(selectedSite))
                     {
                         ListSalles.Add(salle);
                     }
 
                 }
+
                 OnPropertyChanged("Site");
                 OnPropertyChanged("ListSalles");
                 OnPropertyChanged("Salle");
             }
         }
-    }
 
-    public Salle SelectedSalle
-    {
-        get => selectedsalle;
-        set
+        public Salle SelectedSalle
         {
-
-            if (value != null && value != selectedsalle)
+            get => selectedSalle;
+            set
             {
-                selectedsalle = value;
-                listSalle.Clear();
-                OnPropertyChanged("Salle");
+
+                if (value != null && value != selectedSalle)
+                {
+                    selectedSalle = value;
+                    listSalle.Clear();
+                    OnPropertyChanged("Salle");
+                }
             }
         }
     }
-
-
-
-
-
-
-
-
 }
-
