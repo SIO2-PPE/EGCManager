@@ -51,5 +51,10 @@ namespace Model.Data
 
             salle.Theme = GetThemeActuel(salle);
         }
+
+        public void Delete(Theme theme)
+        {
+            _dbal.Delete("theme","id = " + theme.Id);
+        }
     }
 }

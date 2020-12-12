@@ -38,5 +38,19 @@ namespace Model.Data
             }
             return lst;
         }
+
+        public List<Salle> GetAll()
+        {
+            DataTable tab = _dbal.Select("salle");
+            List<Salle> lst = new List<Salle>();
+            foreach (DataRow row in tab.Rows)
+            {
+                Salle s = new Salle(row);
+                s.Site = _daoSite.GetById((int)row["site"]);
+                s.Theme = _daoTheme.GetThemeActuel(s);
+                lst.Add(s);
+            }
+            return lst;
+        }
     }
 }

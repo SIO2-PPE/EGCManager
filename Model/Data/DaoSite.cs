@@ -28,5 +28,10 @@ namespace Model.Data
             }
             return lstS;
         }
+
+        public Site GetById(int i)
+        {
+            return new Site(_dbal.SelectById("site", i));
+        }
     }
 }

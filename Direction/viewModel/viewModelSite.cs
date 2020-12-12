@@ -313,11 +313,16 @@ namespace Direction.viewModel
         }
         private void DeleteTheme()
         {
-            
+            if (VerifThemeNotUse(SelectedTheme))
+            {
+                _daoTheme.Delete(SelectedTheme);
+                ListThemes.Remove(SelectedTheme);
+            }
         }
         private void AddTheme()
         {
-            
+            Theme newTheme = new Theme(NameNewTheme);
+            _daoTheme.New(newTheme);
         }
         #endregion
 
@@ -333,14 +338,28 @@ namespace Direction.viewModel
         private void RefreshListSalle()
         {
             _listSalles.Clear();
-                    foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
-                    {
-                        foreach (Theme theme in ListThemes)
-                        {
-                            if (salle.Theme.Id == theme.Id) salle.Theme = theme;
-                        }
-                        ListSalles.Add(salle);
-                    }
+            foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
+            {
+                foreach (Theme theme in ListThemes)
+                {
+                    if (salle.Theme.Id == theme.Id) salle.Theme = theme;
+                }
+                ListSalles.Add(salle);
+            }
+        }
+
+        private bool VerifThemeNotUse(Theme theme)
+        {
+            bool r = true;
+            foreach (Salle salle in _daoSalle.GetAll())
+            {
+                if (salle.Theme.Id == theme.Id)
+                {
+                    r = false;
+                }
+            }
+
+            return r;
         }
         #endregion
     }
