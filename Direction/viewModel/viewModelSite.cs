@@ -90,15 +90,7 @@ namespace Direction.viewModel
                     value != _selectedSite)
                 {
                     _selectedSite = value;
-                    _listSalles.Clear();
-                    foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
-                    {
-                        foreach (Theme theme in ListThemes)
-                        {
-                            if (salle.Theme.Id == theme.Id) salle.Theme = theme;
-                        }
-                        ListSalles.Add(salle);
-                    }
+                    RefreshListSalle();
                     SelectedSalle = ListSalles.First();
                     ListHorairesSite = new ObservableCollection<Horaire>(_daoHoraire.GetHorairesForSite(_selectedSite));
                     OnPropertyChanged("SelectedSite");
@@ -280,18 +272,16 @@ namespace Direction.viewModel
         #region Action
         private void AddHoraire()
         {
-            MessageBox.Show(DateNewDate.ToString());
             if (_dateNewDate != null)
             {
                 Horaire horaire = new Horaire(DateNewDate.TimeOfDay);
                 _daoHoraire.New(ref horaire);
-                MessageBox.Show(horaire.Id.ToString());
                 ListHoraires.Add(horaire);
             }
         }
         private void AssigneHoraire()
         {
-            if (IsNotNull(SelectedHoraire,"Il faut selectionner un horaire"))
+            if (IsNotNull(SelectedHoraire,"Il faut sélectionner un horaire"))
             {
                 _daoHoraire.AssigneToSite(SelectedHoraire, SelectedSite);
                 ListHorairesSite.Add(SelectedHoraire);
@@ -299,7 +289,7 @@ namespace Direction.viewModel
         }
         private void DissosHoraire()
         {
-            if (IsNotNull(SelectedHoraireSite, "Il faut selectionner un horaire"))
+            if (IsNotNull(SelectedHoraireSite, "Il faut sélectionner un horaire"))
             {
                 _daoHoraire.DissosToSite(SelectedHoraireSite, SelectedSite);
                 ListHorairesSite.Remove(SelectedHoraireSite);
@@ -307,10 +297,18 @@ namespace Direction.viewModel
         }
         private void AssigneToSalle()
         {
-            if (IsNotNull(SelectedTheme,"Il faut selectionner un thème"))
+            if (IsNotNull(SelectedTheme,"Il faut sélectionner un thème"))
             {
-                _daoTheme.AssgneToSalle(SelectedTheme,ref SelectedSalle);
-                ThemeActif = 
+                _daoTheme.AssgneToSalle(SelectedTheme,ref _selectedSalle);
+                Salle activeSalle = _selectedSalle;
+                int index = ListSalles.IndexOf(_selectedSalle);
+                //ThemeActif = SelectedTheme;
+                
+                //ListSalles.Remove(SelectedSalle);
+                //_listSalles.Add(activeSalle);
+
+                RefreshListSalle();
+                SelectedSalle = ListSalles[index];
             }
         }
         private void DeleteTheme()
@@ -330,6 +328,19 @@ namespace Direction.viewModel
             r = r == isnot;
             if (!r) MessageBox.Show(msg);
             return r;
+        }
+
+        private void RefreshListSalle()
+        {
+            _listSalles.Clear();
+                    foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
+                    {
+                        foreach (Theme theme in ListThemes)
+                        {
+                            if (salle.Theme.Id == theme.Id) salle.Theme = theme;
+                        }
+                        ListSalles.Add(salle);
+                    }
         }
         #endregion
     }

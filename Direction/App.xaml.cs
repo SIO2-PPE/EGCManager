@@ -21,6 +21,10 @@ namespace Direction
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoHoraire daoHoraire = new DaoHoraire(dbal);
             DaoTheme daoTheme = new DaoTheme(dbal);
+            
+            // Réinitialisation BDD
+            dbal.DBinit();
+            dbal.DBhydrate();
 
             Login wnd = new Login(daoSite, daoSalle, daoHoraire, daoTheme);
             wnd.Show();
