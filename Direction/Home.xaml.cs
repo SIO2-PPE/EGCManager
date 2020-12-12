@@ -15,14 +15,26 @@ using Model.Data;
 namespace Direction
 {
     /// <summary>
-    /// Logique d'interaction pour EGCManager_Direction.xaml
+    /// Logique d'interaction pour Home.xaml
     /// </summary>
-    public partial class EGCManager_Direction : Window
+    public partial class Home : Window
     {
-        public EGCManager_Direction(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire, DaoTheme daoTheme)
+        private Dbal _dbal;
+        public Home(Dbal dbal)
         {
+            _dbal = dbal;
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.ViewModelSite(daoSite, daoSalle, daoHoraire, daoTheme);
+        }
+
+        private void Click_Gestion(object sender, RoutedEventArgs e)
+        {
+            Gestion gestionPage = new Gestion(_dbal, this);
+            Content = gestionPage;
+        }
+
+        private void Click_Avis(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
