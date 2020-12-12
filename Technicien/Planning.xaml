@@ -18,8 +18,8 @@
         <DatePicker x:Name="datePlanning" SelectedDate="{Binding DatePlanning}" Grid.Column="1" HorizontalAlignment="Center" Margin="51,138,44.6,0" VerticalAlignment="Top" Width="182"/>
         <Label Content="Lieu :" Margin="55,20,185.6,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Salle :" Margin="54,60,183.6,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ComboBox x:Name="cbm_lieu" ItemsSource="{Binding ListSites, Mode=OneTime}" SelectedItem="{Binding Site}" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Margin="97,20,60.6,0" Height="22" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbm_salle" ItemsSource="{Binding ListSalles, Mode=OneTime}" SelectedItem="{Binding Salle}" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Margin="97,60,60.6,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbm_lieu" ItemsSource="{Binding ListSites, Mode=OneTime}" SelectedItem="{Binding SelectedSite}" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Margin="97,20,60.6,0" Height="22" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbm_salle" ItemsSource="{Binding ListSalles, Mode=OneTime}" SelectedItem="{Binding SelectedSalle}" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Margin="97,60,60.6,0" VerticalAlignment="Top"/>
 
 
     </Grid>

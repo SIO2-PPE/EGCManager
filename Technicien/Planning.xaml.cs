@@ -24,7 +24,7 @@ namespace Technicien
         public Planning(DaoSite thedaoSite,DaoSalle thedaoSalle)
         {
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.viewModelApp(thedaoSite,thedaoSalle);
+            MainGrid.DataContext = new viewModel.viewModelPlanning(thedaoSite,thedaoSalle);
 
         }
 
