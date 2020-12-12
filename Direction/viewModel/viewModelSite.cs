@@ -323,6 +323,7 @@ namespace Direction.viewModel
         {
             Theme newTheme = new Theme(NameNewTheme);
             _daoTheme.New(newTheme);
+            ListThemes.Add(newTheme);
         }
         #endregion
 

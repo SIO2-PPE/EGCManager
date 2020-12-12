@@ -56,5 +56,10 @@ namespace Model.Data
         {
             _dbal.Delete("theme","id = " + theme.Id);
         }
+
+        public void New(Theme theme)
+        {
+            _dbal.Insert("theme",theme.ToArray());
+        }
     }
 }
