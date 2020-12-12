@@ -302,11 +302,6 @@ namespace Direction.viewModel
                 _daoTheme.AssgneToSalle(SelectedTheme,ref _selectedSalle);
                 Salle activeSalle = _selectedSalle;
                 int index = ListSalles.IndexOf(_selectedSalle);
-                //ThemeActif = SelectedTheme;
-                
-                //ListSalles.Remove(SelectedSalle);
-                //_listSalles.Add(activeSalle);
-
                 RefreshListSalle();
                 SelectedSalle = ListSalles[index];
             }
@@ -321,9 +316,9 @@ namespace Direction.viewModel
         }
         private void AddTheme()
         {
-            Theme newTheme = new Theme(NameNewTheme);
-            _daoTheme.New(newTheme);
-            ListThemes.Add(newTheme);
+            ListThemes.Add(_daoTheme.New(new Theme(NameNewTheme)));
+            SelectedTheme = ListThemes.Last();
+            NameNewTheme = "";
         }
         #endregion
 
