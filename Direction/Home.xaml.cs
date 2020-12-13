@@ -28,13 +28,16 @@ namespace Direction
 
         private void Click_Gestion(object sender, RoutedEventArgs e)
         {
-            Gestion gestionPage = new Gestion(_dbal, this);
-            Content = gestionPage;
+            Gestion wnd = new Gestion(_dbal);
+            wnd.Show();
+            Close();
         }
 
         private void Click_Avis(object sender, RoutedEventArgs e)
         {
-
+            Avis wnd = new Avis(_dbal);
+            wnd.Show();
+            Close();
         }
     }
 }

@@ -62,5 +62,21 @@ namespace Model.Data
             }
             return lst;
         }
+
+        public List<Avis> GetForTheme(Theme theme)
+        {
+            string query = "SELECT * FROM Avis";
+            query += "";
+            query += "";
+            query += "";
+            query += "";
+            DataTable tab = _dbal.RQuery(query).Tables[0];
+            List<Avis> lstAvis = new List<Avis>();
+            foreach (DataRow row in tab.Rows)
+            {
+                lstAvis.Add(new Avis(row));
+            }
+            return lstAvis;
+        }
     }
 }

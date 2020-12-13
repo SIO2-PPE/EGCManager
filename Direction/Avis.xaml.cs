@@ -3,21 +3,19 @@ using Model.Data;
 
 namespace Direction
 {
-    public partial class Gestion : Window
+    public partial class Avis : Window
     {
         private Dbal _dbal;
-        public Gestion(Dbal dbal)
+        public Avis(Dbal dbal)
         {
             InitializeComponent();
             _dbal = dbal;
-            MainGrid.DataContext = new viewModel.ViewModelGestion(
-                new DaoSite(dbal), 
-                new DaoSalle(dbal), 
-                new DaoHoraire(dbal),
+            MainGrid.DataContext = new viewModel.ViewModelAvis(
                 new DaoTheme(dbal)
             );
         }
-        private void Back(object sender, RoutedEventArgs routedEventArgs)
+
+        private void Back(object sender, RoutedEventArgs e)
         {
             Home wnd = new Home(_dbal);
             wnd.Show();
