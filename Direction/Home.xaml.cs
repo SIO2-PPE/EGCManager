@@ -35,7 +35,7 @@ namespace Direction
 
         private void Click_Avis(object sender, RoutedEventArgs e)
         {
-            Avis wnd = new Avis(_dbal);
+            AvisClients wnd = new AvisClients(_dbal);
             wnd.Show();
             Close();
         }

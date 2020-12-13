@@ -14,6 +14,7 @@ namespace Direction.viewModel
 
         // DAO
         private DaoTheme _daoTheme;
+        private DaoAvis _daoAvis;
 
         // LISTES
         private ObservableCollection<Theme> _listThemes;
@@ -21,7 +22,12 @@ namespace Direction.viewModel
 
         // SELECTIONS
         private Theme _selectedTheme;
-        private DaoAvis _daoAvis;
+        private Avis _selectedAvis;
+        
+        // AFFICHAGE
+        private string _fullAvis;
+        private string _pseudoJoueur;
+        private string _dateAvis;
 
         // COMMANDES
 
@@ -35,9 +41,12 @@ namespace Direction.viewModel
             _daoTheme = daoTheme;
             _daoAvis = daoAvis;
             // LISTES
+            _listAvis = new ObservableCollection<Avis>();
             ListThemes = new ObservableCollection<Theme>(_daoTheme.GetAllTheme());
-            // SELECTIONS
-            
+            // AFFICHAGE
+            FullAvis = "";
+            PseudoJoueur = "Joueur : ";
+            DateAvis = "Date : ";
         }
 
         #endregion
@@ -50,7 +59,7 @@ namespace Direction.viewModel
             set
             {
                 _listThemes = value;
-                if (_listThemes.First() != null) SelectedTheme = _listThemes.First();
+                /*if (_listThemes.First() != null) */SelectedTheme = _listThemes.First();
                 OnPropertyChanged("ListThemes");
             }
         }
@@ -73,9 +82,45 @@ namespace Direction.viewModel
                     {
                         _listAvis.Add(avis);
                     }
+
+                    SelectedAvis = _listAvis.First();
                     OnPropertyChanged("SelectedTheme");
+                    OnPropertyChanged("ListAvis");
                 }
             }
+        }
+
+        public Avis SelectedAvis
+        {
+            get => _selectedAvis;
+            set
+            {
+                _selectedAvis = value;
+                
+                OnPropertyChanged("SelectedAvis");
+            }
+        }
+
+        #endregion
+
+        #region BINDING AFFICHAGE
+
+        public string FullAvis
+        {
+            get => _fullAvis;
+            set => _fullAvis = value;
+        }
+
+        public string PseudoJoueur
+        {
+            get => _pseudoJoueur;
+            set => _pseudoJoueur = value;
+        }
+
+        public string DateAvis
+        {
+            get => _dateAvis;
+            set => _dateAvis = value;
         }
 
         #endregion

@@ -65,11 +65,17 @@ namespace Model.Data
 
         public List<Avis> GetForTheme(Theme theme)
         {
-            string query = "SELECT * FROM Avis";
-            query += "";
-            query += "";
-            query += "";
-            query += "";
+            string query = "";
+            query += "select avis.id,avis.commentaire,avis.date,avis.joueur from avis ";
+            query += "join joueur on joueur.id = avis.joueur ";
+            query += "join joueur_partie ON joueur.id = joueur_partie.joueur ";
+            query += "join partie ON joueur_partie.partie = partie.id ";
+            query += "join salle ON partie.salle = salle.id ";
+            query += "join theme_salle ON salle.id = theme_salle.salle ";
+            query += "where theme_salle.theme = " + theme.Id + " AND ";
+            query += "theme_salle.dateDebut < avis.date AND ";
+            query += "theme_salle.dateFin > avis.date ";
+            query += "group by avis.id";
             DataTable tab = _dbal.RQuery(query).Tables[0];
             List<Avis> lstAvis = new List<Avis>();
             foreach (DataRow row in tab.Rows)

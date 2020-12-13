@@ -3,15 +3,16 @@ using Model.Data;
 
 namespace Direction
 {
-    public partial class Avis : Window
+    public partial class AvisClients : Window
     {
         private Dbal _dbal;
-        public Avis(Dbal dbal)
+        public AvisClients(Dbal dbal)
         {
             InitializeComponent();
             _dbal = dbal;
             MainGrid.DataContext = new viewModel.ViewModelAvis(
-                new DaoTheme(dbal)
+                new DaoTheme(dbal),
+                new DaoAvis(dbal)
             );
         }
 
