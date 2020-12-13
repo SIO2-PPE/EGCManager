@@ -96,5 +96,10 @@ namespace Model.Business
             val.Add("salle", _salle.Id);
             return val;
         }
+
+        public override string ToString()
+        {
+            return _id + "===>" + _horaire.Heure;
+        }
     }
 }

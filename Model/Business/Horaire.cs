@@ -7,7 +7,7 @@ namespace Model.Business
     public class Horaire : IHydrate
     {
         private int _id;
-        private DateTime _heure;
+        private TimeSpan _heure;
 
         public Horaire(DataRow row)
         {
@@ -17,7 +17,7 @@ namespace Model.Business
         public Horaire()
         {
             _id = 0;
-            _heure = new DateTime();
+            _heure = new TimeSpan();
         }
 
         #region Getter and Setter
@@ -28,7 +28,7 @@ namespace Model.Business
             set => _id = value;
         }
 
-        public DateTime Heure
+        public TimeSpan Heure
         {
             get => _heure;
             set => _heure = value;
@@ -39,7 +39,7 @@ namespace Model.Business
         public void Hydrate(DataRow row)
         {
             _id = (int)row["id"];
-            _heure = (DateTime)row["heure"];
+            _heure = (TimeSpan)row["heure"];
         }
 
         public Dictionary<string, dynamic> ToArray()

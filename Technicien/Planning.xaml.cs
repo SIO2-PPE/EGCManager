@@ -21,10 +21,10 @@ namespace Technicien
     {
 
         
-        public Planning(DaoSite thedaoSite,DaoSalle thedaoSalle)
+        public Planning(DaoSite thedaoSite,DaoSalle thedaoSalle,DaoPartie thedaoPartie,DaoHoraire thedaoHoraire)
         {
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.viewModelPlanning(thedaoSite,thedaoSalle);
+            MainGrid.DataContext = new viewModel.viewModelPlanning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire);
 
         }
 

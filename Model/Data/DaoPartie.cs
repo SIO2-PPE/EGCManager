@@ -68,7 +68,7 @@ namespace Model.Data
         {
             return new Partie(_dbal.Select("partie",
                 "salle = " + salle.Id +
-                "date = '" + jour.ToString("yyyy-M-d") + "' and " +
+                " and date = '" + jour.ToString("yyyy-M-d") + "' and " +
                 "horaire = " + horaire.Id
                 ).Rows[0],
                 horaire);

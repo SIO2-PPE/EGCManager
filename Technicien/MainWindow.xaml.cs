@@ -25,17 +25,21 @@ namespace Technicien
         
         private DaoSite thedaoSite;
         private DaoSalle thedaoSalle;
-        public MainWindow(DaoSite daosite,DaoSalle daosalle)
+        private DaoPartie thedaoPartie;
+        private DaoHoraire thedaoHoraire;
+        public MainWindow(DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire)
         {
             thedaoSite = daosite;
             thedaoSalle = daosalle;
+            thedaoHoraire = daohoraire;
+            thedaoPartie = daopartie;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-                Planning subWindow = new Planning(thedaoSite,thedaoSalle);
+                Planning subWindow = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire);
                 subWindow.Show();
                 Close();
             

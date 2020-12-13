@@ -13,13 +13,16 @@ namespace Technicien.viewModel
     class viewModelPlanning : viewModelBase
     {
         //DAO
-        //private DaoHoraire _daoHoraire;
+        private DaoHoraire _daoHoraire;
         private DaoSite _daoSite;
         private DaoSalle _daoSalle;
+        private DaoPartie _daoPartie;
+        
         //LISTS
-        private ObservableCollection<Partie> _listPlannings;
+        private ObservableCollection<Partie> _listPlanning;
         private ObservableCollection<Site> _listSites;
         private ObservableCollection<Salle> _listSalles;
+        
         //SELECTIONS
         private Partie _selectedPlanning;
         private DateTime _datePlanning;
@@ -27,22 +30,27 @@ namespace Technicien.viewModel
         private Salle _selectedSalle;
 
 
-        public viewModelPlanning(/*DaoHoraire daoHoraire,*/ DaoSite daoSite, DaoSalle daoSalle)
+        public viewModelPlanning(DaoSite daoSite, DaoSalle daoSalle,DaoPartie daoPartie,DaoHoraire daoHoraire)
         {
-            //_daoHoraire = daoHoraire;
+            _daoHoraire = daoHoraire;
+            _daoPartie = daoPartie;
             _daoSalle = daoSalle;
             _daoSite = daoSite;
             
+            
             _listSalles = new ObservableCollection<Salle>();
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
-            
             DatePlanning = DateTime.Now;
+            _listPlanning = new ObservableCollection<Partie>(_daoHoraire.GetPlanning(DatePlanning,_selectedSalle,_selectedSite));
+           
+            
+            
         }
 
-        public ObservableCollection<Partie> ListPlannings
+        public ObservableCollection<Partie> ListPlanning
         {
-            get => _listPlannings;
-            set => _listPlannings = value;
+            get => _listPlanning;
+            set => _listPlanning = value;
         }
 
         public ObservableCollection<Site> ListSites
@@ -61,11 +69,7 @@ namespace Technicien.viewModel
             }
         }
 
-        public Partie SelectedPlanning
-        {
-            get => _selectedPlanning;
-            set => _selectedPlanning = value;
-        }
+        
 
         public DateTime DatePlanning
         {
@@ -97,12 +101,22 @@ namespace Technicien.viewModel
             }
         }
         
+        
         private void RefreshListSalle()
         {
             _listSalles.Clear();
             foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
             {
                 ListSalles.Add(salle);
+            }
+        }
+
+        private void RefreshListPlanning()
+        {
+            _listPlanning.Clear();
+            foreach (Partie partie in _daoHoraire.GetPlanning(_datePlanning,_selectedSalle,_selectedSite))
+            {
+                ListPlanning.Add(partie);
             }
         }
     }

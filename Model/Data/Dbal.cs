@@ -14,7 +14,7 @@ namespace Model.Data
         private MySqlConnection _connection;
 
         //Constructor
-        public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
+        public Dbal(string database, string server = "localhost", string uid = "root", string password = "")
         {
             Initialize(
                 server,
@@ -209,7 +209,7 @@ namespace Model.Data
         }
         public DataTable SelectOrderBy(string table, string order)
         {
-            return RQuery("select * from " + table + " oder by " + order).Tables[0];
+            return RQuery("select * from " + table + " order by '" + order+"'").Tables[0];
         }
         public DataRow SelectById(string table, int id)
         {

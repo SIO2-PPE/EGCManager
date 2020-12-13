@@ -20,9 +20,11 @@ namespace Technicien
             Dbal dbal = new Dbal("ppe3_mmd");
             DaoSite daoSite = new DaoSite(dbal);
             DaoSalle daoSalle = new DaoSalle(dbal);
+            DaoPartie daoPartie = new DaoPartie(dbal);
+            DaoHoraire daoHoraire =new DaoHoraire(dbal);
 
 
-            MainWindow Wnd = new MainWindow(daoSite,daoSalle);
+            MainWindow Wnd = new MainWindow(daoSite,daoSalle,daoPartie,daoHoraire);
             Wnd.Show();
         }
     }

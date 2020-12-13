@@ -21,7 +21,7 @@ namespace Model.Data
         /// sois une Partie (qui correspond à l'horraire)
         /// sois null si l'horraire n'est pas réserver
         /// </returns>
-        public Dictionary<Horaire, Partie> GetPlanning(DateTime jour, Salle salle)
+      /*  public Dictionary<Horaire, Partie> GetPlanning(DateTime jour, Salle salle)
         {
             Dictionary<Horaire, Partie> dic = new Dictionary<Horaire, Partie>();
             DataTable tab = _dbal.SelectOrderBy("horaire", "heure");
@@ -31,6 +31,20 @@ namespace Model.Data
                 dic.Add(horaire, _daoPartie.GetPartieForHoraire(horaire,jour,salle));
             }
             return dic;
+        }*/
+        
+        public List<Partie> GetPlanning(DateTime jour, Salle salle,Site site)
+        {
+            List<Partie> plann = new List<Partie>();
+            DataTable tab = _dbal.SelectOrderBy("horaire", "heure");
+            foreach (DataRow row in tab.Rows)
+            {
+                Horaire horaire = new Horaire(row);
+                
+                plann.Add( _daoPartie.GetPartieForHoraire(horaire,jour,salle));
+               
+            }
+            return plann;
         }
     }
 }
