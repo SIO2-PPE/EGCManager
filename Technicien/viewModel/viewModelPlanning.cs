@@ -42,7 +42,6 @@ namespace Technicien.viewModel
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
             DatePlanning = DateTime.Now;
             _listPlanning = new ObservableCollection<Partie>(_daoHoraire.GetPlanning(DatePlanning,_selectedSalle,_selectedSite));
-           
             
             
         }
