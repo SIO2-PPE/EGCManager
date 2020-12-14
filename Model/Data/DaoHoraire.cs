@@ -36,15 +36,18 @@ namespace Model.Data
         public List<Partie> GetPlanning(DateTime jour, Salle salle,Site site)
         {
             List<Partie> plann = new List<Partie>();
-            DataTable tab = _dbal.SelectOrderBy("horaire", "heure");
+            DataTable tab = _dbal.Select("site_horaire", "site = " + site.Id);
             foreach (DataRow row in tab.Rows)
             {
-                Horaire horaire = new Horaire(row);
-                
-                plann.Add( _daoPartie.GetPartieForHoraire(horaire,jour,salle));
+                plann.Add( _daoPartie.GetPartieForHoraire(GetById((int)row["horaire"]),jour,salle));
                
             }
             return plann;
+        }
+
+        public Horaire GetById(int id)
+        {
+            return new Horaire(_dbal.SelectById("horaire", id));
         }
     }
 }

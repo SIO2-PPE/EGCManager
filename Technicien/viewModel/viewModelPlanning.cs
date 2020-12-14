@@ -36,14 +36,12 @@ namespace Technicien.viewModel
             _daoPartie = daoPartie;
             _daoSalle = daoSalle;
             _daoSite = daoSite;
-            
-            
+
+
+            _listPlanning = new ObservableCollection<Partie>();
             _listSalles = new ObservableCollection<Salle>();
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
-            DatePlanning = DateTime.Now;
-            _listPlanning = new ObservableCollection<Partie>(_daoHoraire.GetPlanning(DatePlanning,_selectedSalle,_selectedSite));
-            
-            
+            DatePlanning = new DateTime(2020,12,03);//DateTime.Now;
         }
 
         public ObservableCollection<Partie> ListPlanning
@@ -73,7 +71,12 @@ namespace Technicien.viewModel
         public DateTime DatePlanning
         {
             get => _datePlanning;
-            set => _datePlanning = value;
+            set
+            {
+                _datePlanning = value;
+                OnPropertyChanged("DatePlanning");
+
+            } 
         }
 
         public Site SelectedSite
@@ -83,6 +86,7 @@ namespace Technicien.viewModel
             {
                 _selectedSite = value;
                 RefreshListSalle();
+                
                 SelectedSalle = ListSalles.First();
                 OnPropertyChanged("SelectedSite");
                 OnPropertyChanged("ListSalles");
@@ -96,6 +100,7 @@ namespace Technicien.viewModel
             set
             {
                 _selectedSalle = value;
+                RefreshListPlanning();
                 OnPropertyChanged("SelectedSalle");
             }
         }
@@ -117,6 +122,8 @@ namespace Technicien.viewModel
             {
                 ListPlanning.Add(partie);
             }
+            OnPropertyChanged("ListPlanning");
         }
+        
     }
 }
