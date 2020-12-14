@@ -22,18 +22,34 @@ namespace Compta
     public partial class InfosClient : Window
     {
         private Dbal _dbal;
-
+        private DaoClient _daoClient;
         public InfosClient(Client leClient, Dbal dbal)
         {
             _dbal = dbal;
+            _daoClient = new DaoClient(dbal);
             InitializeComponent();
+            Box_Nom.Text = leClient.Nom;
+            Box_Prenom.Text = leClient.Prenom;
+            Selection_Date.SelectedDate = leClient.Naissance;
+            Box_Email.Text = leClient.Email;
+            Box_Crédits.Text = leClient.Credit.ToString();
+            Box_Numero.Text = leClient.Tel;
+            Box_Adress.Text = leClient.Adresse;
         }
 
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
-            SelectWindow subWindow = new SelectWindow(_dbal);
-            subWindow.Show();
-            Close();
+            Client leClient = new Client(
+                Box_Nom.Text,
+                Box_Prenom.Text,
+                Selection_Date.DisplayDate, 
+                Box_Email.Text,
+                Box_Numero.Text,
+                Box_Adress.Text,
+                int.Parse(Box_Crédits.Text)
+                );
+            _daoClient.EditClient(leClient);
+            MessageBox.Show("Le client a bien été modifié");
         }
 
         private void Factu_Click(object sender, RoutedEventArgs e)

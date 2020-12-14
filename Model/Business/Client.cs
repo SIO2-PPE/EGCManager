@@ -28,7 +28,7 @@ namespace Model.Business
             foreach (Reservation reservation in lstReservation) reservation.Client = this;
             _lstReservation = lstReservation;
         }
-        public Client(string nom, string prenom, DateTime datedenaissance, string email, string numero, string adresse)
+        public Client(string nom, string prenom, DateTime datedenaissance, string email, string numero, string adresse, int credit)
         {
             _nom = nom;
             _prenom = prenom;
@@ -36,6 +36,8 @@ namespace Model.Business
             _email = email;
             _tel = numero;
             _adresse = adresse;
+            _credit = credit;
+            _photo = "default.png";
         }
 
         public Client()

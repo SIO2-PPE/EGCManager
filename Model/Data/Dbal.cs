@@ -148,6 +148,8 @@ namespace Model.Data
             }
             query += " WHERE " + where;
 
+            Console.WriteLine(query);
+
             //Open connection
             if (this.OpenConnection())
             {
