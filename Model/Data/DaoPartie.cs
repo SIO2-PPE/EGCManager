@@ -66,12 +66,19 @@ namespace Model.Data
 
         public Partie GetPartieForHoraire(Horaire horaire,DateTime jour, Salle salle)
         {
-            return new Partie(_dbal.Select("partie",
-                "salle = " + salle.Id +
-                " and date = '" + jour.ToString("yyyy-M-d") + "' and " +
-                "horaire = " + horaire.Id
-                ).Rows[0],
-                horaire);
+            try
+            {
+                return new Partie(_dbal.Select("partie",
+                        "salle = " + salle.Id +
+                        " and date = '" + jour.ToString("yyyy-M-d") + "' and " +
+                        "horaire = " + horaire.Id
+                    ).Rows[0],
+                    horaire);
+            }
+            catch (Exception e)
+            {
+                return  new Partie();
+            }
         }
 
         public void NouvellePartie(Partie partie)
