@@ -9,7 +9,7 @@ namespace Model.Business
     {
         private int _id;
         private DateTime _date;
-        private DateTime _temps;
+        private TimeSpan _temps;
         private bool _win;
 
         private Horaire _horaire;
@@ -21,7 +21,7 @@ namespace Model.Business
         {
             _id = 0;
            _date = new DateTime();
-           _temps = new DateTime();
+           _temps = new TimeSpan();
            _win = false;
            _horaire = horaire;
            _salle = salle;
@@ -55,7 +55,7 @@ namespace Model.Business
             set => _date = value;
         }
 
-        public DateTime Temps
+        public TimeSpan Temps
         {
             get => _temps;
             set => _temps = value;
@@ -91,8 +91,12 @@ namespace Model.Business
         {
             _id = (int)row["id"];
             _date = (DateTime)row["date"];
-            _temps = (DateTime)row["temps"];
-            _win = (bool)row["win"];
+            _temps = (TimeSpan)row["temps"];
+            //_win = (int)row["win"];
+           _win = (bool)row["win"];
+           
+            
+            
         }
         public Dictionary<string, dynamic> ToArray()
         {
