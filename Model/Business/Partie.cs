@@ -19,6 +19,14 @@ namespace Model.Business
 
         public Partie()
         {
+            _id = 0;
+           _date = new DateTime();
+           _temps = new DateTime();
+           _win = false;
+           _horaire = new Horaire();
+           _salle = new Salle();
+           _lstJoueur = new List<Joueur>();
+           _lstObstacle = new List<Obstacle>();
         }
 
         public Partie(DataRow row, Horaire horaire, Salle salle)

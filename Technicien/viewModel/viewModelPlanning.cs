@@ -41,7 +41,7 @@ namespace Technicien.viewModel
             _listPlanning = new ObservableCollection<Partie>();
             _listSalles = new ObservableCollection<Salle>();
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
-            DatePlanning = new DateTime(2020,12,03);//DateTime.Now;
+            DatePlanning = DateTime.Now;
         }
 
         public ObservableCollection<Partie> ListPlanning
@@ -118,7 +118,7 @@ namespace Technicien.viewModel
         private void RefreshListPlanning()
         {
             _listPlanning.Clear();
-            foreach (Partie partie in _daoHoraire.GetPlanning(_datePlanning,_selectedSalle,_selectedSite))
+            foreach (Partie partie in _daoHoraire.GetPlanning(new DateTime(2020,12,03), _selectedSalle,_selectedSite))
             {
                 ListPlanning.Add(partie);
             }
