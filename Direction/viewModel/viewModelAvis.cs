@@ -41,13 +41,13 @@ namespace Direction.viewModel
             // DAO
             _daoTheme = daoTheme;
             _daoAvis = daoAvis;
-            // LISTES
-            _listAvis = new ObservableCollection<Avis>();
-            ListThemes = new ObservableCollection<Theme>(_daoTheme.GetAllTheme());
             // AFFICHAGE
             FullAvis = "";
             PseudoJoueur = "Joueur : ";
             DateAvis = "Date : ";
+            // LISTES
+            _listAvis = new ObservableCollection<Avis>();
+            ListThemes = new ObservableCollection<Theme>(_daoTheme.GetAllTheme());
         }
 
         #endregion
