@@ -22,11 +22,19 @@ namespace Model.Data
         }
         public Client SearchClient(string prenom, string nom, string email)
         {
-            return new Client(_dbal.Select("client",
-                "prenom = '" + prenom + "' AND " +
-                "nom = '" + nom + "' AND " +
-                "email = '" + email + "'"
+            try
+            {
+                return new Client(_dbal.Select("client",
+                    "prenom = '" + prenom + "' AND " +
+                    "nom = '" + nom + "' AND " +
+                    "email = '" + email + "'"
                 ).Rows[0]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new Client();
+            }
         }
         public void EditClient(Client c)
         {

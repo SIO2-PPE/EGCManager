@@ -25,7 +25,6 @@ namespace Compta
     /// </summary>
     public partial class Login : Window
     {
-
         private Dbal _dbal;
 
         public Login(Dbal thedbal)
@@ -34,15 +33,11 @@ namespace Compta
             _dbal = thedbal;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Login(object sender, RoutedEventArgs e)
         {
-            {
-                SelectWindow subWindow = new SelectWindow(_dbal);
-                subWindow.Show();
-                this.Close();
-            }
+            SelectWindow subWindow = new SelectWindow(_dbal);
+            subWindow.Show();
+            Close();
         }
-
     }
 }
-

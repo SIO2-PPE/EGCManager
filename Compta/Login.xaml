@@ -86,6 +86,6 @@
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="20" Style="{DynamicResource BoutonConnexion}" Click="Button_Click"/>
+                FontSize="20" Style="{DynamicResource BoutonConnexion}" Click="Button_Login"/>
     </Grid>
 </Window>

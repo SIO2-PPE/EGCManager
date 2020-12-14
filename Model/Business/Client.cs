@@ -37,7 +37,11 @@ namespace Model.Business
             _tel = numero;
             _adresse = adresse;
         }
-        public Client(){}
+
+        public Client()
+        {
+            _id = 0;
+        }
         public Client(DataRow row)
         {
             Hydrate(row);

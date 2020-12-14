@@ -8,17 +8,21 @@ using Model.Data;
 
 namespace Compta.viewModel
 {
-    class ViewModelSaisieClient : viewModelBase
+    class ViewModelSaisieClient : ViewModelBase
     {
         #region Attributs
 
         // DAO
         private DaoClient _daoClient;
+
         private DaoFacture _daoFacture;
+
         // SAISIE
         private string _prenom;
         private string _nom;
+
         private string _email;
+
         // BOUTON
         private ICommand _faireLaRecherche;
 
@@ -64,17 +68,16 @@ namespace Compta.viewModel
             {
                 if (_faireLaRecherche == null)
                 {
-                    _faireLaRecherche = new RelayCommand(() => test(), () => true);
+                    _faireLaRecherche = new RelayCommand(() => ChangeWnd(), () => true);
                 }
+
                 return _faireLaRecherche;
             }
         }
 
-        private void test()
+        private void ChangeWnd()
         {
-            Client leClient = _daoClient.SearchClient(_prenom, _nom, _email);
-            InfosClient subWindow = new InfosClient(leClient);
-            subWindow.Show();
+            
         }
 
         #endregion

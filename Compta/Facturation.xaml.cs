@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model.Business;
+using Model.Data;
 
 namespace Compta
 {
@@ -20,8 +21,10 @@ namespace Compta
     /// </summary>
     public partial class Facturation : Window
     {
-        public Facturation()
+        private Dbal _dbal;
+        public Facturation(Dbal dbal)
         {
+            _dbal = dbal;
             InitializeComponent();
         }
 
@@ -29,9 +32,9 @@ namespace Compta
         {
 
             {
-                InfosClient subWindow = new InfosClient(new Client());
+                InfosClient subWindow = new InfosClient(new Client(),_dbal);
                 subWindow.Show();
-                this.Close();
+                Close();
             }
 
         }
@@ -39,9 +42,9 @@ namespace Compta
         private void Create_facture_Click(object sender, RoutedEventArgs e)
         {
             {
-                SelectWindow subWindow = new SelectWindow();
+                SelectWindow subWindow = new SelectWindow(_dbal);
                 subWindow.Show();
-                this.Close();
+                Close();
             }
         }
     }

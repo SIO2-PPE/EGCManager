@@ -166,12 +166,14 @@
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource ButtonReturn}" Margin="200,310,493,0" Click="Return1_Click_1"/>
+                FontSize="15" Style="{DynamicResource ButtonReturn}" Margin="200,310,493,0" 
+                Click="Button_Back"/>
         <Button x:Name="Edit" Content="Edité" VerticalAlignment="Top" Width="89" Height="30"
                 Background="#D0D000"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource ButtonEdit}" Margin="352,310,341,0"/>
+                FontSize="15" Style="{DynamicResource ButtonEdit}" Margin="352,310,341,0"
+                Click="Button_Edit"/>
         <Button x:Name="Factu" Content="Facturation" VerticalAlignment="Top" Width="89" Height="30"
                 Background="#10D500"
                 Foreground="White"

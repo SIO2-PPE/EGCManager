@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model.Business;
+using Model.Data;
 
 namespace Compta
 {
@@ -20,35 +21,33 @@ namespace Compta
     /// </summary>
     public partial class InfosClient : Window
     {
-        public InfosClient(Client leClient)
+        private Dbal _dbal;
+
+        public InfosClient(Client leClient, Dbal dbal)
         {
+            _dbal = dbal;
             InitializeComponent();
         }
-        private void Click_Edit(object sender, RoutedEventArgs e)
+
+        private void Button_Edit(object sender, RoutedEventArgs e)
         {
-            {
-                SelectWindow subWindow = new SelectWindow();
-                subWindow.Show();
-                this.Close();
-            }
+            SelectWindow subWindow = new SelectWindow(_dbal);
+            subWindow.Show();
+            Close();
         }
 
         private void Factu_Click(object sender, RoutedEventArgs e)
         {
-            {
-                Facturation subWindow = new Facturation();
-                subWindow.Show();
-                this.Close();
-            }
+            Facturation subWindow = new Facturation(_dbal);
+            subWindow.Show();
+            Close();
         }
 
-        private void Return1_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Back(object sender, RoutedEventArgs e)
         {
-            {
-                SaisieClient subWindow = new SaisieClient();
-                subWindow.Show();
-                this.Close();
-            }
+            SaisieClient subWindow = new SaisieClient(_dbal);
+            subWindow.Show();
+            Close();
         }
     }
 }

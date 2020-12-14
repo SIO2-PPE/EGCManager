@@ -21,28 +21,25 @@ namespace Compta
     public partial class SelectWindow : Window
     {
         private Dbal _dbal;
+
         public SelectWindow(Dbal dbal)
         {
             InitializeComponent();
             _dbal = dbal;
         }
 
-        private void Button_Click() //object sender, RoutedEventArgs e
+        private void Button_SelectClient(object sender, RoutedEventArgs e)
         {
-            {
-                SaisieClient subWindow = new SaisieClient(_dbal);
-                subWindow.Show();
-                this.Close();
-            }
+            SaisieClient subWindow = new SaisieClient(_dbal);
+            subWindow.Show();
+            Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_CreateClient(object sender, RoutedEventArgs e)
         {
-            {
-                CreationClient subWindow = new CreationClient();
-                subWindow.Show();
-                this.Close();
-            }
+            CreationClient subWindow = new CreationClient(_dbal);
+            subWindow.Show();
+            Close();
         }
     }
 }

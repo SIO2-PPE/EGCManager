@@ -23,17 +23,16 @@ namespace Compta
     public partial class CreationClient : Window
     {
         private Dbal _dbal;
-        *
-        public CreationClient()
+        public CreationClient(Dbal dbal)
         {
+            _dbal = dbal;
             InitializeComponent();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            SelectWindow subWindow = new SelectWindow();
+            SelectWindow subWindow = new SelectWindow(_dbal);
             subWindow.Show();
-            this.Close();
+            Close();
         }
 
     }
