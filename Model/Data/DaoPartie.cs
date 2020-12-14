@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using MySqlX.XDevAPI.Relational;
 
 namespace Model.Data
 {
@@ -77,7 +78,7 @@ namespace Model.Data
             }
             catch (Exception e)
             {
-                return  new Partie();
+                return  new Partie(horaire,salle);
             }
         }
 

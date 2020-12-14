@@ -17,14 +17,14 @@ namespace Model.Business
         private List<Joueur> _lstJoueur;
         private List<Obstacle> _lstObstacle; // L'indice correspond à la position (0 à 11)
 
-        public Partie()
+        public Partie(Horaire horaire,Salle salle)
         {
             _id = 0;
            _date = new DateTime();
            _temps = new DateTime();
            _win = false;
-           _horaire = new Horaire();
-           _salle = new Salle();
+           _horaire = horaire;
+           _salle = salle;
            _lstJoueur = new List<Joueur>();
            _lstObstacle = new List<Obstacle>();
         }
