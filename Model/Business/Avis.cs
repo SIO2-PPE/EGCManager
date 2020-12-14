@@ -59,5 +59,10 @@ namespace Model.Business
             val.Add("joueur", _joueur.Id);
             return val;
         }
+
+        public override string ToString()
+        {
+            return _joueur.Pseudo + " : " + _commentaire;
+        }
     }
 }

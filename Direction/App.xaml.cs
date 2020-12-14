@@ -16,7 +16,7 @@ namespace Direction
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Dbal dbal = new Dbal("ppe3_mmd");
+            Dbal dbal = new Dbal("ppe3_mmd","localhost","root","5MichelAnnecy");
             
             // Réinitialisation BDD
             dbal.DBinit();

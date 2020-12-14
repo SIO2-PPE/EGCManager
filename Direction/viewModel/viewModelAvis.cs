@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -64,6 +65,17 @@ namespace Direction.viewModel
             }
         }
 
+        public ObservableCollection<Avis> ListAvis
+        {
+            get => _listAvis;
+            set
+            {
+                _listAvis = value;
+                
+                OnPropertyChanged("ListAvis");
+            }
+        }
+
         #endregion
 
         #region BINDING SELECTIONS
@@ -82,7 +94,6 @@ namespace Direction.viewModel
                     {
                         _listAvis.Add(avis);
                     }
-
                     SelectedAvis = _listAvis.First();
                     OnPropertyChanged("SelectedTheme");
                     OnPropertyChanged("ListAvis");
@@ -95,9 +106,20 @@ namespace Direction.viewModel
             get => _selectedAvis;
             set
             {
-                _selectedAvis = value;
-                
-                OnPropertyChanged("SelectedAvis");
+                if (value != null)
+                {
+                    _selectedAvis = value;
+                    FullAvis = _selectedAvis.Commentaire;
+                    PseudoJoueur = "Joueur : " + _selectedAvis.Joueur.Pseudo;
+                    DateAvis = "Date : " + _selectedAvis.Date.ToString("d");
+                    OnPropertyChanged("SelectedAvis");
+                }
+                else
+                {
+                    FullAvis = "";
+                    PseudoJoueur = "Joueur :";
+                    DateAvis = "Date : ";
+                }
             }
         }
 
@@ -108,19 +130,19 @@ namespace Direction.viewModel
         public string FullAvis
         {
             get => _fullAvis;
-            set => _fullAvis = value;
+            set {_fullAvis = value; OnPropertyChanged("FullAvis");}
         }
 
         public string PseudoJoueur
         {
             get => _pseudoJoueur;
-            set => _pseudoJoueur = value;
+            set {_pseudoJoueur = value; OnPropertyChanged("PseudoJoueur");}
         }
 
         public string DateAvis
         {
             get => _dateAvis;
-            set => _dateAvis = value;
+            set {_dateAvis = value; OnPropertyChanged("DateAvis");}
         }
 
         #endregion

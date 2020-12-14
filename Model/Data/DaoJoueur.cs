@@ -51,5 +51,10 @@ namespace Model.Data
             }
             return lst;
         }
+
+        public Joueur GetById(int id)
+        {
+            return new Joueur(_dbal.SelectById("joueur", id));
+        }
     }
 }

@@ -75,12 +75,15 @@ namespace Model.Data
             query += "where theme_salle.theme = " + theme.Id + " AND ";
             query += "theme_salle.dateDebut < avis.date AND ";
             query += "theme_salle.dateFin > avis.date ";
-            query += "group by avis.id";
+            query += "group by avis.id, avis.commentaire, avis.date, avis.joueur ";
+            query += "order by avis.date";
             DataTable tab = _dbal.RQuery(query).Tables[0];
             List<Avis> lstAvis = new List<Avis>();
             foreach (DataRow row in tab.Rows)
             {
-                lstAvis.Add(new Avis(row));
+                Avis avis = new Avis(row);
+                avis.Joueur = _daoJoueur.GetById((int)row["joueur"]);
+                lstAvis.Add(avis);
             }
             return lstAvis;
         }
