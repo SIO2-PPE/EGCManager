@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Business;
 
 namespace Compta
 {
@@ -19,7 +20,7 @@ namespace Compta
     /// </summary>
     public partial class InfosClient : Window
     {
-        public InfosClient()
+        public InfosClient(Client leClient)
         {
             InitializeComponent();
         }

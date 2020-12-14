@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Business;
 
 namespace Compta
 {
@@ -28,7 +29,7 @@ namespace Compta
         {
 
             {
-                InfosClient subWindow = new InfosClient();
+                InfosClient subWindow = new InfosClient(new Client());
                 subWindow.Show();
                 this.Close();
             }

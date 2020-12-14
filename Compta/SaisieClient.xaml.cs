@@ -21,22 +21,17 @@ namespace Compta
     /// </summary>
     public partial class SaisieClient: Window
     {
-        public SaisieClient()
+        private Dbal _dbal;
+        public SaisieClient(Dbal dbal)
         {
             InitializeComponent();
-        }        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            {
-                InfosClient subWindow = new InfosClient();
-                subWindow.Show();
-                this.Close();
-            }
+            maGrid.DataContext = new viewModel.ViewModelSaisieClient(new DaoClient(dbal),new DaoFacture(dbal));
         }
 
         private void ReturnButton(object sender, RoutedEventArgs e)
         {
             {
-                SelectWindow subWindow = new SelectWindow();
+                SelectWindow subWindow = new SelectWindow(_dbal);
                 subWindow.Show();
                 this.Close();
             }

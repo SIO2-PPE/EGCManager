@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Data;
 
 namespace Compta
 {
@@ -19,15 +20,17 @@ namespace Compta
     /// </summary>
     public partial class SelectWindow : Window
     {
-        public SelectWindow()
+        private Dbal _dbal;
+        public SelectWindow(Dbal dbal)
         {
             InitializeComponent();
+            _dbal = dbal;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click() //object sender, RoutedEventArgs e
         {
             {
-                SaisieClient subWindow = new SaisieClient();
+                SaisieClient subWindow = new SaisieClient(_dbal);
                 subWindow.Show();
                 this.Close();
             }

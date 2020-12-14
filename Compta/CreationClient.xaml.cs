@@ -22,6 +22,8 @@ namespace Compta
     /// </summary>
     public partial class CreationClient : Window
     {
+        private Dbal _dbal;
+        *
         public CreationClient()
         {
             InitializeComponent();
