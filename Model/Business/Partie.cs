@@ -28,6 +28,10 @@ namespace Model.Business
            _lstJoueur = new List<Joueur>();
            _lstObstacle = new List<Obstacle>();
         }
+        public Partie()
+        {
+
+        }
 
         public Partie(DataRow row, Horaire horaire, Salle salle)
         {

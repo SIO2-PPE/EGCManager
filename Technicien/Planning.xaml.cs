@@ -26,6 +26,7 @@ namespace Technicien
         private DaoHoraire thedaoHoraire;
         private DaoObstacle thedaoObstacle;
         private DaoJoueur thedaoJoueur;
+        private Partie unepartieselectioner = new Partie();
 
         public Planning(DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire, DaoObstacle daoobstacle, DaoJoueur daojoeueur)
         {
@@ -37,29 +38,10 @@ namespace Technicien
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoeueur;
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.viewModelPlanning(daosite, daosalle, daopartie, daohoraire);
+            MainGrid.DataContext = new viewModel.viewModelPlanning(daosite, daosalle, daopartie, daohoraire,daoobstacle,daojoeueur);
 
         }
 
-        private void btn_new_partie_Click(object sender, RoutedEventArgs e)
-        {
-            if (ListPlanningView.SelectedItem != null)
-            {
-                Création_de_partie subWindow = new Création_de_partie(thedaoSite, thedaoSalle, thedaoPartie, thedaoHoraire, thedaoObstacle, thedaoJoueur);
-                subWindow.Show();
-                this.Close();
-            }
-            else
-            {
-                
-               
-                MessageBox.Show("veuillez selectionner une partie non réserver");
-            }
-
-
-
-        }
-
-
+        
     }
 }

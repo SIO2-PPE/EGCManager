@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <ListBox x:Name="ListPlanningView" ItemsSource="{Binding ListPlanning}" SelectedItem="{Binding SelectedPlanning}" Margin="0,50,0,1" />
         <Label Content="Planing du" HorizontalAlignment="center" Margin="224,20,224,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_new_partie" Content="Créer une partie" Grid.Column="1"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="126" Height="46" Click="btn_new_partie_Click"/>
+        <Button x:Name="btn_new_partie" Command="{Binding CreerPartie}" Content="Créer une partie" Grid.Column="1"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="126" Height="46"/>
         <DatePicker x:Name="datePlanning" SelectedDate="{Binding DatePlanning}" Grid.Column="1" HorizontalAlignment="Center" Margin="51,138,44.6,0" VerticalAlignment="Top" Width="182"/>
         <Label Content="Lieu :" Margin="55,20,185.6,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Salle :" Margin="54,60,183.6,0" VerticalAlignment="Top" Grid.Column="1"/>

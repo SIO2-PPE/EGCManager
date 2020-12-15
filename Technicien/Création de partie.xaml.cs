@@ -38,6 +38,7 @@ namespace Technicien
             thedaoPartie = daopartie;
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoueur;
+            
             //_partie = partie;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
