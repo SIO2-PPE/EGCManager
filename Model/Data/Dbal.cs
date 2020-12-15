@@ -112,6 +112,7 @@ namespace Model.Data
                     if (val.Value) query += "1";
                     else query += "0";
                 }
+                else if (val.Value is double) query += val.Value.ToString().Replace(',','.');
                 else query += val.Value;
                 if (values.Last().Key != val.Key) query += ",";
             }
