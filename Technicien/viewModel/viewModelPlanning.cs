@@ -47,7 +47,11 @@ namespace Technicien.viewModel
         public ObservableCollection<Partie> ListPlanning
         {
             get => _listPlanning;
-            set => _listPlanning = value;
+            set
+            {
+                _listPlanning = value;
+                
+            }
         }
 
         public ObservableCollection<Site> ListSites
@@ -62,7 +66,7 @@ namespace Technicien.viewModel
         {
             get => _listSalles;
             set { _listSalles = value;
-                SelectedSalle = _listSalles.First();
+                
             }
         }
 
@@ -108,6 +112,7 @@ namespace Technicien.viewModel
         }
         
         
+        
         private void RefreshListSalle()
         {
             _listSalles.Clear();
@@ -124,7 +129,9 @@ namespace Technicien.viewModel
             {
                 ListPlanning.Add(partie);
             }
+           
             OnPropertyChanged("ListPlanning");
+            
         }
         
     }

@@ -28,7 +28,8 @@ namespace Technicien
        private DaoHoraire thedaoHoraire;
        private DaoObstacle thedaoObstacle;
        private DaoJoueur thedaoJoueur;
-        public Création_de_partie(DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire,DaoObstacle daoobstacle,DaoJoueur daojoueur)
+       private Partie _partie;
+        public Création_de_partie(DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire,DaoObstacle daoobstacle,DaoJoueur daojoueur/*,Partie partie*/)
         {
             InitializeComponent();
             thedaoSite = daosite;
@@ -37,6 +38,7 @@ namespace Technicien
             thedaoPartie = daopartie;
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoueur;
+            //_partie = partie;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
