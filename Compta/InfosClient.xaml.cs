@@ -23,8 +23,10 @@ namespace Compta
     {
         private Dbal _dbal;
         private DaoClient _daoClient;
+        private Client _client;
         public InfosClient(Client leClient, Dbal dbal)
         {
+            _client = leClient;
             _dbal = dbal;
             _daoClient = new DaoClient(dbal);
             InitializeComponent();
@@ -54,7 +56,7 @@ namespace Compta
 
         private void Factu_Click(object sender, RoutedEventArgs e)
         {
-            Facturation subWindow = new Facturation(_dbal);
+            Facturation subWindow = new Facturation(_dbal, _client);
             subWindow.Show();
             Close();
         }
@@ -62,6 +64,13 @@ namespace Compta
         private void Button_Back(object sender, RoutedEventArgs e)
         {
             SaisieClient subWindow = new SaisieClient(_dbal);
+            subWindow.Show();
+            Close();
+        }
+
+        private void Button_Factu(object sender, RoutedEventArgs e)
+        {
+            Facturation subWindow = new Facturation(_dbal, _client);
             subWindow.Show();
             Close();
         }

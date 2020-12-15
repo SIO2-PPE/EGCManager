@@ -161,12 +161,12 @@
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource BoutonRetour}" Click="Button_Click"/>
+                FontSize="15" Style="{DynamicResource BoutonRetour}" Click="Button_Back"/>
         <Button Content="✓ Valider" Command="{Binding CreerUnClient}" VerticalAlignment="Top" Width="89" Height="30"
                 Background="#10D500"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Click="Button_Click" Style="{DynamicResource BoutonValider}"/>
+                FontSize="15" Click="Button_Valider" Style="{DynamicResource BoutonValider}"/>
 
     </Grid>
 </Window>

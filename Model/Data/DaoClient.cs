@@ -40,5 +40,12 @@ namespace Model.Data
         {
             _dbal.Update("client", c.ToArray(), "id = " + c.Id);
         }
+
+        public void AddCredits(Client client, int nbCredits)
+        {
+            Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
+            dic.Add("credit", client.Credit + nbCredits);
+            _dbal.Update("client", dic, "id = " + client.Id);
+        }
     }
 }

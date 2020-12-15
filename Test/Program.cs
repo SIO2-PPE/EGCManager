@@ -10,11 +10,10 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            // Dbal dbal = new Dbal("egc_db");
+            Dbal dbal = new Dbal("ppe3_mmd");
             // DaoClient daoClient = new DaoClient(dbal);
             // DaoFacture daoFacture = new DaoFacture(dbal);
 
-            Dictionary<DateTime, string> t = new Dictionary<DateTime, string>();
             
         }
     }
