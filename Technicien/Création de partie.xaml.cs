@@ -22,14 +22,21 @@ namespace Technicien
     {  /// <summary>
        /// Logique d'interaction pour Création_de_partie.xaml
        /// </summary>
-       private Dbal thedbal;
-        private DaoSite thedaoSite;
-        private DaoSalle thedaoSalle;
-        private DaoPartie thedaoPartie;
-        private DaoHoraire thedaoHoraire;
-        public Création_de_partie()
+       private DaoSite thedaoSite;
+       private DaoSalle thedaoSalle;
+       private DaoPartie thedaoPartie;
+       private DaoHoraire thedaoHoraire;
+       private DaoObstacle thedaoObstacle;
+       private DaoJoueur thedaoJoueur;
+        public Création_de_partie(DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire,DaoObstacle daoobstacle,DaoJoueur daojoueur)
         {
             InitializeComponent();
+            thedaoSite = daosite;
+            thedaoSalle = daosalle;
+            thedaoHoraire = daohoraire;
+            thedaoPartie = daopartie;
+            thedaoObstacle = daoobstacle;
+            thedaoJoueur = daojoueur;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -58,7 +65,7 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
-            Planning subWindow = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire);
+            Planning subWindow = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
             subWindow.Show();
             this.Close();
         }

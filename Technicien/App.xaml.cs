@@ -22,9 +22,11 @@ namespace Technicien
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoPartie daoPartie = new DaoPartie(dbal);
             DaoHoraire daoHoraire =new DaoHoraire(dbal);
+            DaoObstacle daoObstacle = new DaoObstacle(dbal);
+            DaoJoueur daoJoueur = new DaoJoueur(dbal);
 
 
-            MainWindow Wnd = new MainWindow(daoSite,daoSalle,daoPartie,daoHoraire);
+            MainWindow Wnd = new MainWindow(daoSite,daoSalle,daoPartie,daoHoraire,daoObstacle,daoJoueur);
             Wnd.Show();
         }
     }

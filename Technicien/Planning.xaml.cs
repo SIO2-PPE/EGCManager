@@ -20,18 +20,31 @@ namespace Technicien
     public partial class Planning : Window
     {
 
+        private DaoSite thedaoSite;
+        private DaoSalle thedaoSalle;
+        private DaoPartie thedaoPartie;
+        private DaoHoraire thedaoHoraire;
+        private DaoObstacle thedaoObstacle;
+        private DaoJoueur thedaoJoueur;
         
-        public Planning(DaoSite thedaoSite,DaoSalle thedaoSalle,DaoPartie thedaoPartie,DaoHoraire thedaoHoraire)
+        public Planning(DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire,DaoObstacle daoobstacle,DaoJoueur daojoeueur)
         {
+            
+            thedaoSite = daosite;
+            thedaoSalle = daosalle;
+            thedaoHoraire = daohoraire;
+            thedaoPartie = daopartie;
+            thedaoObstacle = daoobstacle;
+            thedaoJoueur = daojoeueur;
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.viewModelPlanning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire);
+            MainGrid.DataContext = new viewModel.viewModelPlanning(daosite,daosalle,daopartie,daohoraire);
 
         }
 
         private void btn_new_partie_Click(object sender, RoutedEventArgs e)
         {
             {
-                Création_de_partie subWindow = new Création_de_partie();
+                Création_de_partie subWindow = new Création_de_partie(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
                 subWindow.Show();
                 this.Close();
             }
