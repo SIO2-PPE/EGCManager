@@ -68,8 +68,7 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
-            Planning subWindow = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
-            subWindow.Show();
+            
             this.Close();
         }
 
