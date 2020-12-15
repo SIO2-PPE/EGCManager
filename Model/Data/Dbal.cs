@@ -5,13 +5,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Data;
 using System.Linq;
+using System.Net;
 
 namespace Model.Data
 {
     public class Dbal
     {
         private MySqlConnection _connection;
-        private bool _auto_increment = true;
 
         //Constructor
         public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
@@ -27,11 +27,21 @@ namespace Model.Data
         //Initialize values
         private void Initialize(string server, string database, string uid, string password)
         {
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            string connectionString = "";
+            connectionString += "SERVER=" + server + ";";
+            connectionString += "UID=" + uid + ";"; 
+            connectionString += "PASSWORD=" + password + ";";
+            connectionString += "DATABASE=" + database + ";";
 
-            _connection = new MySqlConnection(connectionString);
+            try
+            {
+                _connection = new MySqlConnection(connectionString);
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         //open connection to database
@@ -108,7 +118,7 @@ namespace Model.Data
             query += ")";
 
             //open connection
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
@@ -119,7 +129,7 @@ namespace Model.Data
                     cmd.ExecuteNonQuery();
 
                     //close connection
-                    this.CloseConnection();
+                    CloseConnection();
                 }
                 catch (Exception e)
                 {
@@ -151,7 +161,7 @@ namespace Model.Data
             Console.WriteLine(query);
 
             //Open connection
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 //create mysql command
                 MySqlCommand cmd = new MySqlCommand();
@@ -164,7 +174,7 @@ namespace Model.Data
                 cmd.ExecuteNonQuery();
 
                 //close connection
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -173,11 +183,11 @@ namespace Model.Data
         {
             string query = "DELETE FROM " + table + " WHERE " + where;
 
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(query, _connection);
                 cmd.ExecuteNonQuery();
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -185,11 +195,11 @@ namespace Model.Data
         {
             System.Console.WriteLine(query);
             DataSet dataset = new DataSet();
-            if (this.OpenConnection())
+            if (OpenConnection())
             {
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, _connection);
                 adapter.Fill(dataset);
-                this.CloseConnection();
+                CloseConnection();
             }
             return dataset;
         }
@@ -205,7 +215,29 @@ namespace Model.Data
         }
         public DataRow SelectById(string table, int id)
         {
-            return this.RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
+            return RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
+        }
+
+        public void DBinit()
+        {
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/scripte.sql");
+            StreamReader reader = new StreamReader(stream);
+            String sqlFile = reader.ReadToEnd();
+            
+            MySqlScript script = new MySqlScript(_connection, sqlFile);
+            script.Execute();
+        }
+
+        public void DBhydrate()
+        {
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/hydratation.sql");
+            StreamReader reader = new StreamReader(stream);
+            String sqlFile = reader.ReadToEnd();
+            
+            MySqlScript script = new MySqlScript(_connection, sqlFile);
+            script.Execute();
         }
     }
 }

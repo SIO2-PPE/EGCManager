@@ -15,6 +15,12 @@ namespace Model.Business
             Hydrate(row);
         }
 
+        public Theme()
+        {
+            _id = 0;
+            _nom = "";
+        }
+
         #region MyRegion
 
         public int Id
@@ -41,6 +47,11 @@ namespace Model.Business
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
             val.Add("nom", _nom);
             return val;
+        }
+
+        public override string ToString()
+        {
+            return _nom;
         }
     }
 }

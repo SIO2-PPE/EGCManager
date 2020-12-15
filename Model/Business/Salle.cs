@@ -11,11 +11,16 @@ namespace Model.Business
         private Site _site;
         private Theme _theme;
 
-        public Salle(int id, Site site, Theme theme)
+        public Salle(DataRow row)
         {
-            _id = id;
-            _site = site;
-            _theme = theme;
+            Hydrate(row);
+        }
+
+        public Salle()
+        {
+            _id = 0;
+            _site = new Site();
+            _theme = new Theme();
         }
 
         #region Getter and Setter
@@ -49,6 +54,10 @@ namespace Model.Business
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
             val.Add("site", _site.Id);
             return val;
+        }
+        public override string ToString()
+        {
+            return _theme.Nom;
         }
     }
 }

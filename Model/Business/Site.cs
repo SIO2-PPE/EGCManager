@@ -11,11 +11,22 @@ namespace Model.Business
         private string _ville;
         private string _adresse;
         private List<Salle> _lstSalle;
+        private List<Horaire> _lstHoraire;
 
-        public Site(DataRow row, List<Salle> lstSalle)
+        public Site(DataRow row)
         {
             Hydrate(row);
-            _lstSalle = lstSalle;
+            _lstSalle = new List<Salle>();
+            _lstHoraire = new List<Horaire>();
+        }
+
+        public Site()
+        {
+            _id = 0;
+            _ville = "";
+            _adresse = "";
+            _lstSalle = new List<Salle>();
+            _lstHoraire = new List<Horaire>();
         }
 
         #region Getter and Setter
@@ -58,6 +69,10 @@ namespace Model.Business
             val.Add("ville", _ville);
             val.Add("adresse", _adresse);
             return val;
+        }
+        public override string ToString()
+        {
+            return _ville;
         }
     }
 }
