@@ -30,7 +30,7 @@ namespace Technicien
 
         public Planning(DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire, DaoObstacle daoobstacle, DaoJoueur daojoeueur)
         {
-
+            
             thedaoSite = daosite;
             thedaoSalle = daosalle;
             thedaoHoraire = daohoraire;
@@ -38,10 +38,9 @@ namespace Technicien
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoeueur;
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.viewModelPlanning(daosite, daosalle, daopartie, daohoraire,daoobstacle,daojoeueur);
+            MainGrid.DataContext = new viewModel.viewModelPlanning(daosite, daosalle, daopartie, daohoraire,daoobstacle,daojoeueur,this);
 
         }
-
         
     }
 }

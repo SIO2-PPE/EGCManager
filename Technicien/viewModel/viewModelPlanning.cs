@@ -12,6 +12,7 @@ namespace Technicien.viewModel
 {
     class viewModelPlanning : viewModelBase
     {
+        private Planning _wnd;
         //DAO
         private DaoHoraire _daoHoraire;
         private DaoSite _daoSite;
@@ -29,12 +30,17 @@ namespace Technicien.viewModel
         private Partie _selectedPlanning;
         private DateTime _datePlanning;
         private Site _selectedSite;
+
         private Salle _selectedSalle;
+
         //COMMANDE
         private ICommand _creerpartie;
 
-        public viewModelPlanning(DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire, DaoObstacle daoObstacle, DaoJoueur daoJoueur)
+        public viewModelPlanning(DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire,
+            DaoObstacle daoObstacle, DaoJoueur daoJoueur, Planning planning)
         {
+            _wnd = planning;
+            
             _daoHoraire = daoHoraire;
             _daoPartie = daoPartie;
             _daoSalle = daoSalle;
@@ -55,7 +61,6 @@ namespace Technicien.viewModel
             {
                 _listPlanning = value;
                 SelectedPlanning = _listPlanning.First();
-
             }
         }
 
@@ -72,13 +77,8 @@ namespace Technicien.viewModel
         public ObservableCollection<Salle> ListSalles
         {
             get => _listSalles;
-            set
-            {
-                _listSalles = value;
-
-            }
+            set { _listSalles = value; }
         }
-
 
 
         public DateTime DatePlanning
@@ -86,11 +86,9 @@ namespace Technicien.viewModel
             get => _datePlanning;
             set
             {
-
                 _datePlanning = value;
                 RefreshListPlanning();
                 OnPropertyChanged("DatePlanning");
-
             }
         }
 
@@ -119,16 +117,16 @@ namespace Technicien.viewModel
                 OnPropertyChanged("SelectedSalle");
             }
         }
+
         public Partie SelectedPlanning
         {
             get => _selectedPlanning;
             set
             {
                 _selectedPlanning = value;
-                OnPropertyChanged("SelectedPlanning"); 
+                OnPropertyChanged("SelectedPlanning");
             }
         }
-
 
 
         private void RefreshListSalle()
@@ -149,8 +147,8 @@ namespace Technicien.viewModel
             }
 
             OnPropertyChanged("ListPlanning");
-
         }
+
         public ICommand CreerPartie
         {
             get
@@ -159,12 +157,11 @@ namespace Technicien.viewModel
                 {
                     this._creerpartie = new RelayCommand(() => CreatePartie(), () => true);
                 }
+
                 return this._creerpartie;
-
             }
-
-
         }
+
         private void CreatePartie()
         {
             if (_selectedPlanning == null)
@@ -175,12 +172,10 @@ namespace Technicien.viewModel
             {
                 if (_selectedPlanning.Id == 0)
                 {
-
-                    
-                    Création_de_partie subWindow = new Création_de_partie(_daoSite, _daoSalle, _daoPartie, _daoHoraire, _daoObstacle, _daoJoueur);0
+                    Création_de_partie subWindow = new Création_de_partie(_daoSite, _daoSalle, _daoPartie, _daoHoraire,
+                        _daoObstacle, _daoJoueur, SelectedPlanning);
                     subWindow.Show();
-
-
+                    _wnd.Close();
                 }
                 else
                 {
@@ -188,6 +183,5 @@ namespace Technicien.viewModel
                 }
             }
         }
-
     }
 }

@@ -8,7 +8,7 @@
         
         Title="Création_de_partie" Height="900" Width="1600">
 
-    <Grid RenderTransformOrigin="0.668,0.614">
+    <Grid Name="MainGrid" RenderTransformOrigin="0.668,0.614">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="797"/>
             <ColumnDefinition Width="797"/>

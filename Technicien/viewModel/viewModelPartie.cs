@@ -10,7 +10,7 @@ using Model.Data;
 
 namespace Technicien.viewModel
 {
-    class viewModelApp : viewModelBase
+    class viewModelPartie : viewModelBase
     {
         //DAO
 
@@ -21,6 +21,7 @@ namespace Technicien.viewModel
         private DaoObstacle _daoObstacle;
         private DaoJoueur _daoJoueur;
 
+        private Partie _activePartie;
 
         //LISTE
         private ObservableCollection<Joueur> _listJoueur;
@@ -36,9 +37,70 @@ namespace Technicien.viewModel
 
         //COMMANDE
 
+        public viewModelPartie(DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
+            DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie)
+        {
+            _daoHoraire = daoHoraire;
+            _daoSite = daoSite;
+            _daoSalle = daoSalle;
+            _daoPartie = daoPartie;
+            _daoObstacle = daoObstacle;
+            _daoJoueur = daoJoueur;
+            _activePartie = activePartie;
+        }
 
+        public ObservableCollection<Joueur> ListJoueur
+        {
+            get => _listJoueur;
+            set => _listJoueur = value;
+        }
 
+        public ObservableCollection<Joueur> ListJoueurPartie
+        {
+            get => _listJoueurPartie;
+            set => _listJoueurPartie = value;
+        }
+
+        public ObservableCollection<Obstacle> ListObstacle
+        {
+            get => _listObstacle;
+            set => _listObstacle = value;
+        }
+
+        public ObservableCollection<Obstacle> ListObstaclePartie
+        {
+            get => _listObstaclePartie;
+            set => _listObstaclePartie = value;
+        }
+
+        public Joueur SelectedJoueur
+        {
+            get => _selectedJoueur;
+            set
+            {
+                _selectedJoueur = value;
+                OnPropertyChanged("SelectedJoueur");
+            }
+        }
+
+        public Joueur SelectedJoueurPartie
+        {
+            get => _selectedJoueurPartie;
+            set
+            {
+                _selectedJoueurPartie = value;
+                OnPropertyChanged("SelectedJoueurPartie");
+            }
+        }
+
+        public Obstacle SelectedObstacle
+        {
+            get => _selectedObstacle;
+            set
+            {
+                _selectedObstacle = value;
+                OnPropertyChanged("SelectedObstacle");
+            }
+        }
     }
-
-
 }
