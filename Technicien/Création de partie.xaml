@@ -7,36 +7,42 @@
         WindowState = "Maximized" 
         mc:Ignorable="d"
         
-        Title="Création_de_partie" Height="900" Width="1600">
+        Title="Création_de_partie" Height="800" Width="1280">
 
     <Grid Name="MainGrid" RenderTransformOrigin="0.668,0.614">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="797"/>
-            <ColumnDefinition Width="797"/>
+            <ColumnDefinition Width="656"/>
+            <ColumnDefinition Width="624"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="324*"/>
             <RowDefinition Height="403*"/>
             <RowDefinition Height="143*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btn_back" Content="Retour" Margin="249,31.8,251.8,33.4" Click="Btn_Retour_Click" Grid.Row="2" HorizontalAlignment="Center" Width="296" Height="78" VerticalAlignment="Center"/>
-        <TextBox x:Name="txt_recherche" Height="23" Margin="1,0,0.8,0" TextWrapping="Wrap" Text="Rechercher" VerticalAlignment="Top" TextChanged="txt_recherche_TextChanged" TextAlignment="Center"/>
-        <ListBox x:Name="lst_joueur" ItemsSource="{Binding ListJoueur}" SelectedItem="{Binding SelectedJoueur}" Margin="1,23,0.8,75"/>
-        <Button x:Name="btn_back_Copy" Content="Créer la partie" Margin="250.2,32.8,250.6,32.4" Click="Btn_Cree_Partie_Click" Grid.Row="2" HorizontalAlignment="Center" Width="296" Height="78" VerticalAlignment="Center" Grid.Column="1"/>
-        <Button Content="Ajouter le joueur à la partie" HorizontalAlignment="Left" Margin="588,0,0,14" VerticalAlignment="Bottom" Width="159" Click="Button_newjoueur" Height="47"/>
-        <Button Content="Ajouter le joueur" HorizontalAlignment="Left" Margin="50,0,0,14" VerticalAlignment="Bottom" Width="159" Click="Button_ajouter_joueur_list" Height="47"/>
-        <Label Content="Liste des joueurs dans la partie" Grid.Column="1" HorizontalAlignment="Center" Height="29" Margin="312.2,0,312.6,0" VerticalAlignment="Top" Width="172"/>
-        <ListBox x:Name="lst_joueur_partie" ItemsSource="{Binding ListJoueurPartie}" SelectedItem="{Binding SelectedJoueurPartie}" Grid.Column="1" Margin="1.2,29,1.6,0"/>
-        <ListBox x:Name="lst_Obstacle" ItemsSource="{Binding ListObstacle}" SelectedItem="{Binding SelectedObstacle}" Margin="2,43,0.8,69.2" Grid.Row="1"/>
-        <ListBox x:Name="lst_ObstaclePartie" ItemsSource="{Binding ListObstaclePartie}" SelectedItem="{Binding SelectedObstaclePartie}" Grid.Column="1" Margin="1.2,42,1.6,68.2" Grid.Row="1"/>
-        <Button Content="Ajouter" Margin="1,0,1.8,0.2" Grid.Row="1" Height="68" VerticalAlignment="Bottom"/>
-        <Button Content="Retirer" Grid.Column="1" Margin="0.2,0,0.6,0.2" Grid.Row="1" Height="68" VerticalAlignment="Bottom"/>
-        <Label Content="Obstacle" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Obstacle dans la partie" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox TextWrapping="Wrap" Width="120" Height="24" Margin="373,265,304,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged_2"/>
-        <TextBox TextWrapping="Wrap" Width="120" Height="24" Margin="373,296,304,0" VerticalAlignment="Top"/>
-        <Label Content="Pseudo :&#xD;&#xA;" HorizontalAlignment="Left" Margin="301,259,0,0" VerticalAlignment="Top"/>
-        <Label Content="E-mail :&#xD;&#xA;" HorizontalAlignment="Left" Margin="304,290,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Button x:Name="btn_back" Content="Retour" Margin="249,0,219,0" Click="Btn_Retour_Click" Grid.Row="2" Height="78" VerticalAlignment="Center"/>
+        <TextBox x:Name="txt_recherche" Height="23" Margin="1,0,43,0" TextWrapping="Wrap" Text="{Binding ResearchText}" VerticalAlignment="Top" TextChanged="txt_recherche_TextChanged" TextAlignment="Center"/>
+        <ListBox x:Name="lst_joueur" ItemsSource="{Binding ListJoueur}" SelectedItem="{Binding SelectedJoueur}" Margin="1,31,1,75"/>
+        <Button x:Name="btn_back_Copy" Content="Créer la partie" Click="Btn_Cree_Partie_Click" Grid.Row="2" HorizontalAlignment="Center" Width="296" Height="78" VerticalAlignment="Center" Grid.Column="1"/>
+        <Button Content="Ajouter le joueur à la partie" Command="{Binding AddJoueur}" Margin="485,0,17,14" VerticalAlignment="Bottom" Height="47"/>
+        <Button Content="Ajouter le joueur" Command="{Binding AddJoueurPartie}" Margin="10,0,517,14" VerticalAlignment="Bottom" Click="Button_ajouter_joueur_list" Height="47"/>
+        <Label Content="Liste des joueurs dans la partie" Grid.Column="1" HorizontalAlignment="Center" Height="29" VerticalAlignment="Top" Width="172"/>
+        <ListBox x:Name="lst_joueur_partie" ItemsSource="{Binding ListJoueurPartie}" SelectedItem="{Binding SelectedJoueurPartie}" Grid.Column="1" Margin="1,29,3,75"/>
+        <ListBox x:Name="lst_Obstacle" ItemsSource="{Binding ListObstacle}" SelectedItem="{Binding SelectedObstacle}" Margin="2,43,1,69" Grid.Row="1"/>
+        <ListBox x:Name="lst_ObstaclePartie" ItemsSource="{Binding ListObstaclePartie}" SelectedItem="{Binding SelectedObstaclePartie}" Grid.Column="1" Margin="1,42,1,68" Grid.Row="1"/>
+        <Button Content="Ajouter" Margin="1,295,2,0" Grid.Row="1" Height="68" VerticalAlignment="Top"/>
+        <Button Content="Retirer" Grid.Column="1" Margin="0,295,1,0" Grid.Row="1" Height="68" VerticalAlignment="Top"/>
+        <Label Content="Obstacle" HorizontalAlignment="Center" Margin="0,12,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="56"/>
+        <Label Content="Obstacle dans la partie" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="132"/>
+        <TextBox TextWrapping="Wrap" Height="24" Margin="256,224,203,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged_2"/>
+        <TextBox TextWrapping="Wrap" Height="24" Margin="256,255,204,0" VerticalAlignment="Top"/>
+        <Label Content="Pseudo :&#xD;&#xA;" Margin="178,218,410,0" VerticalAlignment="Top" Height="33"/>
+        <Label Content="E-mail :&#xD;&#xA;" Margin="184,249,415,0" VerticalAlignment="Top" Height="42"/>
+        <Button Content="Retirer le Joueur" Command="{Binding DelJoueurPartie}" VerticalAlignment="Top" Height="47" Margin="0,229,0,0" Grid.Column="1"/>
+        <Button HorizontalAlignment="Left" Command="{Binding ResearchJoueur}" Margin="618,1,0,0" VerticalAlignment="Top" Height="26" Width="28">
+            <Button.Background>
+                <ImageBrush TileMode="None" ImageSource="loupe.png"/>
+            </Button.Background>
+        </Button>
 
 
     </Grid>

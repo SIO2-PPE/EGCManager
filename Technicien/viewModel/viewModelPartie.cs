@@ -21,6 +21,7 @@ namespace Technicien.viewModel
         private DaoObstacle _daoObstacle;
         private DaoJoueur _daoJoueur;
 
+
         private Partie _activePartie;
 
         //LISTE
@@ -33,9 +34,19 @@ namespace Technicien.viewModel
         private Joueur _selectedJoueur;
         private Joueur _selectedJoueurPartie;
         private Obstacle _selectedObstacle;
+        private Obstacle _selectedObstaclePartie;
 
 
         //COMMANDE
+        private ICommand _AddJoueurPartie;
+        private ICommand _AddJoueur;
+        private ICommand _researchJoueur;
+        private ICommand _DelJoueurPartie;
+        private ICommand _AddObstacle;
+        private ICommand _DelObstacle;
+
+        private string researchText;
+
 
         public viewModelPartie(DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
             DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie)
@@ -50,6 +61,9 @@ namespace Technicien.viewModel
 
             _listJoueur = new ObservableCollection<Joueur>(daoJoueur.GetAllJoueur());
             _listObstacle = new ObservableCollection<Obstacle>(daoObstacle.GetAllObstacle());
+            _listJoueurPartie = new ObservableCollection<Joueur>();
+            _listObstaclePartie = new ObservableCollection<Obstacle>();
+            researchText = "!";
         }
 
 
@@ -107,5 +121,70 @@ namespace Technicien.viewModel
                 OnPropertyChanged("SelectedObstacle");
             }
         }
+        public Obstacle SelectedObstaclePartie
+        {
+            get => _selectedObstaclePartie;
+            set
+            {
+                _selectedObstaclePartie = value;
+                OnPropertyChanged("SelectedObstaclePartie");
+            }
+        }
+        public string ResearchText
+        {
+            get
+            {
+                return researchText;
+            }
+            set
+            {
+                if (value != researchText)
+                {
+                    researchText = value;
+                    OnPropertyChanged("ResearchText");
+                }
+            }
+        }
+
+
+        //commande
+        public ICommand ResearchJoueur
+        {
+            get
+            {
+                if (this._researchJoueur == null)
+                {
+                    this._researchJoueur = new RelayCommand(() => RechercheJoueur(), () => true);
+                }
+                return this._researchJoueur;
+            }
+        }
+        //methode commande
+        private void RechercheJoueur()
+        {
+            if (researchText == "")
+            {
+                _listJoueur.Clear();
+                foreach (Joueur joueur in _daoJoueur.GetAllJoueur())
+                {
+                    _listJoueur.Add(joueur);
+                }
+            }
+            else
+            {
+                _listJoueur.Clear();
+               
+                foreach (Joueur joueur in  _daoJoueur.GetJoueurByPseudo(researchText))
+                {
+                _listJoueur.Add(joueur);
+                }
+                
+
+
+                
+            }
+        }
+        //Refresh liste
+
     }
 }

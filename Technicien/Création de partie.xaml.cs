@@ -85,9 +85,7 @@ namespace Technicien
         {
         }
 
-        private void Button_newjoueur(object sender, RoutedEventArgs e)
-        {
-        }
+        
 
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
@@ -96,5 +94,7 @@ namespace Technicien
         private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
         }
+
+        
     }
 }
