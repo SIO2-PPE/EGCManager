@@ -65,5 +65,9 @@ namespace Model.Business
             val.Add("email", _email);
             return val;
         }
+        public override string ToString()
+        {
+            return this._pseudo+" ===> "+this._email;
+        }
     }
 }

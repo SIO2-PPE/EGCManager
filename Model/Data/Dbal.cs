@@ -29,16 +29,19 @@ namespace Model.Data
         {
             string connectionString = "";
             connectionString += "SERVER=" + server + ";";
-            connectionString += "UID=" + uid + ";"; 
-            connectionString += "PASSWORD=" + password + ";";
+            connectionString += "UID=" + uid + ";";
+            connectionString += "PASSWORD=; " + password + ";"; 
             connectionString += "DATABASE=" + database + ";";
 
             try
             {
+                
                 _connection = new MySqlConnection(connectionString);
+                
             }
             catch (MySqlException e)
             {
+                
                 Console.WriteLine(e);
                 throw;
             }

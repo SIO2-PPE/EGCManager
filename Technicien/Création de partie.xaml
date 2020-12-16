@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Technicien"
+        WindowState = "Maximized" 
         mc:Ignorable="d"
         
         Title="Création_de_partie" Height="900" Width="1600">
@@ -20,14 +21,14 @@
         </Grid.RowDefinitions>
         <Button x:Name="btn_back" Content="Retour" Margin="249,31.8,251.8,33.4" Click="Btn_Retour_Click" Grid.Row="2" HorizontalAlignment="Center" Width="296" Height="78" VerticalAlignment="Center"/>
         <TextBox x:Name="txt_recherche" Height="23" Margin="1,0,0.8,0" TextWrapping="Wrap" Text="Rechercher" VerticalAlignment="Top" TextChanged="txt_recherche_TextChanged" TextAlignment="Center"/>
-        <ListBox x:Name="lst_joueur" Margin="1,23,0.8,75"/>
+        <ListBox x:Name="lst_joueur" ItemsSource="{Binding ListJoueur}" SelectedItem="{Binding SelectedJoueur}" Margin="1,23,0.8,75"/>
         <Button x:Name="btn_back_Copy" Content="Créer la partie" Margin="250.2,32.8,250.6,32.4" Click="Btn_Cree_Partie_Click" Grid.Row="2" HorizontalAlignment="Center" Width="296" Height="78" VerticalAlignment="Center" Grid.Column="1"/>
         <Button Content="Ajouter le joueur à la partie" HorizontalAlignment="Left" Margin="588,0,0,14" VerticalAlignment="Bottom" Width="159" Click="Button_newjoueur" Height="47"/>
         <Button Content="Ajouter le joueur" HorizontalAlignment="Left" Margin="50,0,0,14" VerticalAlignment="Bottom" Width="159" Click="Button_ajouter_joueur_list" Height="47"/>
         <Label Content="Liste des joueurs dans la partie" Grid.Column="1" HorizontalAlignment="Center" Height="29" Margin="312.2,0,312.6,0" VerticalAlignment="Top" Width="172"/>
-        <ListBox Grid.Column="1" Margin="1.2,29,1.6,0"/>
-        <ListBox Margin="2,43,0.8,69.2" Grid.Row="1"/>
-        <ListBox Grid.Column="1" Margin="1.2,42,1.6,68.2" Grid.Row="1"/>
+        <ListBox x:Name="lst_joueur_partie" ItemsSource="{Binding ListJoueurPartie}" SelectedItem="{Binding SelectedJoueurPartie}" Grid.Column="1" Margin="1.2,29,1.6,0"/>
+        <ListBox x:Name="lst_Obstacle" ItemsSource="{Binding ListObstacle}" SelectedItem="{Binding SelectedObstacle}" Margin="2,43,0.8,69.2" Grid.Row="1"/>
+        <ListBox x:Name="lst_ObstaclePartie" ItemsSource="{Binding ListObstaclePartie}" SelectedItem="{Binding SelectedObstaclePartie}" Grid.Column="1" Margin="1.2,42,1.6,68.2" Grid.Row="1"/>
         <Button Content="Ajouter" Margin="1,0,1.8,0.2" Grid.Row="1" Height="68" VerticalAlignment="Bottom"/>
         <Button Content="Retirer" Grid.Column="1" Margin="0.2,0,0.6,0.2" Grid.Row="1" Height="68" VerticalAlignment="Bottom"/>
         <Label Content="Obstacle" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>

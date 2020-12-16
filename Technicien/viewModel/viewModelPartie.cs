@@ -47,7 +47,12 @@ namespace Technicien.viewModel
             _daoObstacle = daoObstacle;
             _daoJoueur = daoJoueur;
             _activePartie = activePartie;
+
+            _listJoueur = new ObservableCollection<Joueur>(daoJoueur.GetAllJoueur());
+            _listObstacle = new ObservableCollection<Obstacle>(daoObstacle.GetAllObstacle());
         }
+
+
 
         public ObservableCollection<Joueur> ListJoueur
         {

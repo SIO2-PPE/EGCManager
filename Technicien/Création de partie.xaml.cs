@@ -24,26 +24,26 @@ namespace Technicien
         /// <summary>
         /// Logique d'interaction pour Création_de_partie.xaml
         /// </summary>
-        /*private DaoSite thedaoSite;
+        private DaoSite thedaoSite;
         private DaoSalle thedaoSalle;
         private DaoPartie thedaoPartie;
         private DaoHoraire thedaoHoraire;
         private DaoObstacle thedaoObstacle;
         private DaoJoueur thedaoJoueur;
-        private Partie _partie;*/
+        private Partie _partie;
 
         public Création_de_partie(DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire,
             DaoObstacle daoobstacle, DaoJoueur daojoueur, Partie partie)
         {
             InitializeComponent();
             MainGrid.DataContext = new viewModelPartie(daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie);
-            /*thedaoSite = daosite;
+            thedaoSite = daosite;
             thedaoSalle = daosalle;
             thedaoHoraire = daohoraire;
             thedaoPartie = daopartie;
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoueur;
-            _partie = partie;*/
+            _partie = partie;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -68,6 +68,8 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
+            Planning wnd = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
+            wnd.Show();
             this.Close();
         }
 
