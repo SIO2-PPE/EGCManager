@@ -38,14 +38,16 @@ namespace Technicien.viewModel
 
 
         //COMMANDE
-        private ICommand _AddJoueurPartie;
-        private ICommand _AddJoueur;
+        private ICommand _addJoueurPartie;
+        private ICommand _addJoueur;
         private ICommand _researchJoueur;
-        private ICommand _DelJoueurPartie;
-        private ICommand _AddObstacle;
-        private ICommand _DelObstacle;
+        private ICommand _delJoueurPartie;
+        private ICommand _addObstacle;
+        private ICommand _delObstacle;
 
         private string researchText;
+        private string pseudoJoueur;
+        private string emailJoueur;
 
 
         public viewModelPartie(DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
@@ -63,7 +65,10 @@ namespace Technicien.viewModel
             _listObstacle = new ObservableCollection<Obstacle>(daoObstacle.GetAllObstacle());
             _listJoueurPartie = new ObservableCollection<Joueur>();
             _listObstaclePartie = new ObservableCollection<Obstacle>();
-            researchText = "!";
+            researchText = "";
+            pseudoJoueur = "";
+            emailJoueur = "";
+            
         }
 
 
@@ -146,8 +151,39 @@ namespace Technicien.viewModel
             }
         }
 
+        public string PseudoJoueur
+        {
+            get
+            {
+                return pseudoJoueur;
+            }
+            set
+            {
+                if (value != pseudoJoueur)
+                {
+                    pseudoJoueur = value;
+                    OnPropertyChanged("PseudoJoueur");
+                }
+            }
+        }
+        public string EmailJoueur
+        {
+            get
+            {
+                return emailJoueur;
+            }
+            set
+            {
+                if (value != emailJoueur)
+                {
+                    emailJoueur = value;
+                    OnPropertyChanged("EmailJoueur");
+                }
+            }
+        }
 
         //commande
+        //rechercher un joueur
         public ICommand ResearchJoueur
         {
             get
@@ -159,6 +195,54 @@ namespace Technicien.viewModel
                 return this._researchJoueur;
             }
         }
+        //ajouter le jouer a la partie
+        public ICommand AddJoueurPartie
+        {
+            get
+            {
+                if (this._addJoueurPartie == null)
+                {
+                    this._addJoueurPartie = new RelayCommand(() => AjouterJoueurPartie(), () => true);
+                }
+                return this._addJoueurPartie;
+            }
+        }
+        //ajouter le jouer dans la bdd
+        public ICommand AddJoueur
+        {
+            get
+            {
+                if (this._addJoueur == null)
+                {
+                    this._addJoueur = new RelayCommand(() => AjouterJoueur(), () => true);
+                }
+                return this._addJoueur;
+            }
+        }
+         public ICommand DelJoueurPartie
+        {
+            get
+            {
+                if (this._delJoueurPartie==null)
+                {
+                    this._delJoueurPartie = new RelayCommand(() => SupprimerJoueurPartie(), () => true);
+                }
+                return this._delJoueurPartie;
+            }
+               
+        }
+        public ICommand AddObstacle
+        {
+            get
+            {
+                if (this._addObstacle == null)
+                {
+                    this._addObstacle = new RelayCommand(() => AjouterObstacle(), () => true);
+                }
+                return this._addObstacle;
+            }
+        }
+
         //methode commande
         private void RechercheJoueur()
         {
@@ -173,18 +257,69 @@ namespace Technicien.viewModel
             else
             {
                 _listJoueur.Clear();
-               
-                foreach (Joueur joueur in  _daoJoueur.GetJoueurByPseudo(researchText))
+
+                foreach (Joueur joueur in _daoJoueur.GetJoueurByPseudo(researchText))
                 {
-                _listJoueur.Add(joueur);
+                    _listJoueur.Add(joueur);
                 }
-                
-
-
-                
             }
         }
-        //Refresh liste
 
+        private void AjouterJoueurPartie()
+        {
+            if (_selectedJoueur == null)
+            {
+                MessageBox.Show("veuillez selectionner un joueur !");
+            }
+            else
+            {
+                _listJoueurPartie.Add(_selectedJoueur);
+                _listJoueur.Remove(_selectedJoueur);
+            }
+        }
+
+        private void AjouterJoueur()
+        {
+            if (pseudoJoueur == "" || emailJoueur == "")
+            {
+                MessageBox.Show("veuillez insérer un pseudo et un email");
+            }
+            else
+            {
+                Joueur j = new Joueur(pseudoJoueur, emailJoueur);
+                _daoJoueur.AddJoueur(j);
+                _listJoueur.Add(j);
+            }
+        }
+        private void SupprimerJoueurPartie()
+        {
+            if (_selectedJoueurPartie == null)
+            {
+                MessageBox.Show("Veuillez selectioner un joueur dans la partie !");
+            }
+            else
+            {
+                _listJoueurPartie.Remove(_selectedJoueurPartie);
+                _listJoueur.Clear();
+                foreach (Joueur joueur in _daoJoueur.GetAllJoueur())
+                {
+                    _listJoueur.Add(joueur);
+                }
+
+            }
+        }
+        private void AjouterObstacle()
+        {
+            if (_selectedObstacle == null)
+            {
+                MessageBox.Show("veuillez selectionner un obstacle !");
+            }
+            else
+            {
+                _listObstaclePartie.Add(_selectedObstacle);
+                _listObstacle.Remove(_selectedObstacle);
+            }
+        }
     }
+         
 }

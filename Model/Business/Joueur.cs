@@ -19,6 +19,11 @@ namespace Model.Business
             foreach (Avis avis in lstAvis) avis.Joueur = this;
             _lstAvis = lstAvis;
         }
+        public Joueur (string pseudo,string email)
+        {
+            _pseudo = pseudo;
+            _email = email;
+        }
 
         #region Getter and Setter
 

@@ -23,18 +23,18 @@
         <TextBox x:Name="txt_recherche" Height="23" Margin="1,0,43,0" TextWrapping="Wrap" Text="{Binding ResearchText}" VerticalAlignment="Top" TextChanged="txt_recherche_TextChanged" TextAlignment="Center"/>
         <ListBox x:Name="lst_joueur" ItemsSource="{Binding ListJoueur}" SelectedItem="{Binding SelectedJoueur}" Margin="1,31,1,75"/>
         <Button x:Name="btn_back_Copy" Content="Créer la partie" Click="Btn_Cree_Partie_Click" Grid.Row="2" HorizontalAlignment="Center" Width="296" Height="78" VerticalAlignment="Center" Grid.Column="1"/>
-        <Button Content="Ajouter le joueur à la partie" Command="{Binding AddJoueur}" Margin="485,0,17,14" VerticalAlignment="Bottom" Height="47"/>
-        <Button Content="Ajouter le joueur" Command="{Binding AddJoueurPartie}" Margin="10,0,517,14" VerticalAlignment="Bottom" Click="Button_ajouter_joueur_list" Height="47"/>
+        <Button Content="Ajouter le joueur à la partie" Command="{Binding AddJoueurPartie}" Margin="485,0,17,14" VerticalAlignment="Bottom" Height="47"/>
+        <Button Content="Ajouter le joueur" Command="{Binding AddJoueur}" Margin="10,0,517,14" VerticalAlignment="Bottom" Click="Button_ajouter_joueur_list" Height="47"/>
         <Label Content="Liste des joueurs dans la partie" Grid.Column="1" HorizontalAlignment="Center" Height="29" VerticalAlignment="Top" Width="172"/>
         <ListBox x:Name="lst_joueur_partie" ItemsSource="{Binding ListJoueurPartie}" SelectedItem="{Binding SelectedJoueurPartie}" Grid.Column="1" Margin="1,29,3,75"/>
         <ListBox x:Name="lst_Obstacle" ItemsSource="{Binding ListObstacle}" SelectedItem="{Binding SelectedObstacle}" Margin="2,43,1,69" Grid.Row="1"/>
         <ListBox x:Name="lst_ObstaclePartie" ItemsSource="{Binding ListObstaclePartie}" SelectedItem="{Binding SelectedObstaclePartie}" Grid.Column="1" Margin="1,42,1,68" Grid.Row="1"/>
-        <Button Content="Ajouter" Margin="1,295,2,0" Grid.Row="1" Height="68" VerticalAlignment="Top"/>
+        <Button Content="Ajouter" Command="{Binding AddObstacle}" Margin="1,295,2,0" Grid.Row="1" Height="68" VerticalAlignment="Top"/>
         <Button Content="Retirer" Grid.Column="1" Margin="0,295,1,0" Grid.Row="1" Height="68" VerticalAlignment="Top"/>
         <Label Content="Obstacle" HorizontalAlignment="Center" Margin="0,12,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="56"/>
         <Label Content="Obstacle dans la partie" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="132"/>
-        <TextBox TextWrapping="Wrap" Height="24" Margin="256,224,203,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged_2"/>
-        <TextBox TextWrapping="Wrap" Height="24" Margin="256,255,204,0" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding PseudoJoueur}" Height="24" Margin="256,224,203,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged_2"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding EmailJoueur}" Height="24" Margin="256,255,204,0" VerticalAlignment="Top"/>
         <Label Content="Pseudo :&#xD;&#xA;" Margin="178,218,410,0" VerticalAlignment="Top" Height="33"/>
         <Label Content="E-mail :&#xD;&#xA;" Margin="184,249,415,0" VerticalAlignment="Top" Height="42"/>
         <Button Content="Retirer le Joueur" Command="{Binding DelJoueurPartie}" VerticalAlignment="Top" Height="47" Margin="0,229,0,0" Grid.Column="1"/>
