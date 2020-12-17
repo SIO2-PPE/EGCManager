@@ -172,6 +172,12 @@ namespace Technicien.viewModel
             {
                 if (_selectedPlanning.Id == 0)
                 {
+                    if (_datePlanning < DateTime.Now)
+                    {
+                        MessageBox.Show("veuillez choisir une date supérieur a celle d'aujourd'hui !");
+                    }
+                    else
+                {
                     _selectedPlanning.Date = _datePlanning;
                     _selectedPlanning.Salle = _selectedSalle;
 
@@ -179,6 +185,8 @@ namespace Technicien.viewModel
                         _daoObstacle, _daoJoueur, _selectedPlanning);
                     subWindow.Show();
                     _wnd.Close();
+                }
+                    
                 }
                 else
                 {
