@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using MySqlX.XDevAPI.Relational;
 
 namespace Model.Data
 {
@@ -65,22 +66,32 @@ namespace Model.Data
         // }
         public Partie GetPartieForHoraire(Horaire horaire, DateTime jour, Salle salle)
         {
-            return new Partie(_dbal.Select("partie",
-                    "salle = " + salle.Id +
-                    "date = '" + jour.ToString("yyyy-M-d") + "' and " +
-                    "horaire = " + horaire.Id
-                ).Rows[0],
-                horaire);
+            try
+            {
+                return new Partie(_dbal.Select("partie",
+                        "salle = " + salle.Id +
+                        " and date = '" + jour.ToString("yyyy-M-d") + "' and " +
+                        "horaire = " + horaire.Id
+                    ).Rows[0],
+                    horaire);
+            }
+            catch (Exception e)
+            {
+                return  new Partie(horaire,salle);
+            }
         }
 
         public void NouvellePartie(Partie partie)
         {
+            
             _dbal.Insert("partie", partie.ToArray());
+           Partie p = new Partie(_dbal.SelectOrderBy("partie", "id", "DESC", "1").Rows[0]);
+            
             foreach (Joueur joueur in partie.LstJoueur)
             {
                 Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
                 dic.Add("joueur", joueur.Id);
-                dic.Add("partie", partie.Id);
+                dic.Add("partie", p.Id);
                 _dbal.Insert("joueur_partie", dic);
             }
 
@@ -88,17 +99,11 @@ namespace Model.Data
             {
                 Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
                 dic.Add("obstacle", partie.LstObstacle[i].Id);
-                dic.Add("partie", partie.Id);
-                dic.Add("position", i + 1);
+                dic.Add("partie", p.Id);
+                dic.Add("position", i+1);
                 _dbal.Insert("obstacle_partie", dic);
             }
         }
-
-        public int NbPartieSalle(Salle salle, DateTime date)
-        {
-            DataRow row = _dbal.Select("partie",
-                "salle = " + salle.Id + " AND date = '" + date.ToString("yyyy-MM-dd") + "'", "count(id) as nb").Rows[0];
-            return (int)(long)row["nb"];
-        }
+        
     }
 }

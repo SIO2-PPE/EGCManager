@@ -9,13 +9,33 @@ namespace Model.Business
     {
         private int _id;
         private DateTime _date;
-        private DateTime _temps;
+        private TimeSpan _temps;
         private bool _win;
 
         private Horaire _horaire;
         private Salle _salle;
         private List<Joueur> _lstJoueur;
         private List<Obstacle> _lstObstacle; // L'indice correspond à la position (0 à 11)
+
+        public Partie(Horaire horaire,Salle salle)
+        {
+            _id = 0;
+           _date = new DateTime();
+           _temps = new TimeSpan();
+           _win = false;
+           _horaire = horaire;
+           _salle = salle;
+           _lstJoueur = new List<Joueur>();
+           _lstObstacle = new List<Obstacle>();
+        }
+        public Partie()
+        {
+
+        }
+        public Partie(DataRow row)
+        {
+            Hydrate(row);
+        }
 
         public Partie(DataRow row, Horaire horaire, Salle salle)
         {
@@ -43,7 +63,7 @@ namespace Model.Business
             set => _date = value;
         }
 
-        public DateTime Temps
+        public TimeSpan Temps
         {
             get => _temps;
             set => _temps = value;
@@ -79,8 +99,12 @@ namespace Model.Business
         {
             _id = (int)row["id"];
             _date = (DateTime)row["date"];
-            _temps = (DateTime)row["temps"];
-            _win = (bool)row["win"];
+            _temps = (TimeSpan)row["temps"];
+            //_win = (int)row["win"];
+           _win = (bool)row["win"];
+           
+            
+            
         }
         public Dictionary<string, dynamic> ToArray()
         {
@@ -91,6 +115,11 @@ namespace Model.Business
             val.Add("win", _win);
             val.Add("salle", _salle.Id);
             return val;
+        }
+
+        public override string ToString()
+        {
+            return _id + "===>" + _horaire.Heure;
         }
     }
 }

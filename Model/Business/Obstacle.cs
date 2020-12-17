@@ -69,5 +69,9 @@ namespace Model.Business
             val.Add("photo", _photo);
             return val;
         }
+        public override string ToString()
+        {
+            return this.Id + " ===> " + this.Nom+"-"+this.Type;
+        }
     }
 }

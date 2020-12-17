@@ -51,6 +51,23 @@ namespace Model.Data
             }
             return lst;
         }
+        public List<Joueur> GetJoueurByPseudo(string pseudo)
+        {
+            List<Joueur> lst = new List<Joueur>();
+            DataTable tab = _dbal.Select("Joueur","pseudo like '%"+ pseudo+"%'");
+            foreach (DataRow row in tab.Rows)
+            {
+                lst.Add(new Joueur(row, _daoAvis.GetByJoueurId((int)row["id"])));
+            }
+            return lst;
+        }
+
+        public void AddJoueur(Joueur joueur)
+        {
+
+           _dbal.Insert("joueur", joueur.ToArray());
+        }
+        
 
         public Joueur GetById(int id)
         {

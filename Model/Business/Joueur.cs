@@ -19,10 +19,10 @@ namespace Model.Business
             foreach (Avis avis in lstAvis) avis.Joueur = this;
             _lstAvis = lstAvis;
         }
-        public Joueur(DataRow row)
+        public Joueur (string pseudo,string email)
         {
-            Hydrate(row);
-            _lstAvis = new List<Avis>();
+            _pseudo = pseudo;
+            _email = email;
         }
 
         #region Getter and Setter
@@ -69,6 +69,10 @@ namespace Model.Business
             val.Add("pseudo", _pseudo);
             val.Add("email", _email);
             return val;
+        }
+        public override string ToString()
+        {
+            return this._pseudo+" ===> "+this._email;
         }
     }
 }
