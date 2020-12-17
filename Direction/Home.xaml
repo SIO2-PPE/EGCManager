@@ -19,8 +19,133 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <DatePicker Grid.Row="0" SelectedDate="{Binding SelectedDate}" HorizontalAlignment="Center"/>
-            <WrapPanel Grid.Row="1" Name="StatWrapPanel" />
+            <DatePicker Grid.Row="0" SelectedDate="{Binding SelectedDate}" HorizontalAlignment="Center" />
+            <WrapPanel Grid.Row="1" Name="StatWrapPanel">
+                <Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Annecy" />
+                        <WrapPanel Grid.Row="1">
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding AnnecySalle1Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding AnnecySalle1Stat }" />
+                                </Grid>
+                            </Border>
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding AnnecySalle2Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding AnnecySalle2Stat }" />
+                                </Grid>
+                            </Border>
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding AnnecySalle3Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding AnnecySalle3Stat }" />
+                                </Grid>
+                            </Border>
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding AnnecySalle4Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding AnnecySalle4Stat }" />
+                                </Grid>
+                            </Border>
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+                <Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Thonon les bains" />
+                        <WrapPanel Grid.Row="1">
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding ThononSalle1Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding ThononSalle1Stat }" />
+                                </Grid>
+                            </Border>
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding ThononSalle2Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding ThononSalle2Stat }" />
+                                </Grid>
+                            </Border>
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+                <Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Bonneville" />
+                        <WrapPanel Grid.Row="1">
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding BonnevilleSalle1Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding BonnevilleSalle1Stat }" />
+                                </Grid>
+                            </Border>
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+                <Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Chamonix Mont Blanc" />
+                        <WrapPanel Grid.Row="1">
+                            <Border>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding ChamonixSalle1Nom }" />
+                                    <TextBlock Grid.Row="1" Text="{Binding ChamonixSalle1Stat }" />
+                                </Grid>
+                            </Border>
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+            </WrapPanel>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
