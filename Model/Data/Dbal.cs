@@ -116,6 +116,7 @@ namespace Model.Data
                 if (values.Last().Key != val.Key) query += ",";
             }
             query += ")";
+            Console.WriteLine(query);
 
             //open connection
             if (OpenConnection())

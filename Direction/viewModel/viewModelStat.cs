@@ -35,31 +35,32 @@ namespace Direction.viewModel
         private string _chamonixSalle1Nom;
         private string _chamonixSalle1Stat;
 
-        private List<Site> _listSite;
+        private ObservableCollection<Site> _listSite;
 
         #endregion
 
         #region Constructeur
+
         public ViewModelStat(DaoPartie daoPartie, DaoSite daoSite)
         {
-            // DAO
             _daoPartie = daoPartie;
             SelectedDate = DateTime.Now;
-            _listSite = daoSite.GetAllSite();
             
-            AnnecySalle1Nom     = _listSite[0].LstSalle[0].Nom;
-            AnnecySalle2Nom     = _listSite[0].LstSalle[1].Nom;
-            AnnecySalle3Nom     = _listSite[0].LstSalle[2].Nom;
-            AnnecySalle4Nom     = _listSite[0].LstSalle[3].Nom;
-            ThononSalle1Nom     = _listSite[1].LstSalle[1].Nom;
-            ThononSalle2Nom     = _listSite[1].LstSalle[2].Nom;
-            BonnevilleSalle1Nom = _listSite[2].LstSalle[1].Nom;
-            ChamonixSalle1Nom   = _listSite[3].LstSalle[1].Nom;
+            _listSite = new ObservableCollection<Site>(daoSite.GetAllSite());
+            AnnecySalle1Nom = _listSite[0].LstSalle[0].ToString();
+            AnnecySalle2Nom = _listSite[0].LstSalle[1].ToString();
+            AnnecySalle3Nom = _listSite[0].LstSalle[2].ToString();
+            AnnecySalle4Nom = _listSite[0].LstSalle[3].ToString();
+            ThononSalle1Nom = _listSite[1].LstSalle[1].ToString();
+            ThononSalle2Nom = _listSite[1].LstSalle[2].ToString();
+            BonnevilleSalle1Nom = _listSite[2].LstSalle[1].ToString();
+            ChamonixSalle1Nom = _listSite[3].LstSalle[1].ToString();
         }
+
         #endregion
 
         #region BINDING
-        
+
         public DateTime SelectedDate
         {
             get => _selectedDate;
@@ -67,15 +68,16 @@ namespace Direction.viewModel
             {
                 _selectedDate = value;
                 OnPropertyChanged("SelectedDate");
-                
-                AnnecySalle1Stat     = 
-                AnnecySalle2Stat     = 
-                AnnecySalle3Stat     = 
-                AnnecySalle4Stat     = 
-                ThononSalle1Stat     = 
-                ThononSalle2Stat     = 
-                BonnevilleSalle1Stat = 
-                ChamonixSalle1Stat   = 
+
+
+                AnnecySalle1Stat = "TEST STAT";
+                AnnecySalle2Stat = "TEST STAT";
+                AnnecySalle3Stat = "TEST STAT";
+                AnnecySalle4Stat = "TEST STAT";
+                ThononSalle1Stat = "TEST STAT";
+                ThononSalle2Stat = "TEST STAT";
+                BonnevilleSalle1Stat = "TEST STAT";
+                ChamonixSalle1Stat = "TEST STAT";
             }
         }
 

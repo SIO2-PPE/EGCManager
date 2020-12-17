@@ -28,7 +28,7 @@ namespace Direction
             // DaoSite daoSite = new DaoSite(dbal);
             // DaoSalle daoSalle = new DaoSalle(dbal);
             InitializeComponent();
-            StatWrapPanel.DataContext = new viewModel.ViewModelStat(new DaoPartie(dbal));
+            StatWrapPanel.DataContext = new viewModel.ViewModelStat(new DaoPartie(dbal),new DaoSite(dbal));
             // List<string> lstBindingSalle = new List<string>();
             // foreach (Site site in daoSite.GetAllSite())
             // {
