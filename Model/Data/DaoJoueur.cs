@@ -62,10 +62,10 @@ namespace Model.Data
             return lst;
         }
 
-        public void AddJoueur(Joueur joueur)
+        public void AddJoueur(ref Joueur joueur)
         {
-
-           _dbal.Insert("joueur", joueur.ToArray());
+            _dbal.Insert("joueur", joueur.ToArray());
+            joueur.Id = (int) _dbal.SelectLast("joueur")["id"];
         }
         
 

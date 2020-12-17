@@ -16,7 +16,7 @@ namespace Model.Data
         private MySqlConnection _connection;
 
         //Constructor
-        public Dbal(string database, string server = "localhost", string uid = "root", string password = "")
+        public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
         {
             Initialize(
                 server,
@@ -32,14 +32,12 @@ namespace Model.Data
             string connectionString = "";
             connectionString += "SERVER=" + server + ";";
             connectionString += "UID=" + uid + ";";
-            connectionString += "PASSWORD=; " + password + ";"; 
+            connectionString += "PASSWORD= " + password + ";"; 
             connectionString += "DATABASE=" + database + ";";
 
             try
             {
-                
                 _connection = new MySqlConnection(connectionString);
-                
             }
             catch (MySqlException e)
             {
@@ -213,6 +211,11 @@ namespace Model.Data
         {
             return RQuery("select * from " + table + " order by " + champ+" "+order+" LIMIT "+limit).Tables[0];
         }
+
+        public DataRow SelectLast(string table)
+        {
+            return RQuery("select * from " + table + " order by id desc limit 1").Tables[0].Rows[0];
+        }
         
         public DataRow SelectById(string table, int id)
         {
@@ -229,9 +232,19 @@ namespace Model.Data
             Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/scripte.sql");
             StreamReader reader = new StreamReader(stream);
             String sqlFile = reader.ReadToEnd();
-            
-            MySqlScript script = new MySqlScript(_connection, sqlFile);
-            script.Execute();
+
+            try
+            {
+                MySqlScript script = new MySqlScript(_connection, sqlFile);
+                script.Execute();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e);
+                Console.ResetColor();
+                throw;
+            }
         }
 
         public void DBhydrate()
@@ -240,9 +253,19 @@ namespace Model.Data
             Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/hydratation.sql");
             StreamReader reader = new StreamReader(stream);
             String sqlFile = reader.ReadToEnd();
-            
-            MySqlScript script = new MySqlScript(_connection, sqlFile);
-            script.Execute();
+
+            try
+            {
+                MySqlScript script = new MySqlScript(_connection, sqlFile);
+                script.Execute();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e);
+                Console.ResetColor();
+                throw;
+            }
         }
 
         #endregion

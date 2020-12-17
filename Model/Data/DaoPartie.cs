@@ -77,7 +77,7 @@ namespace Model.Data
             }
             catch (Exception e)
             {
-                return  new Partie(horaire,salle);
+                return  new Partie(salle,horaire,jour);
             }
         }
 
