@@ -67,5 +67,6 @@ namespace Model.Data
 
            _dbal.Insert("joueur", joueur.ToArray());
         }
+        
     }
 }

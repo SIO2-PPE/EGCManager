@@ -172,8 +172,11 @@ namespace Technicien.viewModel
             {
                 if (_selectedPlanning.Id == 0)
                 {
+                    _selectedPlanning.Date = _datePlanning;
+                    _selectedPlanning.Salle = _selectedSalle;
+
                     Création_de_partie subWindow = new Création_de_partie(_daoSite, _daoSalle, _daoPartie, _daoHoraire,
-                        _daoObstacle, _daoJoueur, SelectedPlanning);
+                        _daoObstacle, _daoJoueur, _selectedPlanning);
                     subWindow.Show();
                     _wnd.Close();
                 }

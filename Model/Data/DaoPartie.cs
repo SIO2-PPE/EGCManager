@@ -84,22 +84,26 @@ namespace Model.Data
 
         public void NouvellePartie(Partie partie)
         {
-            _dbal.Insert("partie",partie.ToArray());
+            
+            _dbal.Insert("partie", partie.ToArray());
+           Partie p = new Partie(_dbal.SelectOrderBy("partie", "id", "DESC", "1").Rows[0]);
+            
             foreach (Joueur joueur in partie.LstJoueur)
             {
                 Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
                 dic.Add("joueur", joueur.Id);
-                dic.Add("partie", partie.Id);
+                dic.Add("partie", p.Id);
                 _dbal.Insert("joueur_partie", dic);
             }
             for (var i = 0; i < partie.LstObstacle.Count; i++)
             {
                 Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
                 dic.Add("obstacle", partie.LstObstacle[i].Id);
-                dic.Add("partie", partie.Id);
+                dic.Add("partie", p.Id);
                 dic.Add("position", i+1);
                 _dbal.Insert("obstacle_partie", dic);
             }
         }
+        
     }
 }

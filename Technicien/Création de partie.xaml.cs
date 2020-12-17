@@ -21,6 +21,7 @@ namespace Technicien
     /// </summary>
     public partial class Création_de_partie : Window
     {
+        
         /// <summary>
         /// Logique d'interaction pour Création_de_partie.xaml
         /// </summary>
@@ -36,7 +37,6 @@ namespace Technicien
             DaoObstacle daoobstacle, DaoJoueur daojoueur, Partie partie)
         {
             InitializeComponent();
-            MainGrid.DataContext = new viewModelPartie(daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie);
             thedaoSite = daosite;
             thedaoSalle = daosalle;
             thedaoHoraire = daohoraire;
@@ -44,6 +44,7 @@ namespace Technicien
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoueur;
             _partie = partie;
+            MainGrid.DataContext = new viewModelPartie(daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie, this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -64,6 +65,7 @@ namespace Technicien
 
         private void Btn_Cree_Partie_Click(object sender, RoutedEventArgs e)
         {
+            
         }
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)

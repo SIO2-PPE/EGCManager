@@ -12,6 +12,7 @@ namespace Technicien.viewModel
 {
     class viewModelPartie : viewModelBase
     {
+        private Création_de_partie _wnd;
         //DAO
 
         private DaoHoraire _daoHoraire;
@@ -44,6 +45,7 @@ namespace Technicien.viewModel
         private ICommand _delJoueurPartie;
         private ICommand _addObstacle;
         private ICommand _delObstacle;
+        private ICommand _createReservation;
 
         private string researchText;
         private string pseudoJoueur;
@@ -51,8 +53,10 @@ namespace Technicien.viewModel
 
 
         public viewModelPartie(DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
-            DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie)
+            DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie,Création_de_partie création_De_Partie)
         {
+            _wnd = création_De_Partie;
+
             _daoHoraire = daoHoraire;
             _daoSite = daoSite;
             _daoSalle = daoSalle;
@@ -68,7 +72,7 @@ namespace Technicien.viewModel
             researchText = "";
             pseudoJoueur = "";
             emailJoueur = "";
-            
+
         }
 
 
@@ -219,17 +223,17 @@ namespace Technicien.viewModel
                 return this._addJoueur;
             }
         }
-         public ICommand DelJoueurPartie
+        public ICommand DelJoueurPartie
         {
             get
             {
-                if (this._delJoueurPartie==null)
+                if (this._delJoueurPartie == null)
                 {
                     this._delJoueurPartie = new RelayCommand(() => SupprimerJoueurPartie(), () => true);
                 }
                 return this._delJoueurPartie;
             }
-               
+
         }
         public ICommand AddObstacle
         {
@@ -240,6 +244,29 @@ namespace Technicien.viewModel
                     this._addObstacle = new RelayCommand(() => AjouterObstacle(), () => true);
                 }
                 return this._addObstacle;
+            }
+        }
+
+        public ICommand DelObstacle
+        {
+            get
+            {
+                if (this._delObstacle == null)
+                {
+                    this._delObstacle = new RelayCommand(() => RetirerObstacle(), () => true);
+                }
+                return this._delObstacle;
+            }
+        }
+        public ICommand CreateReservation
+        {
+            get
+            {
+                if (this._createReservation == null)
+                {
+                    this._createReservation = new RelayCommand(() => CreerPartie(), () => true);
+                }
+                return this._createReservation;
             }
         }
 
@@ -320,6 +347,46 @@ namespace Technicien.viewModel
                 _listObstacle.Remove(_selectedObstacle);
             }
         }
+
+        private void RetirerObstacle()
+        {
+            if (_selectedObstaclePartie == null)
+            {
+                MessageBox.Show("veuillez selectionner un obstacle !");
+            }
+            else
+            {
+                _listObstacle.Add(_selectedObstaclePartie);
+                _listObstaclePartie.Remove(_selectedObstaclePartie);
+            }
+        }
+        private void CreerPartie()
+        {
+            if (_listJoueurPartie.Count() >= 2 && _listJoueurPartie.Count() <= 7 && _listObstaclePartie.Count()<=12 && _listObstaclePartie.Count() >= 6)
+            {
+                foreach (Joueur joueur in _listJoueurPartie)
+                {
+                    _activePartie.LstJoueur.Add(joueur);
+                }
+                foreach (Obstacle obstacle in _listObstaclePartie)
+                {
+                    _activePartie.LstObstacle.Add(obstacle);
+                }
+                
+                
+                _daoPartie.NouvellePartie(_activePartie);
+                Planning subWindows = new Planning(_daoSite, _daoSalle, _daoPartie, _daoHoraire, _daoObstacle, _daoJoueur);
+                subWindows.Show();
+                _wnd.Close();
+                
+                
+            }
+            else
+            {
+                MessageBox.Show("Veuillez vérifier qu'il y est bien entre 2 et 7 joueurs dans la partie et qu'il est bien 12 obstacle");
+            }
+        }
+
     }
          
 }

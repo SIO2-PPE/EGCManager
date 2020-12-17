@@ -32,6 +32,10 @@ namespace Model.Business
         {
 
         }
+        public Partie(DataRow row)
+        {
+            Hydrate(row);
+        }
 
         public Partie(DataRow row, Horaire horaire, Salle salle)
         {

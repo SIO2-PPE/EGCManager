@@ -110,6 +110,7 @@ namespace Model.Data
             {
                 if (val.Value is string) query += "'" + val.Value + "'";
                 else if (val.Value is DateTime) query += "'" + val.Value.ToString("yyyy-M-d") + "'";
+                else if (val.Value is TimeSpan) query += "'" + val.Value + "'";
                 else if (val.Value is bool)
                 {
                     if (val.Value) query += "1";
@@ -210,14 +211,16 @@ namespace Model.Data
             if (where != null) query += " where " + where;
             return RQuery(query).Tables[0];
         }
-        public DataTable SelectOrderBy(string table, string order)
+        public DataTable SelectOrderBy(string table, string champ,string order = "ASC",string limit ="1000")
         {
-            return RQuery("select * from " + table + " order by '" + order+"'").Tables[0];
+            return RQuery("select * from " + table + " order by " + champ+" "+order+" LIMIT "+limit).Tables[0];
         }
+        
         public DataRow SelectById(string table, int id)
         {
             return RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
         }
+        
 
         public void DBinit()
         {
