@@ -20,8 +20,8 @@ namespace Test
         static void Hydrate(DateTime debut, DateTime fin)
         {
             Dbal dbal = new Dbal("ppe3_mmd");
-            //dbal.DBinit();
-            //dbal.DBhydrate();
+            dbal.DBinit();
+            dbal.DBhydrate();
             DaoClient daoClient = new DaoClient(dbal);
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoHoraire daoHoraire = new DaoHoraire(dbal);

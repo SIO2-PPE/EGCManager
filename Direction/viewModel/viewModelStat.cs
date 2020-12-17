@@ -51,10 +51,10 @@ namespace Direction.viewModel
             AnnecySalle2Nom = _listSite[0].LstSalle[1].ToString();
             AnnecySalle3Nom = _listSite[0].LstSalle[2].ToString();
             AnnecySalle4Nom = _listSite[0].LstSalle[3].ToString();
-            ThononSalle1Nom = _listSite[1].LstSalle[1].ToString();
-            ThononSalle2Nom = _listSite[1].LstSalle[2].ToString();
-            BonnevilleSalle1Nom = _listSite[2].LstSalle[1].ToString();
-            ChamonixSalle1Nom = _listSite[3].LstSalle[1].ToString();
+            ThononSalle1Nom = _listSite[1].LstSalle[0].ToString();
+            ThononSalle2Nom = _listSite[1].LstSalle[1].ToString();
+            BonnevilleSalle1Nom = _listSite[2].LstSalle[0].ToString();
+            ChamonixSalle1Nom = _listSite[3].LstSalle[0].ToString();
         }
 
         #endregion
