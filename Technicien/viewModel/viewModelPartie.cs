@@ -315,7 +315,10 @@ namespace Technicien.viewModel
             {
                 Joueur j = new Joueur(pseudoJoueur, emailJoueur);
                 _daoJoueur.AddJoueur(j);
-                _listJoueur.Add(j);
+                foreach (Joueur joueur in _daoJoueur.GetJoueurByPseudo(researchText))
+                {
+                    _listJoueur.Add(joueur);
+                }
             }
         }
         private void SupprimerJoueurPartie()
