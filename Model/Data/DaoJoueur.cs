@@ -71,7 +71,7 @@ namespace Model.Data
 
         public Joueur GetById(int id)
         {
-            return new Joueur(_dbal.SelectById("joueur", id));
+            return new Joueur(_dbal.SelectById("joueur", id),_daoAvis.GetByJoueurId(id));
         }
     }
 }
