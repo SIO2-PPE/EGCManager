@@ -15,8 +15,13 @@ namespace Test
         static void Main(string[] args)
         {
             Dbal dbal = new Dbal("ppe3_mmd");
-            dbal.DBinit();
-            dbal.DBhydrate();
+            // dbal.DBinit();
+            // dbal.DBhydrate();
+            
+            DaoPartie daoP = new DaoPartie(dbal);
+            Salle s = new Salle();
+            s.Id = 1;
+            Console.WriteLine(daoP.NbPartieSalle(s, DateTime.Now));
         }
     }
 }

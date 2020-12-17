@@ -35,16 +35,26 @@ namespace Direction.viewModel
         private string _chamonixSalle1Nom;
         private string _chamonixSalle1Stat;
 
+        private List<Site> _listSite;
+
         #endregion
 
         #region Constructeur
-        public ViewModelStat(DaoPartie daoPartie)
+        public ViewModelStat(DaoPartie daoPartie, DaoSite daoSite)
         {
             // DAO
             _daoPartie = daoPartie;
             SelectedDate = DateTime.Now;
-
+            _listSite = daoSite.GetAllSite();
             
+            AnnecySalle1Nom     = _listSite[0].LstSalle[0].Nom;
+            AnnecySalle2Nom     = _listSite[0].LstSalle[1].Nom;
+            AnnecySalle3Nom     = _listSite[0].LstSalle[2].Nom;
+            AnnecySalle4Nom     = _listSite[0].LstSalle[3].Nom;
+            ThononSalle1Nom     = _listSite[1].LstSalle[1].Nom;
+            ThononSalle2Nom     = _listSite[1].LstSalle[2].Nom;
+            BonnevilleSalle1Nom = _listSite[2].LstSalle[1].Nom;
+            ChamonixSalle1Nom   = _listSite[3].LstSalle[1].Nom;
         }
         #endregion
 
@@ -58,24 +68,14 @@ namespace Direction.viewModel
                 _selectedDate = value;
                 OnPropertyChanged("SelectedDate");
                 
-                List<Site> ls = new List<Site>();
-                int i = 0;
-                AnnecySalle1Nom      = ls[0].LstSalle[
-                AnnecySalle1Stat     = ls[1].LstSalle[
-                AnnecySalle2Nom      = ls[2].LstSalle[
-                AnnecySalle2Stat     = ls[3].LstSalle[
-                AnnecySalle3Nom      = ls[4].LstSalle[
-                AnnecySalle3Stat     = ls[5].LstSalle[
-                AnnecySalle4Nom      = ls[6].LstSalle[
-                AnnecySalle4Stat     = ls[7].LstSalle[
-                ThononSalle1Nom      = ls[8].LstSalle[
-                ThononSalle1Stat     = ls[9].LstSalle[
-                ThononSalle2Nom      = ls[10].LstSalle[
-                ThononSalle2Stat     = ls[11].LstSalle[
-                BonnevilleSalle1Nom  = ls[12].LstSalle[
-                BonnevilleSalle1Stat = ls[13].LstSalle[
-                ChamonixSalle1Nom    = ls[14].LstSalle[
-                ChamonixSalle1Stat   = ls[15].LstSalle[
+                AnnecySalle1Stat     = 
+                AnnecySalle2Stat     = 
+                AnnecySalle3Stat     = 
+                AnnecySalle4Stat     = 
+                ThononSalle1Stat     = 
+                ThononSalle2Stat     = 
+                BonnevilleSalle1Stat = 
+                ChamonixSalle1Stat   = 
             }
         }
 

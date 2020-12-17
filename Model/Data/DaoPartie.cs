@@ -20,7 +20,7 @@ namespace Model.Data
             _daoObstacle = new DaoObstacle(dbal);
             _daoJoueur = new DaoJoueur(dbal);
         }
-        
+
         /*public List<Partie> GetPartiesDuJour(Salle salle, DateTime date)
         {
             DataTable tab = _dbal.Select("Partie",
@@ -63,20 +63,19 @@ namespace Model.Data
         //     partie.LstJoueur = _daoJoueur.GetJoueurToPartie(partie);
         //     return partie;
         // }
-
-        public Partie GetPartieForHoraire(Horaire horaire,DateTime jour, Salle salle)
+        public Partie GetPartieForHoraire(Horaire horaire, DateTime jour, Salle salle)
         {
             return new Partie(_dbal.Select("partie",
-                "salle = " + salle.Id +
-                "date = '" + jour.ToString("yyyy-M-d") + "' and " +
-                "horaire = " + horaire.Id
+                    "salle = " + salle.Id +
+                    "date = '" + jour.ToString("yyyy-M-d") + "' and " +
+                    "horaire = " + horaire.Id
                 ).Rows[0],
                 horaire);
         }
 
         public void NouvellePartie(Partie partie)
         {
-            _dbal.Insert("partie",partie.ToArray());
+            _dbal.Insert("partie", partie.ToArray());
             foreach (Joueur joueur in partie.LstJoueur)
             {
                 Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
@@ -84,14 +83,22 @@ namespace Model.Data
                 dic.Add("partie", partie.Id);
                 _dbal.Insert("joueur_partie", dic);
             }
+
             for (var i = 0; i < partie.LstObstacle.Count; i++)
             {
                 Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
                 dic.Add("obstacle", partie.LstObstacle[i].Id);
                 dic.Add("partie", partie.Id);
-                dic.Add("position", i+1);
+                dic.Add("position", i + 1);
                 _dbal.Insert("obstacle_partie", dic);
             }
+        }
+
+        public int NbPartieSalle(Salle salle, DateTime date)
+        {
+            DataRow row = _dbal.Select("partie",
+                "salle = " + salle.Id + " AND date = '" + date.ToString("yyyy-MM-dd") + "'", "count(id) as nb").Rows[0];
+            return (int)(long)row["nb"];
         }
     }
 }
