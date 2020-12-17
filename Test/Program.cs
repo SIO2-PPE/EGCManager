@@ -11,14 +11,19 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            
-            DateTime deb = new DateTime(2020,12,7);
-            DateTime fin = new DateTime(2020, 12, 19);
-            var randPeriode = RandomizerFactory.GetRandomizer(new FieldOptionsDateTime { From = deb, To = fin, IncludeTime = false});
-            for (int i = 0; i < 50; i++)
-            {
-                Console.WriteLine(randPeriode.Generate());
-            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("une erreur");
+            Console.ResetColor();
+            Console.WriteLine("ya");
+
+
+            // DateTime deb = new DateTime(2020,12,7);
+            // DateTime fin = new DateTime(2020, 12, 19);
+            // var randPeriode = RandomizerFactory.GetRandomizer(new FieldOptionsDateTime { From = deb, To = fin, IncludeTime = false});
+            // for (int i = 0; i < 50; i++)
+            // {
+            //     Console.WriteLine(randPeriode.Generate());
+            // }
         }
 
         static void HydratePartie(DateTime debut, DateTime fin)

@@ -11,6 +11,8 @@ namespace Model.Data
 {
     public class Dbal
     {
+        #region CONNECTION BDD
+
         private MySqlConnection _connection;
 
         //Constructor
@@ -21,7 +23,7 @@ namespace Model.Data
                 database,
                 uid,
                 password
-                );
+            );
         }
 
         //Initialize values
@@ -41,8 +43,9 @@ namespace Model.Data
             }
             catch (MySqlException e)
             {
-                
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(e);
+                Console.ResetColor();
                 throw;
             }
         }
@@ -62,6 +65,7 @@ namespace Model.Data
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
+                Console.ForegroundColor = ConsoleColor.Red;
                 switch (ex.Number)
                 {
                     case 0:
@@ -72,6 +76,7 @@ namespace Model.Data
                         Console.WriteLine("Invalid username/password, please try again");
                         break;
                 }
+                Console.ResetColor();
                 return false;
             }
         }
@@ -86,12 +91,35 @@ namespace Model.Data
             }
             catch (MySqlException ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
+                Console.ResetColor();
                 return false;
             }
         }
 
-        //Insert statement
+        #endregion
+        
+        #region INSERT / UPDATE / DELETE / ...
+        public void Query(string query)
+        {
+            Console.WriteLine(query);
+            if (OpenConnection())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, _connection);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e);
+                    Console.ResetColor();
+                }
+                CloseConnection();
+            }
+        }
         /// <summary>
         /// Result of example: INSERT INTO tableinfo (name, age) VALUES('John Smith', '33'),(Jean Luc, '43')
         /// </summary>
@@ -121,28 +149,7 @@ namespace Model.Data
                 if (values.Last().Key != val.Key) query += ",";
             }
             query += ")";
-            Console.WriteLine(query);
-
-            //open connection
-            if (OpenConnection())
-            {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, _connection);
-
-                try
-                {
-                    //Execute command
-                    cmd.ExecuteNonQuery();
-
-                    //close connection
-                    CloseConnection();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    throw;
-                }
-            }
+            Query(query);
         }
 
         //Update statement
@@ -163,52 +170,18 @@ namespace Model.Data
                 if (values.Last().Key != val.Key) query += ",";
             }
             query += " WHERE " + where;
-
-            Console.WriteLine(query);
-
-            //Open connection
-            if (OpenConnection())
-            {
-                //create mysql command
-                MySqlCommand cmd = new MySqlCommand();
-                //Assign the query using CommandText
-                cmd.CommandText = query;
-                //Assign the connection using Connection
-                cmd.Connection = _connection;
-
-                //Execute query
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                CloseConnection();
-            }
+            Query(query);
         }
 
         //Delete statement
         public void Delete(string table, string where)
         {
-            IQuery("DELETE FROM " + table + " WHERE " + where);
+            Query("DELETE FROM " + table + " WHERE " + where);
         }
+        
+        #endregion
 
-        public void IQuery(string query)
-        {
-            Console.WriteLine(query);
-            if (OpenConnection())
-            {
-                try
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, _connection);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e);
-                    Console.ResetColor();
-                }
-                CloseConnection();
-            }
-        }
+        #region SELECT
         public DataSet RQuery(string query)
         {
             Console.WriteLine(query);
@@ -222,7 +195,7 @@ namespace Model.Data
                 }
                 catch (Exception e)
                 {
-                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e);
                     Console.ResetColor();
                 }
@@ -246,6 +219,9 @@ namespace Model.Data
             return RQuery("select * from " + table + " where id = " + id).Tables[0].Rows[0];
         }
         
+        #endregion
+
+        #region INITIALISATION BDD
 
         public void DBinit()
         {
@@ -268,5 +244,7 @@ namespace Model.Data
             MySqlScript script = new MySqlScript(_connection, sqlFile);
             script.Execute();
         }
+
+        #endregion
     }
 }
