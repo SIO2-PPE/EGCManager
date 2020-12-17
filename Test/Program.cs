@@ -11,6 +11,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            
             DateTime deb = new DateTime(2020,12,7);
             DateTime fin = new DateTime(2020, 12, 19);
             var randPeriode = RandomizerFactory.GetRandomizer(new FieldOptionsDateTime { From = deb, To = fin, IncludeTime = false});
@@ -26,6 +27,7 @@ namespace Test
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoHoraire daoHoraire = new DaoHoraire(dbal);
             DaoJoueur daoJoueur = new DaoJoueur(dbal);
+            dbal.DBinit();
             
             var randJoueur = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName());
             //var randNb = RandomizerFactory.GetRandomizer();

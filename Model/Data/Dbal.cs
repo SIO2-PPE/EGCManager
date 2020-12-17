@@ -180,24 +180,45 @@ namespace Model.Data
         //Delete statement
         public void Delete(string table, string where)
         {
-            string query = "DELETE FROM " + table + " WHERE " + where;
+            IQuery("DELETE FROM " + table + " WHERE " + where);
+        }
 
+        public void IQuery(string query)
+        {
+            Console.WriteLine(query);
             if (OpenConnection())
             {
-                MySqlCommand cmd = new MySqlCommand(query, _connection);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, _connection);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e);
+                    Console.ResetColor();
+                }
                 CloseConnection();
             }
         }
-
         public DataSet RQuery(string query)
         {
-            System.Console.WriteLine(query);
+            Console.WriteLine(query);
             DataSet dataset = new DataSet();
             if (OpenConnection())
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, _connection);
-                adapter.Fill(dataset);
+                try
+                {
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(query, _connection);
+                    adapter.Fill(dataset);
+                }
+                catch (Exception e)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e);
+                    Console.ResetColor();
+                }
                 CloseConnection();
             }
             return dataset;
