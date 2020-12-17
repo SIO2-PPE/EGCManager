@@ -314,9 +314,8 @@ namespace Technicien.viewModel
             else
             {
                 Joueur j = new Joueur(pseudoJoueur, emailJoueur);
-                _daoJoueur.AddJoueur(ref j);
                 _listJoueur.Add(j);
-                _daoJoueur.AddJoueur(j);
+                _daoJoueur.AddJoueur(ref j);
                 foreach (Joueur joueur in _daoJoueur.GetJoueurByPseudo(researchText))
                 {
                     _listJoueur.Add(joueur);
