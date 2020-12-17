@@ -15,10 +15,10 @@ namespace Model.Business
             Hydrate(row);
         }
 
-        public Theme()
+        public Theme(string nom = "")
         {
             _id = 0;
-            _nom = "";
+            _nom = nom;
         }
 
         #region MyRegion

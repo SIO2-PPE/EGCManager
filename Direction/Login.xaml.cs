@@ -18,20 +18,18 @@ namespace Direction
     /// </summary>
     public partial class Login : Window
     {
-        private DaoSite _daoSite;
-        private DaoSalle _daoSalle;
-        public Login(DaoSite daoSite, DaoSalle daoSalle)
+        private Dbal _dbal;
+        public Login(Dbal dbal)
         {
-            _daoSite = daoSite;
-            _daoSalle = daoSalle;
+            _dbal = dbal;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EGCManager_Direction wnd = new EGCManager_Direction(_daoSite, _daoSalle);
+            Home wnd = new Home(_dbal);
             wnd.Show();
-            this.Close();
+            Close();
         }
     }
 }

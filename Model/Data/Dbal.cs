@@ -116,6 +116,7 @@ namespace Model.Data
                 if (values.Last().Key != val.Key) query += ",";
             }
             query += ")";
+            Console.WriteLine(query);
 
             //open connection
             if (OpenConnection())
@@ -201,9 +202,9 @@ namespace Model.Data
             }
             return dataset;
         }
-        public DataTable Select(string table, string where = null)
+        public DataTable Select(string table, string where = null, string champs = "*")
         {
-            string query = "select * from " + table;
+            string query = "select " + champs + " from " + table;
             if (where != null) query += " where " + where;
             return RQuery(query).Tables[0];
         }

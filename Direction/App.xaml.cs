@@ -16,12 +16,13 @@ namespace Direction
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Dbal dbal = new Dbal("ppe3_mmd");
-            DaoSite daoSite = new DaoSite(dbal);
-            DaoSalle daoSalle = new DaoSalle(dbal);
-            DaoHoraire daoHoraire = new DaoHoraire(dbal);
+            Dbal dbal = new Dbal("ppe3_mmd","localhost","root","root");
             
-            Login wnd = new Login(daoSite, daoSalle);
+            // Réinitialisation BDD
+            dbal.DBinit();
+            dbal.DBhydrate();
+
+            Login wnd = new Login(dbal);
             wnd.Show();
         }
     }

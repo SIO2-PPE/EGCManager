@@ -19,6 +19,11 @@ namespace Model.Business
             foreach (Avis avis in lstAvis) avis.Joueur = this;
             _lstAvis = lstAvis;
         }
+        public Joueur(DataRow row)
+        {
+            Hydrate(row);
+            _lstAvis = new List<Avis>();
+        }
 
         #region Getter and Setter
 
