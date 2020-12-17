@@ -87,5 +87,14 @@ namespace Model.Data
             }
             return lstAvis;
         }
+
+        public void Add(Joueur joueur, DateTime date, string comm)
+        {
+            Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
+            dic.Add("commentaire",comm);
+            dic.Add("joueur",joueur.Id);
+            dic.Add("date",date);
+            _dbal.Insert("avis",dic);
+        }
     }
 }

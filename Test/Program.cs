@@ -28,12 +28,14 @@ namespace Test
             DaoJoueur daoJoueur = new DaoJoueur(dbal);
             DaoPartie daoPartie = new DaoPartie(dbal);
             DaoObstacle daoObstacle = new DaoObstacle(dbal);
+            DaoAvis daoAvis = new DaoAvis(dbal);
 
             var randNb = new Random();
             var randFirstName = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName());
             var randLastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName());
             var randNaissance = RandomizerFactory.GetRandomizer(new FieldOptionsDateTime
                 {From = new DateTime(1970, 1, 1), To = DateTime.Today.AddYears(-18), IncludeTime = false});
+            var randComm = RandomizerFactory.GetRandomizer(new FieldOptionsTextLipsum());
 
             for (int i = 0; i < 100; i++)
             {
@@ -58,6 +60,11 @@ namespace Test
                                 Joueur joueur = new Joueur(name, name + "@gmail.com");
                                 daoJoueur.AddJoueur(ref joueur);
                                 partie.LstJoueur.Add(joueur);
+
+                                if (randNb.Next(2) != 0) // 50 %
+                                {
+                                    daoAvis.Add(joueur, j, randComm.Generate());
+                                }
                             }
                             // int nbObstacle = randNb.Next(6, 13);
                             // for (int i = 0; i < nbObstacle; i++)
