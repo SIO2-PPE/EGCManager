@@ -44,7 +44,6 @@ namespace Direction.viewModel
         public ViewModelStat(DaoPartie daoPartie, DaoSite daoSite)
         {
             _daoPartie = daoPartie;
-            SelectedDate = DateTime.Now;
             
             _listSite = new ObservableCollection<Site>(daoSite.GetAllSite());
             AnnecySalle1Nom = _listSite[0].LstSalle[0].ToString();
@@ -55,6 +54,8 @@ namespace Direction.viewModel
             ThononSalle2Nom = _listSite[1].LstSalle[1].ToString();
             BonnevilleSalle1Nom = _listSite[2].LstSalle[0].ToString();
             ChamonixSalle1Nom = _listSite[3].LstSalle[0].ToString();
+
+            SelectedDate = DateTime.Now;
         }
 
         #endregion
@@ -70,14 +71,14 @@ namespace Direction.viewModel
                 OnPropertyChanged("SelectedDate");
 
 
-                AnnecySalle1Stat = "TEST STAT";
-                AnnecySalle2Stat = "TEST STAT";
-                AnnecySalle3Stat = "TEST STAT";
-                AnnecySalle4Stat = "TEST STAT";
-                ThononSalle1Stat = "TEST STAT";
-                ThononSalle2Stat = "TEST STAT";
-                BonnevilleSalle1Stat = "TEST STAT";
-                ChamonixSalle1Stat = "TEST STAT";
+                AnnecySalle1Stat = _daoPartie.NbPartie(_listSite[0].LstSalle[0],_selectedDate).ToString();
+                AnnecySalle2Stat = _daoPartie.NbPartie(_listSite[0].LstSalle[1],_selectedDate).ToString();
+                AnnecySalle3Stat = _daoPartie.NbPartie(_listSite[0].LstSalle[2],_selectedDate).ToString();
+                AnnecySalle4Stat = _daoPartie.NbPartie(_listSite[0].LstSalle[3],_selectedDate).ToString();
+                ThononSalle1Stat = _daoPartie.NbPartie(_listSite[1].LstSalle[0],_selectedDate).ToString();
+                ThononSalle2Stat = _daoPartie.NbPartie(_listSite[1].LstSalle[1],_selectedDate).ToString();
+                BonnevilleSalle1Stat = _daoPartie.NbPartie(_listSite[2].LstSalle[0],_selectedDate).ToString();
+                ChamonixSalle1Stat = _daoPartie.NbPartie(_listSite[3].LstSalle[0],_selectedDate).ToString();
             }
         }
 

@@ -104,6 +104,12 @@ namespace Model.Data
                 _dbal.Insert("obstacle_partie", dic);
             }
         }
-        
+
+        public int NbPartie(Salle salle, DateTime date)
+        {
+            DataRow row = _dbal.Select("partie", 
+                "salle = " + salle.Id + " AND date = '" + date.ToString("yyyy-MM-dd") + "'", "count(id) as nb").Rows[0]; 
+            return (int)(long)row["nb"]; 
+        }
     }
 }
