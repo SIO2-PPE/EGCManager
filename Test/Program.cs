@@ -11,8 +11,8 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            DateTime deb = new DateTime(2020, 12, 16);
-            DateTime fin = new DateTime(2020, 12, 19);
+            DateTime deb = new DateTime(2020, 12, 10);
+            DateTime fin = new DateTime(2020, 12, 20);
 
             Hydrate(deb,fin);
         }
@@ -42,12 +42,6 @@ namespace Test
                     nom + "@gmail.com", "0600000000", "une adresse", 100));
             }
 
-            Console.BackgroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("                                                                                                ");
-            Console.WriteLine("                                                                                                ");
-            Console.ResetColor();
-
-            int a = debut.Day;
             for (DateTime j = debut; j < fin; j = j.AddDays(1))
             {
                 foreach (Salle salle in daoSalle.GetAll())
@@ -75,10 +69,6 @@ namespace Test
                         }
                     }
                 }
-
-                Console.BackgroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("                                                                                                ");
-                Console.ResetColor();
             }
         }
     }
