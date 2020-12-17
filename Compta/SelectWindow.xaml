@@ -107,11 +107,13 @@
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource BoutonSelectUser}" Click="Button_Click"/>
+                FontSize="15" Style="{DynamicResource BoutonSelectUser}"
+                Click="Button_SelectClient"/>
         <Button Content="Creer un utilisateur" Margin="491,197,150,0" VerticalAlignment="Top" Height="50"
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource BoutonCreateUser}" Click="Button_Click_1"/>
+                FontSize="15" Style="{DynamicResource BoutonCreateUser}" 
+                Click="Button_CreateClient"/>
     </Grid>
 </Window>

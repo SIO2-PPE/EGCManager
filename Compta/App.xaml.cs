@@ -16,11 +16,9 @@ namespace Compta
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Dbal thedbal = new Dbal("PPE3_MMD");
-            DaoClient thedaoclient = new DaoClient(thedbal);
-            DaoFacture thedaofacture = new DaoFacture(thedbal);
 
 
-            Login wnd = new Login(thedaoclient, thedaofacture);
+            Login wnd = new Login(thedbal);
             wnd.Show();
 
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Compta.viewModel
 {
-    class viewModelBase : INotifyPropertyChanged
+    class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

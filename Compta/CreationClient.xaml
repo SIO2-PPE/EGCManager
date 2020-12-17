@@ -142,12 +142,12 @@
                    FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="153" Canvas.Left="294" Margin="0,239,392,0"/>
         <TextBlock x:Name="TextBlock_Adresse" Text="Adresse" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="top" Height="24" Width="159" FontFamily="Arial" FontSize="18"
                    FontWeight="Bold" Foreground="#FF534C4C" Canvas.Top="153" Canvas.Left="294" Margin="0,274,392,0"/>
-        <TextBox x:Name="Box_Nom" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="179" TextAlignment="Center" Margin="427,99,152,289"/>
-        <TextBox x:Name="Box_Prenom" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="145" TextAlignment="Center" Margin="427,134,152,254"/>
-        <DatePicker x:Name="Selection_Date" HorizontalAlignment="Left" Height="31" Margin="427,164,0,0" Text="" VerticalAlignment="Top" Width="204"/>
-        <TextBox x:Name="Box_Email" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="215" TextAlignment="Center" Margin="427,201,152,187"/>
-        <TextBox x:Name="Box_Numero" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="215" TextAlignment="Center" Margin="427,235,152,153"/>
-        <TextBox x:Name="Box_Adress" Canvas.Left="424" TextWrapping="Wrap" Text="" Canvas.Top="215" TextAlignment="Center" Margin="427,269,152,119" RenderTransformOrigin="0.5,0.5">
+        <TextBox x:Name="Box_Nom" Text="{Binding Nom}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="179" TextAlignment="Center" Margin="427,99,152,289"/>
+        <TextBox x:Name="Box_Prenom" Text="{Binding PrenomClient}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="145" TextAlignment="Center" Margin="427,134,152,254"/>
+        <DatePicker x:Name="Selection_Date" Text="{Binding DateNaissance}" HorizontalAlignment="Left" Height="31" Margin="427,164,0,0" VerticalAlignment="Top" Width="204"/>
+        <TextBox x:Name="Box_Email" Text="{Binding EmailClient}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,201,152,187"/>
+        <TextBox x:Name="Box_Numero" Text="{Binding NumeroTelephone}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,235,152,153"/>
+        <TextBox x:Name="Box_Adress" Text="{Binding Adresse}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,269,152,119" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
@@ -161,12 +161,12 @@
                 Background="#FF64CCF1"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Style="{DynamicResource BoutonRetour}" Click="Button_Click"/>
-        <Button Content="✓ Valider" Command="{Binding CreateCommandClient}" VerticalAlignment="Top" Width="89" Height="30"
+                FontSize="15" Style="{DynamicResource BoutonRetour}" Click="Button_Back"/>
+        <Button Content="✓ Valider" Command="{Binding CreerUnClient}" VerticalAlignment="Top" Width="89" Height="30"
                 Background="#10D500"
                 Foreground="White"
                 FontFamily="Arial"
-                FontSize="15" Click="Button_Click" Style="{DynamicResource BoutonValider}"/>
+                FontSize="15" Click="Button_Valider" Style="{DynamicResource BoutonValider}"/>
 
     </Grid>
 </Window>

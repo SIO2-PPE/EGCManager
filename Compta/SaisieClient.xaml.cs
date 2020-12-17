@@ -11,34 +11,44 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Business;
+using Model.Data;
 
 namespace Compta
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class SaisieClient: Window
+    public partial class SaisieClient : Window
     {
-        public SaisieClient()
+        private Dbal _dbal;
+        private DaoClient _daoClient;
+        public SaisieClient(Dbal dbal)
         {
+            _dbal = dbal;
+            _daoClient = new DaoClient(dbal);
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Back(object sender, RoutedEventArgs e)
         {
-            {
-                InfosClient subWindow = new InfosClient();
+                SelectWindow subWindow = new SelectWindow(_dbal);
                 subWindow.Show();
-                this.Close();
-            }
+                Close();
         }
 
-        private void ReturnButton(object sender, RoutedEventArgs e)
+        private void Button_Chercher(object sender, RoutedEventArgs e)
         {
+            Client c = _daoClient.SearchClient(TextBox_Prenom.Text, TextBox_Nom.Text, TextBox_Email.Text);
+            if (c.Id != 0)
             {
-                SelectWindow subWindow = new SelectWindow();
-                subWindow.Show();
-                this.Close();
+                InfosClient wnd = new InfosClient(c,_dbal);
+                wnd.Show();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Ce client n'existe pas");
             }
         }
     }

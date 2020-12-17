@@ -22,15 +22,30 @@ namespace Model.Data
         }
         public Client SearchClient(string prenom, string nom, string email)
         {
-            return new Client(_dbal.Select("client",
-                "prenom = '" + prenom + "' AND " +
-                "nom = '" + nom + "' AND " +
-                "email = '" + email + "'"
+            try
+            {
+                return new Client(_dbal.Select("client",
+                    "prenom = '" + prenom + "' AND " +
+                    "nom = '" + nom + "' AND " +
+                    "email = '" + email + "'"
                 ).Rows[0]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new Client();
+            }
         }
         public void EditClient(Client c)
         {
             _dbal.Update("client", c.ToArray(), "id = " + c.Id);
+        }
+
+        public void AddCredits(Client client, int nbCredits)
+        {
+            Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
+            dic.Add("credit", client.Credit + nbCredits);
+            _dbal.Update("client", dic, "id = " + client.Id);
         }
     }
 }

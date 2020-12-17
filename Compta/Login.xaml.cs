@@ -25,25 +25,19 @@ namespace Compta
     /// </summary>
     public partial class Login : Window
     {
-        
+        private Dbal _dbal;
 
-
-        public Login(DaoClient thedaoclient, DaoFacture thedaofacture)
+        public Login(Dbal thedbal)
         {
             InitializeComponent();
-            maGrid.DataContext = new viewModel.viewModelClient(thedaofacture, thedaoclient);
-
+            _dbal = thedbal;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Login(object sender, RoutedEventArgs e)
         {
-            {
-                SelectWindow subWindow = new SelectWindow();
-                subWindow.Show();
-                this.Close();
-            }
+            SelectWindow subWindow = new SelectWindow(_dbal);
+            subWindow.Show();
+            Close();
         }
-
     }
 }
-

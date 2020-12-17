@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Business;
+using Model.Data;
+
 
 namespace Compta
 {
@@ -19,17 +22,34 @@ namespace Compta
     /// </summary>
     public partial class CreationClient : Window
     {
-        public CreationClient()
+        private Dbal _dbal;
+        private DaoClient _daoClient;
+        public CreationClient(Dbal dbal)
         {
+            _dbal = dbal;
+            _daoClient = new DaoClient(dbal);
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Back(object sender, RoutedEventArgs e)
         {
-            SelectWindow subWindow = new SelectWindow();
+            SelectWindow subWindow = new SelectWindow(_dbal);
             subWindow.Show();
-            this.Close();
+            Close();
         }
 
+        private void Button_Valider(object sender, RoutedEventArgs e)
+        {
+            Client leClient = new Client(
+                Box_Nom.Text,
+                Box_Prenom.Text,
+                Selection_Date.DisplayDate, 
+                Box_Email.Text,
+                Box_Numero.Text,
+                Box_Adress.Text,
+                0
+                );
+            _daoClient.NouveauClient(leClient);
+            MessageBox.Show("Le client a bien été créé");
+        }
     }
 }
