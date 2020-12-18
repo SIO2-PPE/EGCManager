@@ -275,10 +275,21 @@ namespace Technicien.viewModel
         {
             if (researchText == "")
             {
+                
                 _listJoueur.Clear();
+                
                 foreach (Joueur joueur in _daoJoueur.GetAllJoueur())
                 {
                     _listJoueur.Add(joueur);
+                    foreach (Joueur j in _listJoueurPartie)
+                    {
+                        if (j == joueur)
+                        {
+                            _listJoueur.Remove(joueur);
+                        }
+                        
+                    }
+                    
                 }
             }
             else
@@ -288,6 +299,14 @@ namespace Technicien.viewModel
                 foreach (Joueur joueur in _daoJoueur.GetJoueurByPseudo(researchText))
                 {
                     _listJoueur.Add(joueur);
+                    foreach (Joueur j in _listJoueurPartie)
+                    {
+                        if (j == joueur)
+                        {
+                            _listJoueur.Remove(joueur);
+                        }
+                        
+                    }
                 }
             }
         }
