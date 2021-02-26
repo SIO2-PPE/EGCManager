@@ -16,7 +16,7 @@ namespace Direction
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Dbal dbal = new Dbal("ppe3_mmd","localhost","root","root");
+            Dbal dbal = new Dbal("ppe3_mmd");
 
             Login wnd = new Login(dbal);
             wnd.Show();

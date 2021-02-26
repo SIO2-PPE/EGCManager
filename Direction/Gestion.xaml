@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Direction"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        WindowState = "Maximized"
+        WindowState="Maximized"
         FontSize="16"
         Title="Gestion" Height="800" Width="1400">
     <Grid Name="MainGrid">
@@ -34,7 +34,7 @@
             <ComboBox Grid.Column="5" ItemsSource="{Binding ListSalles, Mode=OneTime}"
                       SelectedItem="{Binding SelectedSalle}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSalle"
                       VerticalAlignment="Center" />
-            <Button Grid.Column="7" Content="Retour" Click="Back" Margin="16"/>
+            <Button Grid.Column="7" Content="Retour" Click="Back" Margin="16" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -108,49 +108,81 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" Margin="8,16,16,16">
+            <Grid Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="32" />
-                    <RowDefinition Height="32" />
+                    <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Thème actif : " VerticalAlignment="Center"
-                               HorizontalAlignment="Right" />
-                    <TextBlock Grid.Column="1" Text="{Binding ThemeActif}" VerticalAlignment="Center"
-                               HorizontalAlignment="Left" />
+                <Grid Grid.Row="0" Margin="8,16,16,16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32" />
+                        <RowDefinition Height="32" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Thème actif : " VerticalAlignment="Center"
+                                   HorizontalAlignment="Right" />
+                        <TextBlock Grid.Column="1" Text="{Binding ThemeActif}" VerticalAlignment="Center"
+                                   HorizontalAlignment="Left" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <TextBlock Text="Liste des thème" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="32" />
+                            </Grid.RowDefinitions>
+                            <ListBox Grid.Row="0" ItemsSource="{Binding ListThemes}"
+                                     SelectedItem="{Binding SelectedTheme}" />
+                            <Grid Grid.Row="1" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Margin="0,0,2,0" Content="Appliquer à la salle"
+                                        Command="{Binding AssigneToSalleCommand}" />
+                                <Button Grid.Column="1" Margin="2,0,0,0" Content="Supprimer"
+                                        Command="{Binding DeleteThemeCommand}" />
+                            </Grid>
+                            <Grid Grid.Row="2" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Margin="0,0,2,0" TextAlignment="Left" FontSize="16"
+                                         Text="{Binding NameNewTheme}" />
+                                <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"
+                                        Command="{Binding AddThemeCommand}" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
-                    <TextBlock Text="Liste des thème" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="1">
+                <Grid Grid.Row="1" Margin="8,16,16,16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Obstacle" />
+                    <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="32" />
-                            <RowDefinition Height="32" />
                         </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" ItemsSource="{Binding ListThemes}" SelectedItem="{Binding SelectedTheme}" />
+                        <ListBox Grid.Row="0" ItemsSource="{Binding ListThemes}"
+                                 SelectedItem="{Binding SelectedTheme}" />
                         <Grid Grid.Row="1" Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Margin="0,0,2,0" Content="Appliquer à la salle"
-                                    Command="{Binding AssigneToSalleCommand}" />
-                            <Button Grid.Column="1" Margin="2,0,0,0" Content="Supprimer"
-                                    Command="{Binding DeleteThemeCommand}" />
-                        </Grid>
-                        <Grid Grid.Row="2" Margin="0,4,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="100" />
@@ -159,6 +191,8 @@
                                      Text="{Binding NameNewTheme}" />
                             <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"
                                     Command="{Binding AddThemeCommand}" />
+                            <Button Grid.Column="1" Margin="2,0,0,0" Content="Supprimer"
+                                    Command="{Binding DeleteThemeCommand}" />
                         </Grid>
                     </Grid>
                 </Grid>
