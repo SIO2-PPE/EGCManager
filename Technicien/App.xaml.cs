@@ -17,7 +17,7 @@ namespace Technicien
     {
         private void Application_Startup(object sender,StartupEventArgs e)
         {
-            Dbal dbal = new Dbal("ppe3_mmd", "localhost", "root", "5MichelAnnecy");
+            Dbal dbal = new Dbal("ppe3_mmd", "localhost", "root", "");
             DaoSite daoSite = new DaoSite(dbal);
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoPartie daoPartie = new DaoPartie(dbal);

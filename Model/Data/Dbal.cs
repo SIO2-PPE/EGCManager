@@ -16,7 +16,7 @@ namespace Model.Data
         private MySqlConnection _connection;
 
         //Constructor
-        public Dbal(string database, string server = "localhost", string uid = "root", string password = "5MichelAnnecy")
+        public Dbal(string database, string server = "localhost", string uid = "root", string password = "")
         {
             Initialize(
                 server,
@@ -229,7 +229,7 @@ namespace Model.Data
         public void DBinit()
         {
             WebClient client = new WebClient();
-            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/scripte.sql");
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/EGCManager/main/COMMUN/scripte.sql");
             StreamReader reader = new StreamReader(stream);
             String sqlFile = reader.ReadToEnd();
 
@@ -250,7 +250,7 @@ namespace Model.Data
         public void DBhydrate()
         {
             WebClient client = new WebClient();
-            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/BDD/main/hydratation.sql");
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/SIO2-PPE/EGCManager/main/COMMUN/hydratation.sql");
             StreamReader reader = new StreamReader(stream);
             String sqlFile = reader.ReadToEnd();
 
