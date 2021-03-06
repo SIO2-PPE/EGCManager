@@ -144,5 +144,9 @@ namespace Model.Business
             val.Add("adresse", _adresse);
             return val;
         }
+        public override string ToString()
+        {
+            return this._nom + " " + _prenom + " " + _email;
+        }
     }
 }

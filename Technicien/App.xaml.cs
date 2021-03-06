@@ -18,6 +18,7 @@ namespace Technicien
         private void Application_Startup(object sender,StartupEventArgs e)
         {
             Dbal dbal = new Dbal("ppe3_mmd", "localhost", "root", "");
+            DaoClient daoClient = new DaoClient(dbal);
             DaoSite daoSite = new DaoSite(dbal);
             DaoSalle daoSalle = new DaoSalle(dbal);
             DaoPartie daoPartie = new DaoPartie(dbal);
@@ -26,7 +27,7 @@ namespace Technicien
             DaoJoueur daoJoueur = new DaoJoueur(dbal);
 
 
-            MainWindow Wnd = new MainWindow(daoSite,daoSalle,daoPartie,daoHoraire,daoObstacle,daoJoueur);
+            MainWindow Wnd = new MainWindow(daoClient,daoSite,daoSalle,daoPartie,daoHoraire,daoObstacle,daoJoueur);
             Wnd.Show();
         }
     }

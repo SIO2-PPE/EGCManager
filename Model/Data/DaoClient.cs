@@ -47,5 +47,28 @@ namespace Model.Data
             dic.Add("credit", client.Credit + nbCredits);
             _dbal.Update("client", dic, "id = " + client.Id);
         }
+        public List<Client> GetAllClient()
+        {
+            List<Client> lst = new List<Client>();
+            DataTable tab = _dbal.Select("client");
+
+            foreach (DataRow row in tab.Rows)
+            {
+                lst.Add(new Client(row));
+            }
+            return lst;
+
+        }
+        public List<Client> GetClientByMail(string email)
+        {
+            List<Client> lst = new List<Client>();
+            DataTable tab = _dbal.Select("Client", "email like '%" + email + "%'");
+            foreach (DataRow row in tab.Rows)
+            {
+                lst.Add(new Client(row));
+            }
+            return lst;
+
+        }
     }
 }

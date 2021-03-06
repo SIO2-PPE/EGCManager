@@ -15,6 +15,7 @@ namespace Technicien.viewModel
         private Création_de_partie _wnd;
         //DAO
 
+        private DaoClient _daoClient;
         private DaoHoraire _daoHoraire;
         private DaoSite _daoSite;
         private DaoSalle _daoSalle;
@@ -52,11 +53,12 @@ namespace Technicien.viewModel
         private string emailJoueur;
 
 
-        public viewModelPartie(DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
+        public viewModelPartie(DaoClient daoClient,DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
             DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie,Création_de_partie création_De_Partie)
         {
             _wnd = création_De_Partie;
 
+            _daoClient = daoClient;
             _daoHoraire = daoHoraire;
             _daoSite = daoSite;
             _daoSalle = daoSalle;
@@ -398,7 +400,7 @@ namespace Technicien.viewModel
                 
                 
                 _daoPartie.NouvellePartie(_activePartie);
-                Planning subWindows = new Planning(_daoSite, _daoSalle, _daoPartie, _daoHoraire, _daoObstacle, _daoJoueur);
+                Planning subWindows = new Planning(_daoClient, _daoSite, _daoSalle, _daoPartie, _daoHoraire, _daoObstacle, _daoJoueur);
                 subWindows.Show();
                 _wnd.Close();
                 

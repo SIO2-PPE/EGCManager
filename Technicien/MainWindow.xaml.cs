@@ -22,15 +22,16 @@ namespace Technicien
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        private DaoClient thedaoClient;
         private DaoSite thedaoSite;
         private DaoSalle thedaoSalle;
         private DaoPartie thedaoPartie;
         private DaoHoraire thedaoHoraire;
         private DaoObstacle thedaoObstacle;
         private DaoJoueur thedaoJoueur;
-        public MainWindow(DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire,DaoObstacle daoobstacle,DaoJoueur daojoeueur)
+        public MainWindow(DaoClient daoClient,DaoSite daosite,DaoSalle daosalle,DaoPartie daopartie,DaoHoraire daohoraire,DaoObstacle daoobstacle,DaoJoueur daojoeueur)
         {
+            thedaoClient = daoClient;
             thedaoSite = daosite;
             thedaoSalle = daosalle;
             thedaoHoraire = daohoraire;
@@ -44,7 +45,7 @@ namespace Technicien
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-                Planning subWindow = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
+                Planning subWindow = new Planning(thedaoClient, thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
                 subWindow.Show();
                 Close();
             

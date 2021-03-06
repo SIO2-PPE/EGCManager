@@ -20,27 +20,32 @@ namespace Technicien.viewModel
         private DaoPartie _daoPartie;
         private DaoObstacle _daoObstacle;
         private DaoJoueur _daoJoueur;
+        private DaoClient _daoClient;
 
         //LISTS
         private ObservableCollection<Partie> _listPlanning;
         private ObservableCollection<Site> _listSites;
         private ObservableCollection<Salle> _listSalles;
-
+        private ObservableCollection<Client> _listClient;
         //SELECTIONS
         private Partie _selectedPlanning;
         private DateTime _datePlanning;
         private Site _selectedSite;
-
+        private Client _selectedClient;
         private Salle _selectedSalle;
 
         //COMMANDE
         private ICommand _creerpartie;
+        private ICommand _researchClient;
 
-        public viewModelPlanning(DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire,
+        private string researchTextClient;
+
+        public viewModelPlanning(DaoClient daoClient, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire,
             DaoObstacle daoObstacle, DaoJoueur daoJoueur, Planning planning)
         {
             _wnd = planning;
-            
+
+            _daoClient = daoClient;
             _daoHoraire = daoHoraire;
             _daoPartie = daoPartie;
             _daoSalle = daoSalle;
@@ -51,7 +56,15 @@ namespace Technicien.viewModel
             _listPlanning = new ObservableCollection<Partie>();
             _listSalles = new ObservableCollection<Salle>();
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
+            _listClient = new ObservableCollection<Client>(daoClient.GetAllClient());
             DatePlanning = DateTime.Now;
+            researchTextClient = "";
+        }
+
+        public ObservableCollection<Client> ListClient
+        {
+            get => _listClient;
+            set => _listClient = value;
         }
 
         public ObservableCollection<Partie> ListPlanning
@@ -92,6 +105,16 @@ namespace Technicien.viewModel
             }
         }
 
+
+        public Client SelectedClient
+        {
+            get => _selectedClient;
+            set
+            {
+                _selectedClient = value;
+                OnPropertyChanged("SelectedClient");
+            }
+        }
         public Site SelectedSite
         {
             get => _selectedSite;
@@ -127,6 +150,21 @@ namespace Technicien.viewModel
                 OnPropertyChanged("SelectedPlanning");
             }
         }
+        public string ResearchTextClient
+        {
+            get
+            {
+                return researchTextClient;
+            }
+            set
+            {
+                if (value != researchTextClient)
+                {
+                    researchTextClient = value;
+                    OnPropertyChanged("ResearchTextClient");
+                }
+            }
+        }
 
 
         private void RefreshListSalle()
@@ -149,6 +187,18 @@ namespace Technicien.viewModel
             OnPropertyChanged("ListPlanning");
         }
 
+
+        public ICommand ResearchClient
+        {
+            get
+            {
+                if (this._researchClient == null)
+                {
+                    this._researchClient = new RelayCommand(() => RechercheClient(), () => true);
+                }
+                return this._researchClient;
+            }
+        }
         public ICommand CreerPartie
         {
             get
@@ -162,6 +212,31 @@ namespace Technicien.viewModel
             }
         }
 
+        private void RechercheClient()
+        {
+            if (researchTextClient == "")
+            {
+
+                _listClient.Clear();
+
+                foreach (Client client in _daoClient.GetAllClient())
+                {
+                    _listClient.Add(client);
+
+                }
+            }
+            else
+            {
+                _listClient.Clear();
+
+                foreach (Client client in _daoClient.GetClientByMail(researchTextClient))
+                {
+                    _listClient.Add(client);
+
+                }
+            }
+        }
+
         private void CreatePartie()
         {
             if (_selectedPlanning == null)
@@ -172,21 +247,29 @@ namespace Technicien.viewModel
             {
                 if (_selectedPlanning.Id == 0)
                 {
-                    if (_datePlanning <  DateTime.Now.AddDays(-1))
+                    if (_datePlanning < DateTime.Now.AddDays(-1))
                     {
                         MessageBox.Show("veuillez choisir une date supérieur a celle d'aujourd'hui !");
                     }
                     else
-                {
-                    _selectedPlanning.Date = _datePlanning;
-                    _selectedPlanning.Salle = _selectedSalle;
+                    {
+                        if (_selectedClient == null)
+                        {
+                            MessageBox.Show("veuillez selectionner un client");
+                        }
+                        else
+                        {
+                            _selectedPlanning.Date = _datePlanning;
+                            _selectedPlanning.Salle = _selectedSalle;
 
-                    Création_de_partie subWindow = new Création_de_partie(_daoSite, _daoSalle, _daoPartie, _daoHoraire,
-                        _daoObstacle, _daoJoueur, _selectedPlanning);
-                    subWindow.Show();
-                    _wnd.Close();
-                }
-                    
+                            Création_de_partie subWindow = new Création_de_partie(_daoClient,_daoSite, _daoSalle, _daoPartie, _daoHoraire,
+                                _daoObstacle, _daoJoueur, _selectedPlanning);
+                            subWindow.Show();
+                            _wnd.Close();
+                        }
+
+                    }
+
                 }
                 else
                 {

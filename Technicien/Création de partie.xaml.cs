@@ -21,10 +21,11 @@ namespace Technicien
     /// </summary>
     public partial class Création_de_partie : Window
     {
-        
+
         /// <summary>
         /// Logique d'interaction pour Création_de_partie.xaml
         /// </summary>
+        private DaoClient thedaoClient;
         private DaoSite thedaoSite;
         private DaoSalle thedaoSalle;
         private DaoPartie thedaoPartie;
@@ -33,10 +34,11 @@ namespace Technicien
         private DaoJoueur thedaoJoueur;
         private Partie _partie;
 
-        public Création_de_partie(DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire,
+        public Création_de_partie(DaoClient daoclient, DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire,
             DaoObstacle daoobstacle, DaoJoueur daojoueur, Partie partie)
         {
             InitializeComponent();
+            thedaoClient = daoclient;
             thedaoSite = daosite;
             thedaoSalle = daosalle;
             thedaoHoraire = daohoraire;
@@ -44,7 +46,7 @@ namespace Technicien
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoueur;
             _partie = partie;
-            MainGrid.DataContext = new viewModelPartie(daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie, this);
+            MainGrid.DataContext = new viewModelPartie(daoclient, daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie, this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -70,7 +72,7 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
-            Planning wnd = new Planning(thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
+            Planning wnd = new Planning(thedaoClient,thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
             wnd.Show();
             this.Close();
         }
