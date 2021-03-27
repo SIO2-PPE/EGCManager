@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`Avis` (
   `date` DATETIME NULL,
   `joueur` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idJOUEUR_idx` (`joueur` ASC) VISIBLE,
+  INDEX `idJOUEUR_idx` (`joueur` ASC) ,
     FOREIGN KEY (`joueur`)
     REFERENCES `PPE3_MMD`.`Joueur` (`id`)
     ON DELETE RESTRICT
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`Client` (
   `credit` INT NULL,
   `adresse` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB;
 
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`Facture` (
   `nbCredit` INT NULL,
   `client` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idCLIENT_idx` (`client` ASC) VISIBLE,
+  INDEX `idCLIENT_idx` (`client` ASC) ,
     FOREIGN KEY (`client`)
     REFERENCES `PPE3_MMD`.`Client` (`id`)
     ON DELETE RESTRICT
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`salle` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `site` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idSITE_idx` (`site` ASC) VISIBLE,
+  INDEX `idSITE_idx` (`site` ASC) ,
     FOREIGN KEY (`site`)
     REFERENCES `PPE3_MMD`.`site` (`id`)
     ON DELETE RESTRICT
@@ -139,8 +139,8 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`Partie` (
   `win` BOOLEAN NULL DEFAULT 0,
   `salle` INT NOT NULL,
   PRIMARY KEY (`id`,`date`,`horaire`,`salle`),
-  INDEX `idHORAIRE_idx` (`horaire` ASC) VISIBLE,
-  INDEX `idSALLE_idx` (`salle` ASC) VISIBLE,
+  INDEX `idHORAIRE_idx` (`horaire` ASC) ,
+  INDEX `idSALLE_idx` (`salle` ASC) ,
     FOREIGN KEY (`horaire`)
     REFERENCES `PPE3_MMD`.`Horaire` (`id`)
     ON DELETE NO ACTION
@@ -162,8 +162,8 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`Reservation` (
   `client` INT NOT NULL,
   `partie` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `idCLIENT_idx` (`client` ASC) VISIBLE,
-  INDEX `idPARTIE_idx` (`partie` ASC) VISIBLE,
+  INDEX `idCLIENT_idx` (`client` ASC) ,
+  INDEX `idPARTIE_idx` (`partie` ASC) ,
     FOREIGN KEY (`client`)
     REFERENCES `PPE3_MMD`.`Client` (`id`)
     ON DELETE RESTRICT
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`obstacle_partie` (
   `partie` INT NOT NULL,
   `position` INT NOT NULL,
   PRIMARY KEY (`obstacle`, `partie`),
-  INDEX `idPARTIE_idx` (`partie` ASC) VISIBLE,
+  INDEX `idPARTIE_idx` (`partie` ASC) ,
     FOREIGN KEY (`partie`)
     REFERENCES `PPE3_MMD`.`Partie` (`id`)
     ON DELETE NO ACTION
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`theme_salle` (
   `dateDebut` DATE NOT NULL,
   `dateFin` DATE NULL DEFAULT '9999-12-31',
   PRIMARY KEY (`salle`, `theme`, `dateDebut`),
-  INDEX `idTHEME_idx` (`theme` ASC) VISIBLE,
+  INDEX `idTHEME_idx` (`theme` ASC) ,
     FOREIGN KEY (`salle`)
     REFERENCES `PPE3_MMD`.`salle` (`id`)
     ON DELETE NO ACTION
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`joueur_partie` (
   `joueur` INT NOT NULL,
   `partie` INT NOT NULL,
   PRIMARY KEY (`joueur`, `partie`),
-  INDEX `idPARTIE_idx` (`partie` ASC) VISIBLE,
+  INDEX `idPARTIE_idx` (`partie` ASC) ,
     FOREIGN KEY (`joueur`)
     REFERENCES `PPE3_MMD`.`Joueur` (`id`)
     ON DELETE NO ACTION
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`site_horaire` (
   `site` INT NOT NULL,
   `horaire` INT NOT NULL,
   PRIMARY KEY (`site`, `horaire`),
-  INDEX `idHORAIRE_idx` (`horaire` ASC) VISIBLE,
+  INDEX `idHORAIRE_idx` (`horaire` ASC) ,
     FOREIGN KEY (`site`)
     REFERENCES `PPE3_MMD`.`site` (`id`)
     ON DELETE NO ACTION
