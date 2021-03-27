@@ -25,6 +25,7 @@ namespace Technicien
         /// <summary>
         /// Logique d'interaction pour Création_de_partie.xaml
         /// </summary>
+        private DaoFacture thedaoFacture;
         private DaoClient thedaoClient;
         private DaoSite thedaoSite;
         private DaoSalle thedaoSalle;
@@ -33,11 +34,13 @@ namespace Technicien
         private DaoObstacle thedaoObstacle;
         private DaoJoueur thedaoJoueur;
         private Partie _partie;
+        private Client _client;
 
-        public Création_de_partie(DaoClient daoclient, DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire,
-            DaoObstacle daoobstacle, DaoJoueur daojoueur, Partie partie)
+        public Création_de_partie(DaoFacture daofacture, DaoClient daoclient, DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire,
+            DaoObstacle daoobstacle, DaoJoueur daojoueur, Partie partie, Client client)
         {
             InitializeComponent();
+            thedaoFacture = daofacture;
             thedaoClient = daoclient;
             thedaoSite = daosite;
             thedaoSalle = daosalle;
@@ -46,7 +49,8 @@ namespace Technicien
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoueur;
             _partie = partie;
-            MainGrid.DataContext = new viewModelPartie(daoclient, daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie, this);
+            _client = client;
+            MainGrid.DataContext = new viewModelPartie(daofacture, daoclient, daohoraire, daosite, daosalle, daopartie, daoobstacle, daojoueur, partie, client, this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -72,7 +76,7 @@ namespace Technicien
 
         private void Btn_Retour_Click(object sender, RoutedEventArgs e)
         {
-            Planning wnd = new Planning(thedaoClient,thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
+            Planning wnd = new Planning(thedaoFacture, thedaoClient,thedaoSite,thedaoSalle,thedaoPartie,thedaoHoraire,thedaoObstacle,thedaoJoueur);
             wnd.Show();
             this.Close();
         }

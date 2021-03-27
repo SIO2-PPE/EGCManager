@@ -14,7 +14,7 @@ namespace Technicien.viewModel
     {
         private Création_de_partie _wnd;
         //DAO
-
+        private DaoFacture _daoFacture;
         private DaoClient _daoClient;
         private DaoHoraire _daoHoraire;
         private DaoSite _daoSite;
@@ -23,7 +23,7 @@ namespace Technicien.viewModel
         private DaoObstacle _daoObstacle;
         private DaoJoueur _daoJoueur;
 
-
+        private Client _activeclient;
         private Partie _activePartie;
 
         //LISTE
@@ -53,11 +53,12 @@ namespace Technicien.viewModel
         private string emailJoueur;
 
 
-        public viewModelPartie(DaoClient daoClient,DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
-            DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie,Création_de_partie création_De_Partie)
+        public viewModelPartie(DaoFacture daoFacture, DaoClient daoClient,DaoHoraire daoHoraire, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie,
+            DaoObstacle daoObstacle, DaoJoueur daoJoueur, Partie activePartie,Client activeclient, Création_de_partie création_De_Partie)
         {
             _wnd = création_De_Partie;
 
+            _daoFacture = daoFacture;
             _daoClient = daoClient;
             _daoHoraire = daoHoraire;
             _daoSite = daoSite;
@@ -66,6 +67,7 @@ namespace Technicien.viewModel
             _daoObstacle = daoObstacle;
             _daoJoueur = daoJoueur;
             _activePartie = activePartie;
+            _activeclient = activeclient;
 
             _listJoueur = new ObservableCollection<Joueur>(daoJoueur.GetAllJoueur());
             _listObstacle = new ObservableCollection<Obstacle>(daoObstacle.GetAllObstacle());
@@ -397,10 +399,11 @@ namespace Technicien.viewModel
                 {
                     _activePartie.LstObstacle.Add(obstacle);
                 }
-                
-                
+
+                Facture _newfacture = new Facture(DateTime.Now, 10, 10, _activeclient);
                 _daoPartie.NouvellePartie(_activePartie);
-                Planning subWindows = new Planning(_daoClient, _daoSite, _daoSalle, _daoPartie, _daoHoraire, _daoObstacle, _daoJoueur);
+                _daoFacture.NouvelleFacture(_newfacture);
+                Planning subWindows = new Planning(_daoFacture, _daoClient, _daoSite, _daoSalle, _daoPartie, _daoHoraire, _daoObstacle, _daoJoueur);
                 subWindows.Show();
                 _wnd.Close();
                 

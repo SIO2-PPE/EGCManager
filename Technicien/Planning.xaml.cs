@@ -19,6 +19,7 @@ namespace Technicien
     /// </summary>
     public partial class Planning : Window
     {
+        private DaoFacture thedaoFacture;
         private DaoClient thedaoClient;
         private DaoSite thedaoSite;
         private DaoSalle thedaoSalle;
@@ -28,8 +29,9 @@ namespace Technicien
         private DaoJoueur thedaoJoueur;
         private Partie unepartieselectioner = new Partie();
 
-        public Planning(DaoClient daoClient, DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire, DaoObstacle daoobstacle, DaoJoueur daojoeueur)
+        public Planning(DaoFacture daoFacture, DaoClient daoClient, DaoSite daosite, DaoSalle daosalle, DaoPartie daopartie, DaoHoraire daohoraire, DaoObstacle daoobstacle, DaoJoueur daojoeueur)
         {
+            thedaoFacture = daoFacture;
             thedaoClient = daoClient;
             thedaoSite = daosite;
             thedaoSalle = daosalle;
@@ -38,7 +40,7 @@ namespace Technicien
             thedaoObstacle = daoobstacle;
             thedaoJoueur = daojoeueur;
             InitializeComponent();
-            MainGrid.DataContext = new viewModel.viewModelPlanning(daoClient, daosite, daosalle, daopartie, daohoraire,daoobstacle,daojoeueur,this);
+            MainGrid.DataContext = new viewModel.viewModelPlanning(daoFacture,daoClient, daosite, daosalle, daopartie, daohoraire,daoobstacle,daojoeueur,this);
 
         }
 

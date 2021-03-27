@@ -14,6 +14,7 @@ namespace Technicien.viewModel
     {
         private Planning _wnd;
         //DAO
+        private DaoFacture _daoFacture;
         private DaoHoraire _daoHoraire;
         private DaoSite _daoSite;
         private DaoSalle _daoSalle;
@@ -40,11 +41,12 @@ namespace Technicien.viewModel
 
         private string researchTextClient;
 
-        public viewModelPlanning(DaoClient daoClient, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire,
+        public viewModelPlanning(DaoFacture daoFacture, DaoClient daoClient, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire,
             DaoObstacle daoObstacle, DaoJoueur daoJoueur, Planning planning)
         {
             _wnd = planning;
 
+            _daoFacture = daoFacture;
             _daoClient = daoClient;
             _daoHoraire = daoHoraire;
             _daoPartie = daoPartie;
@@ -262,8 +264,8 @@ namespace Technicien.viewModel
                             _selectedPlanning.Date = _datePlanning;
                             _selectedPlanning.Salle = _selectedSalle;
 
-                            Création_de_partie subWindow = new Création_de_partie(_daoClient,_daoSite, _daoSalle, _daoPartie, _daoHoraire,
-                                _daoObstacle, _daoJoueur, _selectedPlanning);
+                            Création_de_partie subWindow = new Création_de_partie(_daoFacture, _daoClient,_daoSite, _daoSalle, _daoPartie, _daoHoraire,
+                                _daoObstacle, _daoJoueur, _selectedPlanning, _selectedClient);
                             subWindow.Show();
                             _wnd.Close();
                         }

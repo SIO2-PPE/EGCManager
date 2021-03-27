@@ -16,7 +16,7 @@ namespace Model.Data
         private MySqlConnection _connection;
 
         //Constructor
-        public Dbal(string database, string server = "localhost", string uid = "root", string password = "")
+        public Dbal(string database, string server = "localhost", string uid = "root", string password = "root")
         {
             Initialize(
                 server,
