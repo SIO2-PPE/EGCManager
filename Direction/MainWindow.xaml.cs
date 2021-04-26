@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Direction.ViewModels;
 using Model.Data;
+using Direction.Models;
 
 namespace Direction
 {
@@ -22,15 +23,22 @@ namespace Direction
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Dbal _dbal;
         public MainWindow()
         {
             InitializeComponent();
+            _dbal = new Dbal("ppe3_mmd");
+            DataContext = new DashboardViewModel(new DaoPartie(_dbal), new DaoSite(_dbal));
+        }
+
+        private void TopBar_MouseDown(object sender, RoutedEventArgs e)
+        {
+            this.DragMove();
         }
 
         private void Dashboard_Clicked(object sender, RoutedEventArgs e)
         {
-            Dbal dbal = new Dbal("ppe3_mmd");
-            DataContext = new DashboardViewModel(new DaoPartie(dbal), new DaoSite(dbal));
+            DataContext = new DashboardViewModel(new DaoPartie(_dbal), new DaoSite(_dbal));
         }
 
         private void SiteManagement_Clicked(object sender, RoutedEventArgs e)
@@ -41,6 +49,11 @@ namespace Direction
         private void CustomerReviews_Clicked(object sender, RoutedEventArgs e)
         {
             DataContext = new CustomerReviewsViewModel();
+        }
+
+        private void Exit_Button(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

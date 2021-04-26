@@ -7,37 +7,116 @@
         xmlns:viewmodels="clr-namespace:Direction.ViewModels"
         xmlns:views="clr-namespace:Direction.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Height="600" Width="920"
+        Background="Transparent"
+        AllowsTransparency="True">
 
     <Window.Resources>
-        <DataTemplate x:Name="DashboardViewTemplate" DataType="{x:Type viewmodels:DashboardViewModel}">
+        
+        <DataTemplate x:Name="DashboardViewTemplate"
+                      DataType="{x:Type viewmodels:DashboardViewModel}"
+                      >
             <views:DashboardView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="SiteManagementViewTemplate" DataType="{x:Type viewmodels:SiteManagementViewModel}">
+        
+        <DataTemplate x:Name="SiteManagementViewTemplate"
+                      DataType="{x:Type viewmodels:SiteManagementViewModel}"
+                      >
             <views:SiteManagementView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="CustomerReviewsViewTemplate" DataType="{x:Type viewmodels:CustomerReviewsViewModel}">
+        
+        <DataTemplate x:Name="CustomerReviewsViewTemplate"
+                      DataType="{x:Type viewmodels:CustomerReviewsViewModel}"
+                      >
             <views:CustomerReviewsView DataContext="{Binding}"/>
         </DataTemplate>
+        
     </Window.Resources>
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="LightBlue">
-            <TextBlock Margin="26 16" FontWeight="Medium" FontSize="38px" Foreground="#FFFFFF">EGC Manager</TextBlock>
-            <TextBlock Margin="26 50" FontWeight="Regular" FontSize="28px" Foreground="#E2EAFF">Direction</TextBlock>
-            <StackPanel Margin="0 128">
-                <Button HorizontalContentAlignment="Left" Padding="32 16" Background="#5D83E2" BorderThickness="0" Foreground="#FFE8F2FF" FontSize="30" FontWeight="Medium" Content="Tableau de bord" Click="Dashboard_Clicked"/>
-                <Button HorizontalContentAlignment="Left" Padding="32 16" Background="#5D83E2" BorderThickness="0" Foreground="#FFE8F2FF" FontSize="30" FontWeight="Medium" Content="Gestion des sites" Click="SiteManagement_Clicked"/>
-                <Button HorizontalContentAlignment="Left" Padding="32 16" Background="#5D83E2" BorderThickness="0" Foreground="#FFE8F2FF" FontSize="30" FontWeight="Medium" Content="Avis clients" Click="CustomerReviews_Clicked"/>
-            </StackPanel>
+    <Border Background="#272537"
+            CornerRadius="18"
+            >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.ColumnSpan="2" 
+                    Background="#201E2B"
+                    CornerRadius="18,18,0,0"
+                    MouseDown="TopBar_MouseDown"
+                    />
+
+            <TextBlock Text="EGC Manager"
+                       Foreground="White"
+                       FontSize="26"
+                       FontWeight="DemiBold"
+                       Margin="24,16,0,0"
+                       />
+
+            <TextBlock Text="Direction"
+                       Foreground="#CEC7FF"
+                       FontSize="24"
+                       Margin="24,40,0,0"
+                       />
+
+            <Button Grid.Column="1"
+                    Content="Fermer"
+                    Padding="8,4"
+                    Margin="0,0,40,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="Exit_Button"
+                    />
+
+            <Border Grid.Row="1"
+                    Background="#232138"
+                    CornerRadius="0,0,0,18"
+                    >
+                <StackPanel Margin="0,32,0,0">
+
+                    <RadioButton Content="Tableau de bord"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Click="Dashboard_Clicked"
+                                 IsChecked="True"
+                                 />
+
+                    <RadioButton Content="Gestion des sites"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Click="SiteManagement_Clicked"
+                                 />
+
+                    <RadioButton Content="Avis client"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Click="CustomerReviews_Clicked"
+                                 />
+
+                </StackPanel>
+            </Border>
+
+            <ContentControl Content="{Binding}"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            />
+
         </Grid>
+    </Border>
 
-        <ContentControl Grid.Column="1" Content="{Binding}"/>
-
-    </Grid>
 </Window>
