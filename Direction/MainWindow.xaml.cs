@@ -38,17 +38,28 @@ namespace Direction
 
         private void Dashboard_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new DashboardViewModel(new DaoPartie(_dbal), new DaoSite(_dbal));
+            DataContext = new DashboardViewModel(
+                new DaoPartie(_dbal),
+                new DaoSite(_dbal)
+            );
         }
 
         private void SiteManagement_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new SiteManagementViewModel();
+            DataContext = new SiteManagementViewModel(
+                new DaoSite(_dbal),
+                new DaoSalle(_dbal),
+                new DaoHoraire(_dbal),
+                new DaoTheme(_dbal)
+            );
         }
 
         private void CustomerReviews_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new CustomerReviewsViewModel();
+            DataContext = new CustomerReviewsViewModel(
+                new DaoTheme(_dbal),
+                new DaoAvis(_dbal)
+            );
         }
 
         private void Exit_Button(object sender, RoutedEventArgs e)

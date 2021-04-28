@@ -11,8 +11,8 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            DateTime deb = new DateTime(2021, 04, 13);
-            DateTime fin = new DateTime(2021, 04, 15);
+            DateTime deb = DateTime.Now;
+            DateTime fin = deb.AddDays(1);
 
             Hydrate(deb,fin);
         }
@@ -63,7 +63,7 @@ namespace Test
 
                                 if (randNb.Next(2) != 0) // 50 %
                                 {
-                                    daoAvis.Add(joueur, j, randComm.Generate());
+                                    daoAvis.Add(joueur, j, randComm.Generate(), randNb.Next(6));
                                 }
                             }
                             // int nbObstacle = randNb.Next(6, 13);

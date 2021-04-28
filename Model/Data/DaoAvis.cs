@@ -66,7 +66,7 @@ namespace Model.Data
         public List<Avis> GetForTheme(Theme theme)
         {
             string query = "";
-            query += "select avis.id,avis.commentaire,avis.date,avis.joueur from avis ";
+            query += "select avis.id,avis.commentaire,avis.note,avis.date,avis.joueur from avis ";
             query += "join joueur on joueur.id = avis.joueur ";
             query += "join joueur_partie ON joueur.id = joueur_partie.joueur ";
             query += "join partie ON joueur_partie.partie = partie.id ";
@@ -75,7 +75,7 @@ namespace Model.Data
             query += "where theme_salle.theme = " + theme.Id + " AND ";
             query += "theme_salle.dateDebut < avis.date AND ";
             query += "theme_salle.dateFin > avis.date ";
-            query += "group by avis.id, avis.commentaire, avis.date, avis.joueur ";
+            query += "group by avis.id ";
             query += "order by avis.date";
             DataTable tab = _dbal.RQuery(query).Tables[0];
             List<Avis> lstAvis = new List<Avis>();
@@ -88,10 +88,11 @@ namespace Model.Data
             return lstAvis;
         }
 
-        public void Add(Joueur joueur, DateTime date, string comm)
+        public void Add(Joueur joueur, DateTime date, string comm, int note)
         {
             Dictionary<string, dynamic> dic = new Dictionary<string, dynamic>();
             dic.Add("commentaire",comm);
+            dic.Add("note", note);
             dic.Add("joueur",joueur.Id);
             dic.Add("date",date);
             _dbal.Insert("avis",dic);

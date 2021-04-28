@@ -9,6 +9,7 @@ namespace Model.Business
     {
         private int _id;
         private string _commentaire;
+        private int _note;
         private DateTime _date;
         private Joueur _joueur;
 
@@ -42,6 +43,7 @@ namespace Model.Business
             get => _joueur;
             set => _joueur = value;
         }
+        public int Note { get => _note; set => _note = value; }
 
         #endregion
 
@@ -49,12 +51,14 @@ namespace Model.Business
         {
             _id = (int)row["id"];
             _commentaire = (string)row["commentaire"];
+            _note = (int)row["note"];
             _date = (DateTime)row["date"];
         }
         public Dictionary<string, dynamic> ToArray()
         {
             Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
             val.Add("commentaire", _commentaire);
+            val.Add("note", _note);
             val.Add("date", _date);
             val.Add("joueur", _joueur.Id);
             return val;
@@ -62,7 +66,7 @@ namespace Model.Business
 
         public override string ToString()
         {
-            return _joueur.Pseudo + " : " + _commentaire;
+            return _joueur.Pseudo + " : " + _note;
         }
     }
 }
