@@ -32,6 +32,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `PPE3_MMD`.`Avis` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `commentaire` TEXT NOT NULL,
+  `note` INT NOT NULL,
   `date` DATETIME NULL,
   `joueur` INT NULL,
   PRIMARY KEY (`id`),
