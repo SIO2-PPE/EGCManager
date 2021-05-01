@@ -72,7 +72,7 @@ namespace Model.Business
         }
         public override string ToString()
         {
-            return this._pseudo+" ===> "+this._email;
+            return this._pseudo;
         }
     }
 }

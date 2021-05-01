@@ -6,7 +6,122 @@
              xmlns:local="clr-namespace:Direction.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          Margin="24"
+          >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#322B61"
+                CornerRadius="8"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Padding="16,10"
+                >
+            <DockPanel>
+
+                <TextBlock Text="Thème"
+                           Foreground="White"
+                           FontSize="16"
+                           Margin="0,0,16,0"
+                           />
+
+                <ComboBox ItemsSource="{Binding ListThemes, Mode=OneTime}"
+                          SelectedItem="{Binding SelectedTheme}" 
+                          IsSynchronizedWithCurrentItem="True" 
+                          x:Name="SelectSite"
+                          />
+
+            </DockPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1">
+
+            <ItemsControl ItemsSource="{Binding ListAvis}">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border Background="#514C72"
+                                CornerRadius="10"
+                                Margin="16"
+                                Padding="16,10"
+                                >
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <DockPanel>
+
+                                    <TextBlock Text="{Binding Joueur}"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               Margin="0,0,10,0"
+                                               
+                                               />
+
+                                    <TextBlock Text="{Binding Date}"
+                                               VerticalAlignment="Bottom"
+                                               Margin="0,0,0,2"
+                                               Foreground="#9B96BE"
+                                               FontSize="13"
+                                               />
+
+                                </DockPanel>
+
+                                <DockPanel Grid.Column="1"
+                                           HorizontalAlignment="Right">
+
+                                    <TextBlock Text="Note : "
+                                               Foreground="#D1DBFF"
+                                               FontSize="17"
+                                               />
+
+                                    <TextBlock Text="{Binding Note}"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               
+                                               />
+
+                                </DockPanel>
+
+                                <TextBlock Text="{Binding Commentaire}"
+                                           Grid.Row="1" 
+                                           Grid.ColumnSpan="2"
+                                           TextWrapping="Wrap"
+                                   />
+
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </ScrollViewer>
+
+    </Grid>
+    
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="64" />
             <RowDefinition Height="31" />
@@ -58,5 +173,5 @@
                 </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </Grid>-->
 </UserControl>

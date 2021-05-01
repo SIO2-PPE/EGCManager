@@ -55,9 +55,9 @@
                                     <DataTemplate>
 
                                         <DockPanel Margin="0,2"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch"
-                                              >
+                                                   HorizontalAlignment="Stretch"
+                                                   VerticalAlignment="Stretch"
+                                                   >
 
                                             <TextBlock Text="{Binding Theme}"
                                                        HorizontalAlignment="Left"
