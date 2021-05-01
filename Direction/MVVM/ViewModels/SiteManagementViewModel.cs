@@ -17,6 +17,7 @@ namespace Direction.ViewModels
         private DaoSalle _daoSalle;
         private DaoHoraire _daoHoraire;
         private DaoTheme _daoTheme;
+        private DaoObstacle _daoObstacle;
 
         // LISTES
         private ObservableCollection<Site> _listSites;
@@ -24,16 +25,19 @@ namespace Direction.ViewModels
         private ObservableCollection<Horaire> _listHoraires;
         private ObservableCollection<Horaire> _listHorairesSite;
         private ObservableCollection<Theme> _listThemes;
+        private ObservableCollection<Obstacle> _listObstacles;
 
         // SELECTIONS
         private Site _selectedSite;
         private Salle _selectedSalle;
         private Horaire _selectedHoraire;
         private Horaire _selectedHoraireSite;
+        private Obstacle _selectedObstacle;
         private DateTime _dateNewDate;
         private Theme _themeActif;
         private Theme _selectedTheme;
         private string _nameNewTheme;
+        private string _nameNewObstacle;
 
         // COMMANDES
         private ICommand _addHoraireCommand;
@@ -42,30 +46,36 @@ namespace Direction.ViewModels
         private ICommand _assigneToSalleCommand;
         private ICommand _deleteThemeCommand;
         private ICommand _addThemeCommand;
+        private ICommand _addObstacleCommand;
+        private ICommand _removeObstacleCommand;
 
         #endregion
 
         #region Constructeur
 
-        public SiteManagementViewModel(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire, DaoTheme daoTheme)
+        public SiteManagementViewModel(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire, DaoTheme daoTheme, DaoObstacle daoObstacle)
         {
             // DAO
             _daoSite = daoSite;
             _daoSalle = daoSalle;
             _daoHoraire = daoHoraire;
             _daoTheme = daoTheme;
+            _daoObstacle = daoObstacle;
             // LISTES
             _listSalles = new ObservableCollection<Salle>();
             _listThemes = new ObservableCollection<Theme>(_daoTheme.GetAllTheme());
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
             _listHoraires = new ObservableCollection<Horaire>(_daoHoraire.GetAllHoraires());
+            _listObstacles = new ObservableCollection<Obstacle>(_daoObstacle.GetAllObstacle());
             // SELECTIONS
             _selectedSite = _listSites.First();
             _selectedSalle = _listSalles.First();
+            _selectedObstacle = _listObstacles.First();
             _selectedHoraire = new Horaire();
             _selectedHoraireSite = new Horaire();
             _dateNewDate = new DateTime();
             _nameNewTheme = "";
+            _nameNewObstacle = "";
         }
 
         #endregion
@@ -108,6 +118,12 @@ namespace Direction.ViewModels
         {
             get => _listThemes;
             set => _listThemes = value;
+        }
+
+        public ObservableCollection<Obstacle> ListObstacles
+        {
+            get => _listObstacles;
+            set => _listObstacles = value;
         }
 
         #endregion
@@ -223,6 +239,20 @@ namespace Direction.ViewModels
             }
         }
 
+        public Obstacle SelectedObstacle
+        {
+            get => _selectedObstacle;
+            set
+            {
+                if (value != null &&
+                    value != _selectedObstacle)
+                {
+                    _selectedObstacle = value;
+                    OnPropertyChanged("SelectedObstacle");
+                }
+            }
+        }
+
         public string NameNewTheme
         {
             get => _nameNewTheme;
@@ -234,6 +264,21 @@ namespace Direction.ViewModels
                     _nameNewTheme = value;
 
                     OnPropertyChanged("NameNewTheme");
+                }
+            }
+        }
+
+        public string NameNewObstacle
+        {
+            get => _nameNewObstacle;
+            set
+            {
+                if (value != null &&
+                    value != _nameNewObstacle)
+                {
+                    _nameNewObstacle = value;
+
+                    OnPropertyChanged("NameNewObstacle");
                 }
             }
         }
@@ -320,6 +365,32 @@ namespace Direction.ViewModels
             }
         }
 
+        private ICommand AddObstacleCommand
+        {
+            get
+            {
+                if (_addObstacleCommand == null)
+                {
+                    _addObstacleCommand = new RelayCommand(() => AddObstacle(), () => true);
+                }
+
+                return _addObstacleCommand;
+            }
+        }
+
+        private ICommand RemoveObstacleCommand
+        {
+            get
+            {
+                if (_removeObstacleCommand == null)
+                {
+                    _removeObstacleCommand = new RelayCommand(() => RemoveObstacle(), () => true);
+                }
+
+                return _removeObstacleCommand;
+            }
+        }
+
         #endregion
 
         #region Action
@@ -378,6 +449,19 @@ namespace Direction.ViewModels
             ListThemes.Add(_daoTheme.New(new Theme(NameNewTheme)));
             SelectedTheme = ListThemes.Last();
             NameNewTheme = "";
+        }
+
+        private void AddObstacle()
+        {
+            ListObstacles.Add(_daoObstacle.New(new Obstacle(NameNewObstacle)));
+            SelectedObstacle = ListObstacles.Last();
+            NameNewObstacle = "";
+        }
+
+        private void RemoveObstacle()
+        {
+            _daoObstacle.Delete(SelectedObstacle);
+            ListObstacles.Remove(SelectedObstacle);
         }
 
         #endregion

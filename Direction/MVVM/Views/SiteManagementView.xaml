@@ -7,8 +7,209 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          Margin="24"
+          >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="#322B61"
+                CornerRadius="8"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Padding="16,10"
+                >
+            <DockPanel>
+
+                <TextBlock Text="Site"
+                           Foreground="White"
+                           FontSize="16"
+                           Margin="0,0,16,0"
+                           />
+
+                <ComboBox ItemsSource="{Binding ListSites, Mode=OneTime}"
+                          SelectedItem="{Binding SelectedSite}" 
+                          IsSynchronizedWithCurrentItem="True"
+                          />
+
+                <TextBlock Text="Salle"
+                           Foreground="White"
+                           FontSize="16"
+                           Margin="0,0,16,0"
+                           />
+
+                <ComboBox ItemsSource="{Binding ListSalles, Mode=OneTime}"
+                          SelectedItem="{Binding SelectedSalle}" 
+                          IsSynchronizedWithCurrentItem="True"
+                          />
+
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            
+            <TextBlock Text="Horaire prédéfini"
+                       />
+
+            <ListBox ItemsSource="{Binding ListHoraires}"
+                     SelectedItem="{Binding SelectedHoraire}"
+                     Grid.Row="1"
+                     />
+
+            <DockPanel Grid.Row="2">
+
+                <xctk:TimePicker Value="{Binding DateNewDate}"/>
+                
+                <Button Content="Ajouter"
+                        Command="{Binding AddHoraireCommand}"
+                        />
+                
+                <Button Content="+"
+                        Command="{Binding AssigneHoraireCommand}"
+                        />
+
+            </DockPanel>
+
+
+            <TextBlock Text="Horaire du site"
+                       Grid.Column="1"
+                       />
+
+            <ListBox ItemsSource="{Binding ListHorairesSite}"
+                     SelectedItem="{Binding SelectedHoraireSite}"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     />
+
+            <Button Content="-"
+                    Command="{Binding DissosHoraireCommand}"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    />
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Thèmes"/>
+
+            <DockPanel Grid.Column="1">
+
+                <TextBlock Text="Actif : "/>
+
+                <TextBlock Text="{Binding ThemeActif}"/>
+
+            </DockPanel>
+
+            <ListBox ItemsSource="{Binding ListThemes}"
+                     SelectedItem="{Binding SelectedTheme}"
+                     Grid.Row="1"
+                     />
+
+            <Grid Grid.Column="1"
+                  Grid.Row="1"
+                  >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Content="Appliquer"
+                        Command="{Binding AssigneToSalleCommand}"
+                        />
+
+                <Button Content="Supprimer"
+                        Command="{Binding DeleteThemeCommand}"
+                        Grid.Column="1"
+                        />
+
+                <TextBox Text="{Binding NameNewTheme}"
+                         Grid.Row="1"
+                         />
+
+                <Button Content="Ajouter"
+                        Command="{Binding AddThemeCommand}"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        />
+
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Grid.RowSpan="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Obstacles"/>
+
+            <ListBox ItemsSource="{Binding ListObstacles}"
+                     SelectedItem="{Binding SelectedObstacle}"
+                     Grid.Row="1"
+                     />
+
+            <DockPanel Grid.Row="2">
+
+                <TextBox Text="{Binding NameNewObstacle}"/>
+
+                <Button Content="+"
+                        Command="{Binding AddObstacleCommand}"
+                        />
+
+                <Button Content="-"
+                        Command="{Binding RemoveObstacleCommand}"
+                        />
+
+            </DockPanel>
+
+        </Grid>
+
+    <!--<Grid.RowDefinitions>
             <RowDefinition Height="64" />
             <RowDefinition Height="31" />
             <RowDefinition />
@@ -82,7 +283,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="32" />
                             </Grid.ColumnDefinitions>
-                            <!-- <DatePicker Grid.Column="0" Margin="0,0,2,0" SelectedDate="{Binding DateNewDate}" SelectedDateFormat="Short" FirstDayOfWeek="Monday"/> -->
+                            --><!-- <DatePicker Grid.Column="0" Margin="0,0,2,0" SelectedDate="{Binding DateNewDate}" SelectedDateFormat="Short" FirstDayOfWeek="Monday"/> --><!--
                             <xctk:TimePicker Grid.Column="0" Margin="0,0,2,0" Value="{Binding DateNewDate}" />
                             <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"
                                     Command="{Binding AddHoraireCommand}" />
@@ -194,6 +395,6 @@
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

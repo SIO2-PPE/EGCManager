@@ -50,7 +50,8 @@ namespace Direction
                 new DaoSite(_dbal),
                 new DaoSalle(_dbal),
                 new DaoHoraire(_dbal),
-                new DaoTheme(_dbal)
+                new DaoTheme(_dbal),
+                new DaoObstacle(_dbal)
             );
         }
 

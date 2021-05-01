@@ -18,6 +18,14 @@ namespace Model.Business
             Hydrate(row);
         }
 
+        public Obstacle(string nom)
+        {
+            _nom = nom;
+            _type = "";
+            _description = "";
+            _photo = "";
+        }
+
         #region Getter and Setter
 
         public int Id
@@ -71,7 +79,7 @@ namespace Model.Business
         }
         public override string ToString()
         {
-            return this.Id + " ===> " + this.Nom+"-"+this.Type;
+            return _nom;
         }
     }
 }
