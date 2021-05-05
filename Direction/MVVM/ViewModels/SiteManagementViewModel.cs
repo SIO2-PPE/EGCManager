@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Model.Business;
 using Model.Data;
@@ -10,7 +11,6 @@ namespace Direction.ViewModels
 {
     public class SiteManagementViewModel : AbstractViewModel
     {
-        #region Attributs
 
         // DAO
         private DaoSite _daoSite;
@@ -23,9 +23,7 @@ namespace Direction.ViewModels
         private ObservableCollection<Site> _listSites;
         private ObservableCollection<Salle> _listSalles;
         private ObservableCollection<Horaire> _listHoraires;
-        private ObservableCollection<Horaire> _listHorairesSite;
         private ObservableCollection<Theme> _listThemes;
-        private ObservableCollection<Obstacle> _listObstacles;
 
         // SELECTIONS
         private Site _selectedSite;
@@ -49,57 +47,33 @@ namespace Direction.ViewModels
         private ICommand _addObstacleCommand;
         private ICommand _removeObstacleCommand;
 
-        #endregion
-
-        #region Constructeur
-
         public SiteManagementViewModel(DaoSite daoSite, DaoSalle daoSalle, DaoHoraire daoHoraire, DaoTheme daoTheme, DaoObstacle daoObstacle)
         {
-            // DAO
             _daoSite = daoSite;
             _daoSalle = daoSalle;
             _daoHoraire = daoHoraire;
             _daoTheme = daoTheme;
             _daoObstacle = daoObstacle;
-            // LISTES
+
             _listSalles = new ObservableCollection<Salle>();
             _listThemes = new ObservableCollection<Theme>(_daoTheme.GetAllTheme());
             ListSites = new ObservableCollection<Site>(_daoSite.GetAllSite());
             _listHoraires = new ObservableCollection<Horaire>(_daoHoraire.GetAllHoraires());
-            _listObstacles = new ObservableCollection<Obstacle>(_daoObstacle.GetAllObstacle());
-            // SELECTIONS
-            _selectedSite = _listSites.First();
-            _selectedSalle = _listSalles.First();
-            _selectedObstacle = _listObstacles.First();
-            _selectedHoraire = new Horaire();
-            _selectedHoraireSite = new Horaire();
-            _dateNewDate = new DateTime();
-            _nameNewTheme = "";
-            _nameNewObstacle = "";
         }
-
-        #endregion
-
-        #region BINDING LISTES
 
         public ObservableCollection<Site> ListSites
         {
             get => _listSites;
-            set
-            {
+            set {
                 _listSites = value;
-                if (_listSites.First() != null) SelectedSite = _listSites.First();
+                SelectedSite = _listSites.First();
             }
         }
 
         public ObservableCollection<Salle> ListSalles
         {
             get => _listSalles;
-            set
-            {
-                _listSalles = value;
-                if (_listSalles.First() != null) SelectedSalle = _listSalles.First();
-            }
+            set => _listSalles = value;
         }
 
         public ObservableCollection<Horaire> ListHoraires
@@ -108,58 +82,33 @@ namespace Direction.ViewModels
             set => _listHoraires = value;
         }
 
-        public ObservableCollection<Horaire> ListHorairesSite
-        {
-            get => _listHorairesSite;
-            set => _listHorairesSite = value;
-        }
+        public ObservableCollection<Horaire> ListHorairesSite { get; set; }
 
-        public ObservableCollection<Theme> ListThemes
-        {
-            get => _listThemes;
-            set => _listThemes = value;
-        }
+        public ObservableCollection<Theme> ListThemes { get; set; }
 
-        public ObservableCollection<Obstacle> ListObstacles
-        {
-            get => _listObstacles;
-            set => _listObstacles = value;
-        }
-
-        #endregion
-
-        #region BINDING SELECTIONS
+        public ObservableCollection<Obstacle> ListObstacles { get; set; }
 
         public Site SelectedSite
         {
             get => _selectedSite;
-            set
-            {
-                if (value != null &&
-                    value != _selectedSite)
-                {
-                    _selectedSite = value;
-                    RefreshListSalle();
-                    SelectedSalle = ListSalles.First();
-                    ListHorairesSite = new ObservableCollection<Horaire>(_daoHoraire.GetHorairesForSite(_selectedSite));
-                    OnPropertyChanged("SelectedSite");
-                    OnPropertyChanged("ListSalles");
-                    OnPropertyChanged("ListHorairesSite");
-                }
+            set {
+                _selectedSite = value;
+                RefreshListSalle();
+                ListHorairesSite = new ObservableCollection<Horaire>(_daoHoraire.GetHorairesForSite(_selectedSite));
+                OnPropertyChanged("SelectedSite");
+                OnPropertyChanged("ListSalles");
+                OnPropertyChanged("ListHorairesSite");
             }
         }
 
         public Salle SelectedSalle
         {
             get => _selectedSalle;
-            set
-            {
-                if (value != null &&
-                    value != _selectedSalle)
+            set {
+                if (value != _selectedSalle &&
+                    value != null)
                 {
                     _selectedSalle = value;
-                    ThemeActif = _selectedSalle.Theme;
-                    OnPropertyChanged("SelectedSalle");
                 }
             }
         }
@@ -167,125 +116,66 @@ namespace Direction.ViewModels
         public Horaire SelectedHoraire
         {
             get => _selectedHoraire;
-            set
-            {
-                if (value != null &&
-                    value != _selectedHoraire)
-                {
-                    _selectedHoraire = value;
-
-                    OnPropertyChanged("SelectedHoraire");
-                }
+            set {
+                _selectedHoraire = value;
             }
         }
 
         public Horaire SelectedHoraireSite
         {
             get => _selectedHoraireSite;
-            set
-            {
-                if (value != null &&
-                    value != _selectedHoraireSite)
-                {
-                    _selectedHoraireSite = value;
-
-                    OnPropertyChanged("SelectedHoraireSite");
-                }
-            }
-        }
-
-        public DateTime DateNewDate
-        {
-            get => _dateNewDate;
-            set
-            {
-                if (value != null &&
-                    value != _dateNewDate)
-                {
-                    _dateNewDate = value;
-
-                    OnPropertyChanged("DateNewDate");
-                }
-            }
-        }
-
-        public Theme ThemeActif
-        {
-            get => _themeActif;
-            set
-            {
-                if (value != null &&
-                    value != _themeActif)
-                {
-                    _themeActif = value;
-
-                    OnPropertyChanged("ThemeActif");
-                }
-            }
-        }
-
-        public Theme SelectedTheme
-        {
-            get => _selectedTheme;
-            set
-            {
-                if (value != null &&
-                    value != _selectedTheme)
-                {
-                    _selectedTheme = value;
-
-                    OnPropertyChanged("SelectedTheme");
-                }
+            set {
+                _selectedHoraireSite = value;
             }
         }
 
         public Obstacle SelectedObstacle
         {
             get => _selectedObstacle;
-            set
-            {
-                if (value != null &&
-                    value != _selectedObstacle)
-                {
-                    _selectedObstacle = value;
-                    OnPropertyChanged("SelectedObstacle");
-                }
+            set {
+                _selectedObstacle = value;
+            }
+        }
+
+        public DateTime DateNewDate
+        {
+            get => _dateNewDate;
+            set {
+                _dateNewDate = value;
+            }
+        }
+
+        public Theme ThemeActif
+        {
+            get => _themeActif;
+            set {
+                _themeActif = value;
+            }
+        }
+
+        public Theme SelectedTheme
+        {
+            get => _selectedTheme;
+            set {
+                _selectedTheme = value;
             }
         }
 
         public string NameNewTheme
         {
             get => _nameNewTheme;
-            set
-            {
-                if (value != null &&
-                    value != _nameNewTheme)
-                {
-                    _nameNewTheme = value;
-
-                    OnPropertyChanged("NameNewTheme");
-                }
+            set {
+                _nameNewTheme = value;
             }
         }
 
         public string NameNewObstacle
         {
             get => _nameNewObstacle;
-            set
-            {
-                if (value != null &&
-                    value != _nameNewObstacle)
-                {
-                    _nameNewObstacle = value;
-
-                    OnPropertyChanged("NameNewObstacle");
-                }
+            set {
+                _nameNewObstacle = value;
             }
         }
-
-        #endregion
-
-        #region Commande (boutons)
 
         public ICommand AddHoraireCommand
         {
@@ -295,7 +185,6 @@ namespace Direction.ViewModels
                 {
                     _addHoraireCommand = new RelayCommand(() => AddHoraire(), () => true);
                 }
-
                 return _addHoraireCommand;
             }
         }
@@ -308,7 +197,6 @@ namespace Direction.ViewModels
                 {
                     _assigneHoraireCommand = new RelayCommand(() => AssigneHoraire(), () => true);
                 }
-
                 return _assigneHoraireCommand;
             }
         }
@@ -321,7 +209,6 @@ namespace Direction.ViewModels
                 {
                     _dissosHoraireCommand = new RelayCommand(() => DissosHoraire(), () => true);
                 }
-
                 return _dissosHoraireCommand;
             }
         }
@@ -334,7 +221,6 @@ namespace Direction.ViewModels
                 {
                     _assigneToSalleCommand = new RelayCommand(() => AssigneToSalle(), () => true);
                 }
-
                 return _assigneToSalleCommand;
             }
         }
@@ -347,7 +233,6 @@ namespace Direction.ViewModels
                 {
                     _deleteThemeCommand = new RelayCommand(() => DeleteTheme(), () => true);
                 }
-
                 return _deleteThemeCommand;
             }
         }
@@ -360,12 +245,11 @@ namespace Direction.ViewModels
                 {
                     _addThemeCommand = new RelayCommand(() => AddTheme(), () => true);
                 }
-
                 return _addThemeCommand;
             }
         }
 
-        private ICommand AddObstacleCommand
+        public ICommand AddObstacleCommand
         {
             get
             {
@@ -373,12 +257,11 @@ namespace Direction.ViewModels
                 {
                     _addObstacleCommand = new RelayCommand(() => AddObstacle(), () => true);
                 }
-
                 return _addObstacleCommand;
             }
         }
 
-        private ICommand RemoveObstacleCommand
+        public ICommand RemoveObstacleCommand
         {
             get
             {
@@ -386,15 +269,10 @@ namespace Direction.ViewModels
                 {
                     _removeObstacleCommand = new RelayCommand(() => RemoveObstacle(), () => true);
                 }
-
                 return _removeObstacleCommand;
             }
         }
-
-        #endregion
-
-        #region Action
-
+        
         private void AddHoraire()
         {
             if (_dateNewDate != null)
@@ -443,6 +321,15 @@ namespace Direction.ViewModels
                 ListThemes.Remove(SelectedTheme);
             }
         }
+        
+        private void AddObstacle()
+        {
+            MessageBox.Show("AddObstacle()");
+        }
+        private void RemoveObstacle()
+        {
+            MessageBox.Show("RemoveObstacle()");
+        }
 
         private void AddTheme()
         {
@@ -450,24 +337,7 @@ namespace Direction.ViewModels
             SelectedTheme = ListThemes.Last();
             NameNewTheme = "";
         }
-
-        private void AddObstacle()
-        {
-            ListObstacles.Add(_daoObstacle.New(new Obstacle(NameNewObstacle)));
-            SelectedObstacle = ListObstacles.Last();
-            NameNewObstacle = "";
-        }
-
-        private void RemoveObstacle()
-        {
-            _daoObstacle.Delete(SelectedObstacle);
-            ListObstacles.Remove(SelectedObstacle);
-        }
-
-        #endregion
-
-        #region Autre methode
-
+        
         private bool IsNotNull(dynamic val, string msg, bool isnot = true)
         {
             bool r = val != null;
@@ -481,7 +351,7 @@ namespace Direction.ViewModels
             _listSalles.Clear();
             foreach (Salle salle in _daoSalle.GetBySite(_selectedSite))
             {
-                foreach (Theme theme in ListThemes)
+                foreach (Theme theme in _listThemes)
                 {
                     if (salle.Theme.Id == theme.Id) salle.Theme = theme;
                 }
@@ -503,7 +373,5 @@ namespace Direction.ViewModels
 
             return r;
         }
-
-        #endregion
     }
 }
