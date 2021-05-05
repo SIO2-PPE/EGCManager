@@ -10,17 +10,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Direction.ViewModels;
+using Model.Data;
 
 namespace Direction.Views
 {
     /// <summary>
     /// Logique d'interaction pour DashboardView.xaml
     /// </summary>
-    public partial class DashboardView : UserControl
+    public partial class DashboardView : Page
     {
-        public DashboardView()
+        public DashboardView(Dbal dbal)
         {
             InitializeComponent();
+            DataContext = new DashboardViewModel(
+                new DaoPartie(dbal),
+                new DaoSite(dbal)
+            );
         }
     }
 }

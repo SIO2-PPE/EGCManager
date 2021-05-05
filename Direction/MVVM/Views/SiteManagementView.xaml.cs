@@ -10,17 +10,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Direction.ViewModels;
+using Model.Data;
 
 namespace Direction.Views
 {
     /// <summary>
     /// Logique d'interaction pour SiteManagementView.xaml
     /// </summary>
-    public partial class SiteManagementView : UserControl
+    public partial class SiteManagementView : Page
     {
-        public SiteManagementView()
+        public SiteManagementView(Dbal dbal)
         {
             InitializeComponent();
+            DataContext = new SiteManagementViewModel(
+                new DaoSite(dbal),
+                new DaoSalle(dbal),
+                new DaoHoraire(dbal),
+                new DaoTheme(dbal),
+                new DaoObstacle(dbal)
+            );
         }
     }
 }
