@@ -11,8 +11,8 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            DateTime deb = new DateTime(2021, 02, 25);
-            DateTime fin = new DateTime(2021, 02, 28);
+            DateTime deb = DateTime.Now.AddDays(-1);
+            DateTime fin = DateTime.Now.AddDays(1);
 
             Hydrate(deb,fin);
         }
