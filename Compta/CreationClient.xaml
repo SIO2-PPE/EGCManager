@@ -147,16 +147,7 @@
         <DatePicker x:Name="Selection_Date" Text="{Binding DateNaissance}" HorizontalAlignment="Left" Height="31" Margin="427,164,0,0" VerticalAlignment="Top" Width="204"/>
         <TextBox x:Name="Box_Email" Text="{Binding EmailClient}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,201,152,187"/>
         <TextBox x:Name="Box_Numero" Text="{Binding NumeroTelephone}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,235,152,153"/>
-        <TextBox x:Name="Box_Adress" Text="{Binding Adresse}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,269,152,119" RenderTransformOrigin="0.5,0.5">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
+        <TextBox x:Name="Box_Adress" Text="{Binding Adresse}" Canvas.Left="424" TextWrapping="Wrap" Canvas.Top="215" TextAlignment="Center" Margin="427,269,152,119" RenderTransformOrigin="0.5,0.5"/>
         <Button Content="← Retour" VerticalAlignment="Top" Width="89" Height="30"
                 Background="#FF64CCF1"
                 Foreground="White"
