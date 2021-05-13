@@ -39,8 +39,7 @@
                            />
 
                 <ComboBox ItemsSource="{Binding ListSites, Mode=OneTime}"
-                          SelectedIndex="{Binding SelectedIndexSite}"
-                          SelectedItem="{Binding SelectedSite}"
+                          SelectedItem="{Binding SelectedSite}" 
                           IsSynchronizedWithCurrentItem="True"
                           />
 
@@ -73,7 +72,6 @@
 
             
             <TextBlock Text="Horaire prédéfini"
-                       Foreground="White"
                        />
 
             <ListBox ItemsSource="{Binding ListHoraires}"
@@ -97,7 +95,6 @@
 
 
             <TextBlock Text="Horaire du site"
-                       Foreground="White"
                        Grid.Column="1"
                        />
 
@@ -123,23 +120,17 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Thèmes"
-                       Foreground="White"
-                       />
+            <TextBlock Text="Thèmes"/>
 
             <DockPanel Grid.Column="1">
 
-                <TextBlock Text="Actif : "
-                           Foreground="White"
-                           />
+                <TextBlock Text="Actif : "/>
 
-                <TextBlock Text="{Binding ThemeActif}"
-                           Foreground="White"
-                           />
+                <TextBlock Text="{Binding ThemeActif}"/>
 
             </DockPanel>
 
@@ -173,7 +164,6 @@
 
                 <TextBox Text="{Binding NameNewTheme}"
                          Grid.Row="1"
-                         Foreground="White"
                          />
 
                 <Button Content="Ajouter"
@@ -196,9 +186,7 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Obstacles"
-                       Foreground="White"
-                       />
+            <TextBlock Text="Obstacles"/>
 
             <ListBox ItemsSource="{Binding ListObstacles}"
                      SelectedItem="{Binding SelectedObstacle}"
@@ -207,9 +195,7 @@
 
             <DockPanel Grid.Row="2">
 
-                <TextBox Text="{Binding NameNewObstacle}"
-                         Foreground="White"
-                         />
+                <TextBox Text="{Binding NameNewObstacle}"/>
 
                 <Button Content="+"
                         Command="{Binding AddObstacleCommand}"

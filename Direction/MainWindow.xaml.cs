@@ -56,6 +56,5 @@ namespace Direction
         {
             this.Close();
         }
-
     }
 }
