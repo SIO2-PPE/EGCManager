@@ -13,7 +13,7 @@
         Background="Transparent"
         AllowsTransparency="True">
 
-    <!--<Window.Resources>
+    <Window.Resources>
         
         <DataTemplate x:Name="DashboardViewTemplate"
                       DataType="{x:Type viewmodels:DashboardViewModel}"
@@ -33,7 +33,7 @@
             <views:CustomerReviewsView DataContext="{Binding}"/>
         </DataTemplate>
         
-    </Window.Resources>-->
+    </Window.Resources>
 
     <Border Background="#272537"
             CornerRadius="18"
@@ -111,16 +111,11 @@
                 </StackPanel>
             </Border>
 
-            <!--<ContentControl Content="{Binding}"
+            <ContentControl Content="{Binding}"
                             Grid.Row="1"
                             Grid.Column="1"
-                            />-->
+                            />
 
-            <Frame x:Name="Body"
-                   Grid.Row="1"
-                   Grid.Column="1"
-                   />
-            
         </Grid>
     </Border>
 

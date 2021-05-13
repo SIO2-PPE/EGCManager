@@ -488,8 +488,6 @@ namespace Direction.ViewModels
 
                 ListSalles.Add(salle);
             }
-
-            SelectedSalle = ListSalles.First();
         }
 
         private bool VerifThemeNotUse(Theme theme)

@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using Direction.ViewModels;
 using Model.Data;
 using Direction.Models;
-using Direction.Views;
 
 namespace Direction
 {
@@ -29,7 +28,7 @@ namespace Direction
         {
             InitializeComponent();
             _dbal = new Dbal("ppe3_mmd");
-            Body.Content = new DashboardView(_dbal);
+            DataContext = new DashboardViewModel(new DaoPartie(_dbal), new DaoSite(_dbal));
         }
 
         private void TopBar_MouseDown(object sender, RoutedEventArgs e)
@@ -39,17 +38,29 @@ namespace Direction
 
         private void Dashboard_Clicked(object sender, RoutedEventArgs e)
         {
-            Body.Content = new DashboardView(_dbal);
+            DataContext = new DashboardViewModel(
+                new DaoPartie(_dbal),
+                new DaoSite(_dbal)
+            );
         }
 
         private void SiteManagement_Clicked(object sender, RoutedEventArgs e)
         {
-            Body.Content = new SiteManagementView(_dbal);
+            DataContext = new SiteManagementViewModel(
+                new DaoSite(_dbal),
+                new DaoSalle(_dbal),
+                new DaoHoraire(_dbal),
+                new DaoTheme(_dbal),
+                new DaoObstacle(_dbal)
+            );
         }
 
         private void CustomerReviews_Clicked(object sender, RoutedEventArgs e)
         {
-            Body.Content = new CustomerReviewsView(_dbal);
+            DataContext = new CustomerReviewsViewModel(
+                new DaoTheme(_dbal),
+                new DaoAvis(_dbal)
+            );
         }
 
         private void Exit_Button(object sender, RoutedEventArgs e)

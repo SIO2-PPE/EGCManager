@@ -10,23 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Direction.ViewModels;
-using Model.Data;
 
 namespace Direction.Views
 {
     /// <summary>
     /// Logique d'interaction pour CustomerReviewsView.xaml
     /// </summary>
-    public partial class CustomerReviewsView : Page
+    public partial class CustomerReviewsView : UserControl
     {
-        public CustomerReviewsView(Dbal dbal)
+        public CustomerReviewsView()
         {
             InitializeComponent();
-            DataContext = new CustomerReviewsViewModel(
-                new DaoTheme(dbal),
-                new DaoAvis(dbal)
-            );
         }
     }
 }
