@@ -62,5 +62,19 @@ namespace Model.Data
             _dbal.Insert("theme",theme.ToArray());
             return new Theme(_dbal.Select("theme","nom = '" + theme.Nom + "'").Rows[0]);
         }
+
+        public bool VerifNotUse(Theme theme)
+        {
+            DataTable tab = _dbal.Select("theme_salle");
+            bool r = true;
+            foreach (DataRow row in tab.Rows)
+            {
+                if ((int)row["theme"] == theme.Id)
+                {
+                    r = false;
+                }
+            }
+            return r;
+        }
     }
 }

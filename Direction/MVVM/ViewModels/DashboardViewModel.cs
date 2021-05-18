@@ -28,7 +28,7 @@ namespace Direction.ViewModels
             set
             {
                 _cityList = value;
-                OnPropertyChanged("ListSite");
+                OnPropertyChanged("CityList");
             }
         }
 

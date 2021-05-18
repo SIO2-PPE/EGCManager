@@ -1,400 +1,258 @@
 ﻿<UserControl x:Class="Direction.Views.SiteManagementView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Direction.Views"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch"
-          Margin="24"
-          >
+          VerticalAlignment="Stretch">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Border Grid.ColumnSpan="2"
                 Background="#322B61"
                 CornerRadius="8"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Padding="16,10"
-                >
+                Margin="24,24,0,0">
             <DockPanel>
 
                 <TextBlock Text="Site"
                            Foreground="White"
                            FontSize="16"
-                           Margin="0,0,16,0"
-                           />
+                           Margin="0,0,16,0" />
 
                 <ComboBox ItemsSource="{Binding ListSites, Mode=OneTime}"
-                          SelectedItem="{Binding SelectedSite}" 
-                          IsSynchronizedWithCurrentItem="True"
-                          />
+                          SelectedItem="{Binding SelectedSite}"
+                          IsSynchronizedWithCurrentItem="True" />
 
                 <TextBlock Text="Salle"
                            Foreground="White"
                            FontSize="16"
-                           Margin="0,0,16,0"
-                           />
+                           Margin="0,0,16,0" />
 
                 <ComboBox ItemsSource="{Binding ListSalles, Mode=OneTime}"
-                          SelectedItem="{Binding SelectedSalle}" 
-                          IsSynchronizedWithCurrentItem="True"
-                          />
+                          SelectedItem="{Binding SelectedSalle}"
+                          IsSynchronizedWithCurrentItem="True" />
 
             </DockPanel>
         </Border>
 
-        <Grid Grid.Row="1">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="22"/>
-                <RowDefinition/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-
-            
-            <TextBlock Text="Horaire prédéfini"
-                       />
-
-            <ListBox ItemsSource="{Binding ListHoraires}"
-                     SelectedItem="{Binding SelectedHoraire}"
-                     Grid.Row="1"
-                     />
-
-            <DockPanel Grid.Row="2">
-
-                <xctk:TimePicker Value="{Binding DateNewDate}"/>
-                
-                <Button Content="Ajouter"
-                        Command="{Binding AddHoraireCommand}"
-                        />
-                
-                <Button Content="+"
-                        Command="{Binding AssigneHoraireCommand}"
-                        />
-
-            </DockPanel>
-
-
-            <TextBlock Text="Horaire du site"
-                       Grid.Column="1"
-                       />
-
-            <ListBox ItemsSource="{Binding ListHorairesSite}"
-                     SelectedItem="{Binding SelectedHoraireSite}"
-                     Grid.Column="1"
-                     Grid.Row="1"
-                     />
-
-            <Button Content="-"
-                    Command="{Binding DissosHoraireCommand}"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    />
-
-        </Grid>
-
-        <Grid Grid.Row="2">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Thèmes"/>
-
-            <DockPanel Grid.Column="1">
-
-                <TextBlock Text="Actif : "/>
-
-                <TextBlock Text="{Binding ThemeActif}"/>
-
-            </DockPanel>
-
-            <ListBox ItemsSource="{Binding ListThemes}"
-                     SelectedItem="{Binding SelectedTheme}"
-                     Grid.Row="1"
-                     />
-
-            <Grid Grid.Column="1"
-                  Grid.Row="1"
-                  >
+        <Border Grid.Row="1"
+                Background="#514C72"
+                CornerRadius="8"
+                Padding="16,10"
+                Margin="24,24,0,0">
+            <Grid>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <Button Content="Appliquer"
-                        Command="{Binding AssigneToSalleCommand}"
-                        />
 
-                <Button Content="Supprimer"
-                        Command="{Binding DeleteThemeCommand}"
-                        Grid.Column="1"
-                        />
+                <TextBlock Text="Horaire prédéfini"
+                           Foreground="White"
+                           TextAlignment="Center" />
 
-                <TextBox Text="{Binding NameNewTheme}"
+                <ListBox ItemsSource="{Binding ListHoraires}"
+                         SelectedItem="{Binding SelectedHoraire}"
                          Grid.Row="1"
-                         />
+                         Margin="0,4" />
 
-                <Button Content="Ajouter"
-                        Command="{Binding AddThemeCommand}"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        />
+                <DockPanel Grid.Row="2">
+
+                    <xctk:TimePicker Value="{Binding DateNewDate}"
+                                     Width="80" />
+
+                    <Button Content="Ajouter"
+                            Command="{Binding AddHoraireCommand}"
+                            Margin="4,0,0,0" />
+
+                </DockPanel>
+
+                <StackPanel Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Margin="4,0">
+
+                    <Button Content="+"
+                            Command="{Binding AssigneHoraireCommand}"
+                            Padding="4,0"
+                            Margin="0,0,0,4" />
+
+                    <Button Content="-"
+                            Command="{Binding DissosHoraireCommand}"
+                            Padding="4,0" />
+
+                </StackPanel>
+
+
+                <TextBlock Text="Horaire du site"
+                           Grid.Column="2"
+                           Foreground="White"
+                           TextAlignment="Center" />
+
+                <ListBox ItemsSource="{Binding ListHorairesSite}"
+                         SelectedItem="{Binding SelectedHoraireSite}"
+                         Grid.Column="2"
+                         Grid.Row="1"
+                         Margin="0,4" />
 
             </Grid>
+        </Border>
 
-        </Grid>
+        <Border Grid.Row="2"
+                Background="#514C72"
+                CornerRadius="8"
+                Padding="16,10"
+                Margin="24,24,0,24">
+            <Grid>
 
-        <Grid Grid.Column="1"
-              Grid.Row="1"
-              Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition/>
-                <RowDefinition Height="20"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Obstacles"/>
-
-            <ListBox ItemsSource="{Binding ListObstacles}"
-                     SelectedItem="{Binding SelectedObstacle}"
-                     Grid.Row="1"
-                     />
-
-            <DockPanel Grid.Row="2">
-
-                <TextBox Text="{Binding NameNewObstacle}"/>
-
-                <Button Content="+"
-                        Command="{Binding AddObstacleCommand}"
-                        />
-
-                <Button Content="-"
-                        Command="{Binding RemoveObstacleCommand}"
-                        />
-
-            </DockPanel>
-
-        </Grid>
-
-    <!--<Grid.RowDefinitions>
-            <RowDefinition Height="64" />
-            <RowDefinition Height="31" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition />
-                <ColumnDefinition Width="128" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="1" Content="Site" VerticalAlignment="Center" />
-            <ComboBox Grid.Column="2" ItemsSource="{Binding ListSites, Mode=OneTime}"
-                      SelectedItem="{Binding SelectedSite}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSite"
-                      VerticalAlignment="Center" />
-            <Label Grid.Column="4" Content="Salle" VerticalAlignment="Center" />
-            <ComboBox Grid.Column="5" ItemsSource="{Binding ListSalles, Mode=OneTime}"
-                      SelectedItem="{Binding SelectedSalle}" IsSynchronizedWithCurrentItem="True" x:Name="SelectSalle"
-                      VerticalAlignment="Center" />
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Modifier les horaires du site" FontSize="18" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" Text="Modifier le thème de la salle" FontSize="18" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-        </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="16,16,8,16">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="32" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+
+                <TextBlock Text="Thèmes"
+                           Foreground="White"
+                           TextAlignment="Center" />
+
+                <ListBox ItemsSource="{Binding ListThemes}"
+                         SelectedItem="{Binding SelectedTheme}"
+                         Grid.Row="1" />
+
+                <Grid Grid.Column="1"
+                      Grid.Row="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Horaire prédéfini" HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1" Text="Liste des horaire du site" HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.ColumnSpan="2"
+                               Margin="2"
+                               >
+
+                        <TextBlock Text="Actif : "
+                                   Foreground="White" />
+
+                        <TextBlock Text="{Binding ThemeActif}"
+                                   Foreground="White" />
+
+                    </DockPanel>
+
+                    <Button Content="Appliquer"
+                            Command="{Binding AssigneToSalleCommand}"
+                            Grid.Row="1"
+                            Padding="4,2"
+                            Margin="2"
+                            />
+
+                    <Button Content="Suppr."
+                            Command="{Binding DeleteThemeCommand}"
+                            Grid.Row="1"
+                            Grid.Column="1" 
+                            Padding="4,2"
+                            Margin="2"
+                            />
+
+                    <TextBox Text="{Binding NameNewTheme}"
+                             Grid.Row="2"
+                             Padding="2"
+                             Margin="2"
+                             />
+
+                    <Button Content="Ajouter"
+                            Command="{Binding AddThemeCommand}"
+                            Grid.Row="2"
+                            Grid.Column="1" 
+                            Padding="4,2"
+                            Margin="2"
+                            />
+
+                    <TextBlock Text="{Binding ErrorTheme}"
+                               Grid.Row="3"
+                               Grid.ColumnSpan="2"
+                               Foreground="#FF7070"
+                               TextWrapping="Wrap" />
+
                 </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0,0,4,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="36" />
-                        </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" ItemsSource="{Binding ListHoraires}"
-                                 SelectedItem="{Binding SelectedHoraire}" />
-                        <Grid Grid.Row="1" Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="164" />
-                                <ColumnDefinition Width="64" />
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="32" />
-                            </Grid.ColumnDefinitions>
-                            --><!-- <DatePicker Grid.Column="0" Margin="0,0,2,0" SelectedDate="{Binding DateNewDate}" SelectedDateFormat="Short" FirstDayOfWeek="Monday"/> --><!--
-                            <xctk:TimePicker Grid.Column="0" Margin="0,0,2,0" Value="{Binding DateNewDate}" />
-                            <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"
-                                    Command="{Binding AddHoraireCommand}" />
-                            <Button Grid.Column="3" Content="+" Command="{Binding AssigneHoraireCommand}" />
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="36" />
-                        </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" ItemsSource="{Binding ListHorairesSite}"
-                                 SelectedItem="{Binding SelectedHoraireSite}" />
-                        <Grid Grid.Row="1" Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="32" />
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Content="-" Command="{Binding DissosHoraireCommand}" />
-                        </Grid>
-                    </Grid>
-                </Grid>
+
             </Grid>
-            <Grid Column="1">
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Background="#514C72"
+                CornerRadius="8"
+                Padding="16,10"
+                Margin="24,24,24,24">
+            <Grid>
+
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
                     <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="8,16,16,16">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="32" />
-                        <RowDefinition Height="32" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Thème actif : " VerticalAlignment="Center"
-                                   HorizontalAlignment="Right" />
-                        <TextBlock Grid.Column="1" Text="{Binding ThemeActif}" VerticalAlignment="Center"
-                                   HorizontalAlignment="Left" />
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <TextBlock Text="Liste des thème" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition Height="32" />
-                                <RowDefinition Height="32" />
-                            </Grid.RowDefinitions>
-                            <ListBox Grid.Row="0" ItemsSource="{Binding ListThemes}"
-                                     SelectedItem="{Binding SelectedTheme}" />
-                            <Grid Grid.Row="1" Margin="0,4,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="100" />
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Margin="0,0,2,0" Content="Appliquer à la salle"
-                                        Command="{Binding AssigneToSalleCommand}" />
-                                <Button Grid.Column="1" Margin="2,0,0,0" Content="Supprimer"
-                                        Command="{Binding DeleteThemeCommand}" />
-                            </Grid>
-                            <Grid Grid.Row="2" Margin="0,4,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="100" />
-                                </Grid.ColumnDefinitions>
-                                <TextBox Grid.Column="0" Margin="0,0,2,0" TextAlignment="Left" FontSize="16"
-                                         Text="{Binding NameNewTheme}" />
-                                <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"
-                                        Command="{Binding AddThemeCommand}" />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="1" Margin="8,16,16,16">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="32" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Obstacle" />
-                    <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="32" />
-                        </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" ItemsSource="{Binding ListThemes}"
-                                 SelectedItem="{Binding SelectedTheme}" />
-                        <Grid Grid.Row="1" Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Margin="0,0,2,0" TextAlignment="Left" FontSize="16"
-                                     Text="{Binding NameNewTheme}" />
-                            <Button Grid.Column="1" Content="Ajouter" Margin="2,0,0,0"
-                                    Command="{Binding AddThemeCommand}" />
-                            <Button Grid.Column="1" Margin="2,0,0,0" Content="Supprimer"
-                                    Command="{Binding DeleteThemeCommand}" />
-                        </Grid>
-                    </Grid>
-                </Grid>
+
+                <TextBlock Text="Obstacles"
+                           Foreground="White"
+                           TextAlignment="Center" />
+
+                <ListBox ItemsSource="{Binding ListObstacles}"
+                         SelectedItem="{Binding SelectedObstacle}"
+                         Grid.Row="1" />
+
+                <DockPanel Grid.Row="2">
+
+                    <TextBox Text="{Binding NameNewObstacle}" />
+
+                    <Button Content="+"
+                            Command="{Binding AddObstacleCommand}" />
+
+                    <Button Content="-"
+                            Command="{Binding RemoveObstacleCommand}" />
+
+                </DockPanel>
+
             </Grid>
-        </Grid>-->
+        </Border>
+
     </Grid>
 </UserControl>

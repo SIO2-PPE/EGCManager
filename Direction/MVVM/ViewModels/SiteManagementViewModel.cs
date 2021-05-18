@@ -38,6 +38,7 @@ namespace Direction.ViewModels
         private Theme _selectedTheme;
         private string _nameNewTheme;
         private string _nameNewObstacle;
+        private string _errorTheme;
 
         // COMMANDES
         private ICommand _addHoraireCommand;
@@ -391,6 +392,16 @@ namespace Direction.ViewModels
             }
         }
 
+        public string ErrorTheme 
+        { 
+            get => _errorTheme;
+            set
+            {
+                _errorTheme = value;
+                OnPropertyChanged("ErrorTheme");
+            }
+        }
+
         #endregion
 
         #region Action
@@ -432,23 +443,36 @@ namespace Direction.ViewModels
                 int index = ListSalles.IndexOf(_selectedSalle);
                 RefreshListSalle();
                 SelectedSalle = ListSalles[index];
+                ErrorTheme = "";
             }
         }
 
         private void DeleteTheme()
         {
-            if (VerifThemeNotUse(SelectedTheme))
+            if (_daoTheme.VerifNotUse(SelectedTheme))
             {
                 _daoTheme.Delete(SelectedTheme);
                 ListThemes.Remove(SelectedTheme);
+            }
+            else
+            {
+                ErrorTheme = "Ce thème est attribuer à une salle";
             }
         }
 
         private void AddTheme()
         {
-            ListThemes.Add(_daoTheme.New(new Theme(NameNewTheme)));
-            SelectedTheme = ListThemes.Last();
-            NameNewTheme = "";
+            if (NameNewTheme != "")
+            {
+                ListThemes.Add(_daoTheme.New(new Theme(NameNewTheme)));
+                SelectedTheme = ListThemes.Last();
+                NameNewTheme = "";
+                ErrorTheme = "";
+            }
+            else
+            {
+                ErrorTheme = "Nom du thème obligatoire";
+            }
         }
 
         private void AddObstacle()
@@ -490,7 +514,7 @@ namespace Direction.ViewModels
             }
         }
 
-        private bool VerifThemeNotUse(Theme theme)
+        /*private bool VerifThemeNotUse(Theme theme)
         {
             bool r = true;
             foreach (Salle salle in _daoSalle.GetAll())
@@ -502,7 +526,7 @@ namespace Direction.ViewModels
             }
 
             return r;
-        }
+        }*/
 
         #endregion
     }

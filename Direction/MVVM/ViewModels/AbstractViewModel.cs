@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Direction.ViewModels
 {
-    public abstract class AbstractViewModel
+    public abstract class AbstractViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
