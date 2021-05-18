@@ -29,7 +29,7 @@ namespace Model.Data
         public Obstacle New(Obstacle obstacle)
         {
             _dbal.Insert("obstacle", obstacle.ToArray());
-            return new Obstacle(_dbal.Select("theme", "nom = '" + obstacle.Nom + "'").Rows[0]);
+            return new Obstacle(_dbal.Select("obstacle", "nom = '" + obstacle.Nom + "'").Rows[0]);
         }
 
         public void Delete(Obstacle obstacle)
@@ -37,13 +37,18 @@ namespace Model.Data
             _dbal.Delete("obstacle", "id = " + obstacle.Id);
         }
 
-        /*public void AddObstacleToPartie(Obstacle o, Partie p, int position)
+        public bool IsNotUse(Obstacle obstacle)
         {
-            Dictionary<string, dynamic> val = new Dictionary<string, dynamic>();
-            val.Add("obstacle", o.Id);
-            val.Add("partie", p.Id);
-            val.Add("position", position);
-            _dbal.Insert("obstacle_partie", val);
-        }*/
+            DataTable tab = _dbal.Select("obstacle_partie");
+            bool r = true;
+            foreach (DataRow row in tab.Rows)
+            {
+                if ((int)row["obstacle"] == obstacle.Id)
+                {
+                    r = false;
+                }
+            }
+            return r;
+        }
     }
 }

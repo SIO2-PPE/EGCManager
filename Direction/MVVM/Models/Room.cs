@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Direction.Models
+﻿namespace Direction.Models
 {
     public class Room
     {
-        private string theme;
-        private int nbOfGame;
+        private string _theme;
+        private int _nbOfGame;
 
         public Room(string theme, int nbOfGame)
         {
-            this.theme = theme;
-            this.nbOfGame = nbOfGame;
+            _theme = theme;
+            _nbOfGame = nbOfGame;
         }
 
-        public string Theme { get => theme; set => theme = value; }
-        public int NbOfGame { get => nbOfGame; set => nbOfGame = value; }
+        public string Theme { get => _theme; set => _theme = value; }
+        public int NbOfGame { get => _nbOfGame; set => _nbOfGame = value; }
     }
 }

@@ -93,5 +93,20 @@ namespace Model.Data
                 "horaire = " + horaire.Id
                 );
         }
+        
+        public bool Exist(TimeSpan heure)
+        {
+            try
+            {
+                DataTable tab = _dbal.Select("horaire", "heure = '" + heure + "'");
+                if (tab.Rows[0] != null) return true;
+                else return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }

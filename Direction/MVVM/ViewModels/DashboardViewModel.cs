@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using Model.Business;
-using Model.Data;
 using Direction.Models;
+using Model.Data;
 
 namespace Direction.ViewModels
 {
@@ -12,8 +9,8 @@ namespace Direction.ViewModels
     {
         private DateTime _selectedDate;
         private ObservableCollection<City> _cityList;
-        private DaoSite _daoSite;
-        private DaoPartie _daoPartie;
+        private readonly DaoSite _daoSite;
+        private readonly DaoPartie _daoPartie;
 
         public DashboardViewModel(DaoPartie daoPartie, DaoSite daoSite)
         {
@@ -28,32 +25,34 @@ namespace Direction.ViewModels
             set
             {
                 _cityList = value;
-                OnPropertyChanged("CityList");
+                OnPropertyChanged();
             }
         }
 
         public DateTime SelectedDate
-        { 
-            get => _selectedDate; 
+        {
+            get => _selectedDate;
             set
             {
                 _selectedDate = value;
-                OnPropertyChanged("SelectedDate");
+                OnPropertyChanged();
 
-                ObservableCollection<City> newCityList = new ObservableCollection<City>();
-                foreach (Site site in _daoSite.GetAllSite())
+                var newCityList = new ObservableCollection<City>();
+                foreach (var site in _daoSite.GetAllSite())
                 {
-                    City newCity = new City(site.Ville);
-                    foreach (Salle salle in site.LstSalle)
+                    var newCity = new City(site.Ville);
+                    foreach (var salle in site.LstSalle)
                     {
-                        Room newRoom = new Room(
+                        var newRoom = new Room(
                             salle.ToString(),
                             _daoPartie.NbPartie(salle, value)
                         );
                         newCity.Rooms.Add(newRoom);
                     }
+
                     newCityList.Add(newCity);
                 }
+
                 CityList = newCityList;
             }
         }

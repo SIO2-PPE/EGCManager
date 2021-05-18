@@ -63,7 +63,7 @@ namespace Model.Data
             return new Theme(_dbal.Select("theme","nom = '" + theme.Nom + "'").Rows[0]);
         }
 
-        public bool VerifNotUse(Theme theme)
+        public bool IsNotUse(Theme theme)
         {
             DataTable tab = _dbal.Select("theme_salle");
             bool r = true;

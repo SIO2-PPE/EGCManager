@@ -19,13 +19,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Border Grid.ColumnSpan="2"
                 Background="#322B61"
                 CornerRadius="8"
                 HorizontalAlignment="Left"
+                MinWidth="300"
                 Padding="16,10"
                 Margin="24,24,0,0">
             <DockPanel>
@@ -39,14 +40,19 @@
                           SelectedItem="{Binding SelectedSite}"
                           IsSynchronizedWithCurrentItem="True" />
 
-                <TextBlock Text="Salle"
-                           Foreground="White"
-                           FontSize="16"
-                           Margin="0,0,16,0" />
+                <DockPanel HorizontalAlignment="Right"
+                           Margin="10,0,0,0">
 
-                <ComboBox ItemsSource="{Binding ListSalles, Mode=OneTime}"
-                          SelectedItem="{Binding SelectedSalle}"
-                          IsSynchronizedWithCurrentItem="True" />
+                    <TextBlock Text="Salle"
+                               Foreground="White"
+                               FontSize="16"
+                               Margin="0,0,16,0" />
+
+                    <ComboBox ItemsSource="{Binding ListSalles, Mode=OneTime}"
+                              SelectedItem="{Binding SelectedSalle}"
+                              IsSynchronizedWithCurrentItem="True" />
+
+                </DockPanel>
 
             </DockPanel>
         </Border>
@@ -73,6 +79,8 @@
 
                 <TextBlock Text="Horaire prédéfini"
                            Foreground="White"
+                           FontSize="14"
+                           FontWeight="Bold"
                            TextAlignment="Center" />
 
                 <ListBox ItemsSource="{Binding ListHoraires}"
@@ -90,6 +98,16 @@
                             Margin="4,0,0,0" />
 
                 </DockPanel>
+                
+                <TextBlock Text="{Binding ErrorHoraire}"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Foreground="#FF7070"
+                           TextWrapping="Wrap"
+                           FontStyle="Italic" 
+                           VerticalAlignment="Center"
+                           Margin="4,0,0,0"/>
 
                 <StackPanel Grid.Row="1"
                             Grid.Column="1"
@@ -111,6 +129,8 @@
                 <TextBlock Text="Horaire du site"
                            Grid.Column="2"
                            Foreground="White"
+                           FontSize="14"
+                           FontWeight="Bold"
                            TextAlignment="Center" />
 
                 <ListBox ItemsSource="{Binding ListHorairesSite}"
@@ -141,16 +161,20 @@
 
                 <TextBlock Text="Thèmes"
                            Foreground="White"
+                           FontSize="14"
+                           FontWeight="Bold"
                            TextAlignment="Center" />
 
                 <ListBox ItemsSource="{Binding ListThemes}"
                          SelectedItem="{Binding SelectedTheme}"
-                         Grid.Row="1" />
+                         Grid.Row="1"
+                         Margin="0,4" />
 
                 <Grid Grid.Column="1"
                       Grid.Row="1"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center">
+                      VerticalAlignment="Center"
+                      Margin="10,0,0,0">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -165,8 +189,7 @@
                     </Grid.RowDefinitions>
 
                     <DockPanel Grid.ColumnSpan="2"
-                               Margin="2"
-                               >
+                               Margin="2">
 
                         <TextBlock Text="Actif : "
                                    Foreground="White" />
@@ -180,36 +203,33 @@
                             Command="{Binding AssigneToSalleCommand}"
                             Grid.Row="1"
                             Padding="4,2"
-                            Margin="2"
-                            />
+                            Margin="2" />
 
                     <Button Content="Suppr."
                             Command="{Binding DeleteThemeCommand}"
                             Grid.Row="1"
-                            Grid.Column="1" 
+                            Grid.Column="1"
                             Padding="4,2"
-                            Margin="2"
-                            />
+                            Margin="2" />
 
                     <TextBox Text="{Binding NameNewTheme}"
                              Grid.Row="2"
                              Padding="2"
-                             Margin="2"
-                             />
+                             Margin="2" />
 
                     <Button Content="Ajouter"
                             Command="{Binding AddThemeCommand}"
                             Grid.Row="2"
-                            Grid.Column="1" 
+                            Grid.Column="1"
                             Padding="4,2"
-                            Margin="2"
-                            />
+                            Margin="2" />
 
                     <TextBlock Text="{Binding ErrorTheme}"
                                Grid.Row="3"
                                Grid.ColumnSpan="2"
                                Foreground="#FF7070"
-                               TextWrapping="Wrap" />
+                               TextWrapping="Wrap"
+                               FontStyle="Italic" />
 
                 </Grid>
 
@@ -229,27 +249,50 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Obstacles"
                            Foreground="White"
+                           FontSize="14"
+                           FontWeight="Bold"
                            TextAlignment="Center" />
 
                 <ListBox ItemsSource="{Binding ListObstacles}"
                          SelectedItem="{Binding SelectedObstacle}"
-                         Grid.Row="1" />
+                         Grid.Row="1"
+                         Margin="0,4" />
 
-                <DockPanel Grid.Row="2">
+                <Grid Grid.Row="2">
 
-                    <TextBox Text="{Binding NameNewObstacle}" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                    <Button Content="+"
-                            Command="{Binding AddObstacleCommand}" />
+                    <TextBox Text="{Binding NameNewObstacle}"
+                             Padding="3" />
 
-                    <Button Content="-"
-                            Command="{Binding RemoveObstacleCommand}" />
+                    <Button Content="Ajouter"
+                            Command="{Binding AddObstacleCommand}"
+                            Grid.Column="1"
+                            Padding="8,2"
+                            Margin="4,0" />
 
-                </DockPanel>
+                    <Button Content="Supprimer"
+                            Command="{Binding RemoveObstacleCommand}"
+                            Grid.Column="2"
+                            Padding="8,2" />
+
+                </Grid>
+
+                <TextBlock Text="{Binding ErrorObstacle}"
+                           Grid.Row="3"
+                           Grid.ColumnSpan="2"
+                           Foreground="#FF7070"
+                           TextWrapping="Wrap"
+                           FontStyle="Italic" />
 
             </Grid>
         </Border>

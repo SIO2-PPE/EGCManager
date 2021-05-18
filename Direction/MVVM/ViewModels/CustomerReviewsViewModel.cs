@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using Model.Business;
 using Model.Data;
 
@@ -14,8 +11,8 @@ namespace Direction.ViewModels
         #region Attributs
 
         // DAO
-        private DaoTheme _daoTheme;
-        private DaoAvis _daoAvis;
+        private readonly DaoTheme _daoTheme;
+        private readonly DaoAvis _daoAvis;
 
         // LISTES
         private ObservableCollection<Theme> _listThemes;
@@ -62,7 +59,7 @@ namespace Direction.ViewModels
                 _listThemes = value;
                 /*if (_listThemes.First() != null) */
                 SelectedTheme = _listThemes.First();
-                OnPropertyChanged("ListThemes");
+                OnPropertyChanged();
             }
         }
 
@@ -73,7 +70,7 @@ namespace Direction.ViewModels
             {
                 _listAvis = value;
 
-                OnPropertyChanged("ListAvis");
+                OnPropertyChanged();
             }
         }
 
@@ -91,19 +88,17 @@ namespace Direction.ViewModels
                 {
                     _selectedTheme = value;
                     _listAvis.Clear();
-                    foreach (Avis avis in _daoAvis.GetForTheme(SelectedTheme))
-                    {
-                        _listAvis.Add(avis);
-                    }
+                    foreach (var avis in _daoAvis.GetForTheme(SelectedTheme)) _listAvis.Add(avis);
+
                     try
                     {
                         SelectedAvis = _listAvis.First();
-                    } 
+                    }
                     catch
                     {
-
                     }
-                    OnPropertyChanged("SelectedTheme");
+
+                    OnPropertyChanged();
                     OnPropertyChanged("ListAvis");
                 }
             }
@@ -120,7 +115,7 @@ namespace Direction.ViewModels
                     FullAvis = _selectedAvis.Commentaire;
                     PseudoJoueur = "Joueur : " + _selectedAvis.Joueur.Pseudo;
                     DateAvis = "Date : " + _selectedAvis.Date.ToString("d");
-                    OnPropertyChanged("SelectedAvis");
+                    OnPropertyChanged();
                 }
                 else
                 {
@@ -138,32 +133,40 @@ namespace Direction.ViewModels
         public string FullAvis
         {
             get => _fullAvis;
-            set { _fullAvis = value; OnPropertyChanged("FullAvis"); }
+            set
+            {
+                _fullAvis = value;
+                OnPropertyChanged();
+            }
         }
 
         public string PseudoJoueur
         {
             get => _pseudoJoueur;
-            set { _pseudoJoueur = value; OnPropertyChanged("PseudoJoueur"); }
+            set
+            {
+                _pseudoJoueur = value;
+                OnPropertyChanged();
+            }
         }
 
         public string DateAvis
         {
             get => _dateAvis;
-            set { _dateAvis = value; OnPropertyChanged("DateAvis"); }
+            set
+            {
+                _dateAvis = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion
 
         #region Commande (boutons)
 
-
-
         #endregion
 
         #region Action
-
-
 
         #endregion
 
