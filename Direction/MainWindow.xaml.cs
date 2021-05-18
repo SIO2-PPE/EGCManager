@@ -27,7 +27,7 @@ namespace Direction
         public MainWindow()
         {
             InitializeComponent();
-            _dbal = new Dbal("ppe3_mmd");
+            _dbal = new Dbal("ppe3_mmd", "localhost", "root", "5MichelAnnecy");
             DataContext = new DashboardViewModel(new DaoPartie(_dbal), new DaoSite(_dbal));
         }
 

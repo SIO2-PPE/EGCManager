@@ -19,7 +19,7 @@ namespace Test
 
         static void Hydrate(DateTime debut, DateTime fin)
         {
-            Dbal dbal = new Dbal("ppe3_mmd");
+            Dbal dbal = new Dbal("ppe3_mmd", "localhost", "root", "5MichelAnnecy");
             dbal.DBinit();
             dbal.DBhydrate();
             DaoClient daoClient = new DaoClient(dbal);
