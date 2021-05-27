@@ -111,5 +111,9 @@ namespace Model.Data
                 "salle = " + salle.Id + " AND date = '" + date.ToString("yyyy-MM-dd") + "'", "count(id) as nb").Rows[0]; 
             return (int)(long)row["nb"]; 
         }
+        public void SupprPartie(Partie partie)
+        {
+            _dbal.Delete("Partie", partie.Id.ToString());
+        }
     }
 }

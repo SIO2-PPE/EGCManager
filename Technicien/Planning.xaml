@@ -28,6 +28,7 @@
                 <ImageBrush ImageSource="loupe.png"/>
             </Button.Background>
         </Button>
+        <Button x:Name="btn_del_partie" Command="{Binding SupprPartie}" Content="Supprimé la partie" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="126" Height="46" Margin="0,291,0,0"/>
 
 
     </Grid>

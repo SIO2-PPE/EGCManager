@@ -251,7 +251,7 @@ namespace Technicien.viewModel
                 {
                     if (_datePlanning < DateTime.Now.AddDays(-1))
                     {
-                        MessageBox.Show("veuillez choisir une date supérieur a celle d'aujourd'hui !");
+                        MessageBox.Show("veuillez choisir une date supérieur à celle d'aujourd'hui !");
                     }
                     else
                     {
