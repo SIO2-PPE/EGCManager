@@ -39,6 +39,8 @@ namespace Technicien.viewModel
         private ICommand _creerpartie;
         private ICommand _researchClient;
 
+        private ICommand _supprpartie;
+
         private string researchTextClient;
 
         public viewModelPlanning(DaoFacture daoFacture, DaoClient daoClient, DaoSite daoSite, DaoSalle daoSalle, DaoPartie daoPartie, DaoHoraire daoHoraire,
@@ -214,6 +216,21 @@ namespace Technicien.viewModel
             }
         }
 
+
+
+        public ICommand SupprPartie
+        {
+            get
+            {
+                if (this._supprpartie == null)
+                {
+                    this._supprpartie = new RelayCommand(() => DelPartie(), () => true);
+                }
+
+                return this._supprpartie;
+            }
+        }
+
         private void RechercheClient()
         {
             if (researchTextClient == "")
@@ -264,7 +281,7 @@ namespace Technicien.viewModel
                             _selectedPlanning.Date = _datePlanning;
                             _selectedPlanning.Salle = _selectedSalle;
 
-                            Création_de_partie subWindow = new Création_de_partie(_daoFacture, _daoClient,_daoSite, _daoSalle, _daoPartie, _daoHoraire,
+                            Création_de_partie subWindow = new Création_de_partie(_daoFacture, _daoClient, _daoSite, _daoSalle, _daoPartie, _daoHoraire,
                                 _daoObstacle, _daoJoueur, _selectedPlanning, _selectedClient);
                             subWindow.Show();
                             _wnd.Close();
@@ -277,6 +294,18 @@ namespace Technicien.viewModel
                 {
                     MessageBox.Show("veuillez selectionner un partie non réserver !");
                 }
+            }
+        }
+        private void DelPartie()
+        {
+            if (_selectedPlanning == null)
+            {
+                MessageBox.Show("veuillez selectionner une partie à supprimé !");
+            }
+            else
+            {
+                _daoPartie.SupprPartie(_selectedPlanning);
+                RefreshListPlanning();
             }
         }
     }
